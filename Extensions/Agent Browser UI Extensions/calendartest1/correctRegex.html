@@ -1,0 +1,31 @@
+<html lang='en'>
+	<head>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="closeModel.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Calendar extension</title>
+		<style>
+			#center {
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+    <div class="form-group" id="correctFormat"></div>
+    <div id="center"><button id="OK" class="btn btn-primary" onclick="closeModel()">OK</button></div>
+	</body>
+</html>
+
+<script>
+var urlString = window.location.href;
+var url = new URL(urlString);
+var reason = url.searchParams.get("reason");
+if(reason == 'empty date') {
+  $('#correctFormat').text('Vintage is required');
+}
+if(reason == 'invalid pattern') {
+  $('#correctFormat').text('Please enter the value in MM/YYYY format');
+}
+</script>
