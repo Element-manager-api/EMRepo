@@ -1,0 +1,62 @@
+[
+	{
+		"name": "decimalField",
+		"defaultValue": "Incident.sentiment$script_sentiment",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "decimalFieldLabel",
+		"defaultValue": "Incident script",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "rateDenotation",
+		"defaultValue": "$",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "isDenotationPrefix",
+		"defaultValue": true,
+		"dataType": "boolean",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "fieldPrecision",
+		"defaultValue": 2,
+		"dataType": "integer",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "Required",
+		"defaultValue": false,
+		"dataType": "boolean",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "Popup Error Message",
+		"defaultValue": "Invalid vaiue",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "Required Named Event",
+		"defaultValue": "makeRequired",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "Not Required Named Event",
+		"defaultValue": "makeNotRequired",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "Label Width",
+		"defaultValue": "199",
+		"dataType": "integer",
+		"isWorkspaceProperty": true
+	}
+]
