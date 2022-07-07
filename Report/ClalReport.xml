@@ -11,14 +11,11 @@
   <acType>
     1
   </acType>
-  <aux>
-    1.0.1,1.42.1,1.43.1,1.0.2,1.31.2,1.0.3,1.32.3,1.0.53,1.0.126,1.0.542
-  </aux>
   <created>
     @@@
   </created>
   <image>
-    8
+    6
   </image>
   <interfaceId>
     1
@@ -28,7 +25,7 @@
       false
     </XSDModified>
     <label>
-      EMTesting
+      ClalReport
     </label>
     <langId>
       1
@@ -49,7 +46,7 @@
         1
       </colRf>
       <dataType>
-        3
+        1
       </dataType>
       <displayOrder>
         1
@@ -61,26 +58,23 @@
         1
       </type>
       <val>
-        incidents.i_id
+        acct2channel_accounts.acct_id
       </val>
       <valAttrs>
         1
       </valAttrs>
       <valColRefs>
-        incidents.i_id;1
+        acct2channel_accounts.acct_id;366
       </valColRefs>
       <xmlData>
         &lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ColumnXmlData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;UnitType&gt;Auto&lt;/UnitType&gt;
   &lt;Header&gt;
-    &lt;LabelId&gt;10071&lt;/LabelId&gt;
+    &lt;LabelId&gt;9821&lt;/LabelId&gt;
   &lt;/Header&gt;
-  &lt;NumberFormat&gt;
-    &lt;NumberType&gt;Number&lt;/NumberType&gt;
-  &lt;/NumberFormat&gt;
-  &lt;HeaderAlignment&gt;Far&lt;/HeaderAlignment&gt;
-  &lt;DataAlignment&gt;Far&lt;/DataAlignment&gt;
+  &lt;HeaderAlignment&gt;Near&lt;/HeaderAlignment&gt;
+  &lt;DataAlignment&gt;Near&lt;/DataAlignment&gt;
 &lt;/ColumnXmlData&gt;
       </xmlData>
     </cols>
@@ -107,20 +101,20 @@
         1
       </type>
       <val>
-        contacts.c_id
+        acct2channel_accounts.chan_acct_id
       </val>
       <valAttrs>
         1
       </valAttrs>
       <valColRefs>
-        contacts.c_id;2
+        acct2channel_accounts.chan_acct_id;366
       </valColRefs>
       <xmlData>
         &lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ColumnXmlData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;UnitType&gt;Auto&lt;/UnitType&gt;
   &lt;Header&gt;
-    &lt;LabelId&gt;6849&lt;/LabelId&gt;
+    &lt;LabelId&gt;21992&lt;/LabelId&gt;
   &lt;/Header&gt;
   &lt;NumberFormat&gt;
     &lt;NumberType&gt;Number&lt;/NumberType&gt;
@@ -179,48 +173,12 @@
       &lt;Visible&gt;true&lt;/Visible&gt;
     &lt;/ReportSection&gt;
     &lt;ReportSection&gt;
-      &lt;Fields&gt;
-        &lt;ReportField xsi:type="ReportTextField"&gt;
-          &lt;Padding&gt;
-            &lt;Bottom&gt;1&lt;/Bottom&gt;
-            &lt;Left&gt;1&lt;/Left&gt;
-            &lt;Right&gt;1&lt;/Right&gt;
-            &lt;Top&gt;0&lt;/Top&gt;
-          &lt;/Padding&gt;
-          &lt;StyleType&gt;Title&lt;/StyleType&gt;
-          &lt;AnchorStyles&gt;Top Left Right&lt;/AnchorStyles&gt;
-          &lt;AutoSize&gt;true&lt;/AutoSize&gt;
-          &lt;TextAlign&gt;Near&lt;/TextAlign&gt;
-          &lt;LineAlign&gt;Center&lt;/LineAlign&gt;
-          &lt;Text&gt;
-            &lt;LabelStr&gt;Title&lt;/LabelStr&gt;
-          &lt;/Text&gt;
-          &lt;TextType&gt;Title&lt;/TextType&gt;
-        &lt;/ReportField&gt;
-        &lt;ReportField xsi:type="ReportTextField"&gt;
-          &lt;Padding&gt;
-            &lt;Bottom&gt;1&lt;/Bottom&gt;
-            &lt;Left&gt;1&lt;/Left&gt;
-            &lt;Right&gt;1&lt;/Right&gt;
-            &lt;Top&gt;1&lt;/Top&gt;
-          &lt;/Padding&gt;
-          &lt;StyleType&gt;SubTitle&lt;/StyleType&gt;
-          &lt;AnchorStyles&gt;Bottom Left Right&lt;/AnchorStyles&gt;
-          &lt;AutoSize&gt;true&lt;/AutoSize&gt;
-          &lt;TextAlign&gt;Near&lt;/TextAlign&gt;
-          &lt;LineAlign&gt;Center&lt;/LineAlign&gt;
-          &lt;Text&gt;
-            &lt;LabelStr&gt;Sub Title&lt;/LabelStr&gt;
-          &lt;/Text&gt;
-          &lt;TextType&gt;SubTitle&lt;/TextType&gt;
-        &lt;/ReportField&gt;
-      &lt;/Fields&gt;
-      &lt;Height&gt;57&lt;/Height&gt;
+      &lt;Height&gt;80&lt;/Height&gt;
       &lt;SectionType&gt;ReportHeader&lt;/SectionType&gt;
       &lt;StyleType&gt;ReportHeader&lt;/StyleType&gt;
       &lt;LayoutType&gt;Fixed&lt;/LayoutType&gt;
       &lt;AutoHeight&gt;false&lt;/AutoHeight&gt;
-      &lt;Visible&gt;true&lt;/Visible&gt;
+      &lt;Visible&gt;false&lt;/Visible&gt;
     &lt;/ReportSection&gt;
     &lt;ReportSection&gt;
       &lt;Height&gt;-1&lt;/Height&gt;
@@ -255,28 +213,12 @@
       &lt;Visible&gt;true&lt;/Visible&gt;
     &lt;/ReportSection&gt;
     &lt;ReportSection&gt;
-      &lt;Fields&gt;
-        &lt;ReportField xsi:type="ReportTextField"&gt;
-          &lt;Padding&gt;
-            &lt;Bottom&gt;1&lt;/Bottom&gt;
-            &lt;Left&gt;1&lt;/Left&gt;
-            &lt;Right&gt;1&lt;/Right&gt;
-            &lt;Top&gt;0&lt;/Top&gt;
-          &lt;/Padding&gt;
-          &lt;StyleType&gt;RecordCounts&lt;/StyleType&gt;
-          &lt;AnchorStyles&gt;Top Left&lt;/AnchorStyles&gt;
-          &lt;AutoSize&gt;true&lt;/AutoSize&gt;
-          &lt;TextAlign&gt;Near&lt;/TextAlign&gt;
-          &lt;LineAlign&gt;Center&lt;/LineAlign&gt;
-          &lt;TextType&gt;RecordCount&lt;/TextType&gt;
-        &lt;/ReportField&gt;
-      &lt;/Fields&gt;
-      &lt;Height&gt;32&lt;/Height&gt;
+      &lt;Height&gt;40&lt;/Height&gt;
       &lt;SectionType&gt;ReportFooter&lt;/SectionType&gt;
       &lt;StyleType&gt;ReportFooter&lt;/StyleType&gt;
       &lt;LayoutType&gt;Fixed&lt;/LayoutType&gt;
       &lt;AutoHeight&gt;false&lt;/AutoHeight&gt;
-      &lt;Visible&gt;true&lt;/Visible&gt;
+      &lt;Visible&gt;false&lt;/Visible&gt;
     &lt;/ReportSection&gt;
     &lt;ReportSection&gt;
       &lt;Height&gt;-1&lt;/Height&gt;
@@ -312,11 +254,11 @@
     &lt;/ReportSection&gt;
   &lt;/Sections&gt;
   &lt;PageWidthOptions&gt;
-    &lt;WidthType&gt;Auto&lt;/WidthType&gt;
+    &lt;WidthType&gt;FitInWindow&lt;/WidthType&gt;
   &lt;/PageWidthOptions&gt;
   &lt;PageReport&gt;false&lt;/PageReport&gt;
   &lt;Name&gt;
-    &lt;LabelStr&gt;Standard Report&lt;/LabelStr&gt;
+    &lt;LabelStr&gt;Grid Report&lt;/LabelStr&gt;
   &lt;/Name&gt;
   &lt;SearchCriteriaStyle&gt;None&lt;/SearchCriteriaStyle&gt;
   &lt;OutputDescriptionStyle&gt;Rollover&lt;/OutputDescriptionStyle&gt;
@@ -340,39 +282,13 @@
       false
     </XSDModified>
     <alias>
-      incidents
+      acct2channel_accounts
     </alias>
     <tbl>
-      1
+      366
     </tbl>
     <tblId>
       1
-    </tblId>
-  </tables>
-  <tables>
-    <XSDModified>
-      false
-    </XSDModified>
-    <alias>
-      contacts
-    </alias>
-    <joinDefEnum>
-      incidents$1$c_id$$contacts$2$c_id
-    </joinDefEnum>
-    <joinDefIdx>
-      27
-    </joinDefIdx>
-    <joinToTblIdx>
-      0
-    </joinToTblIdx>
-    <joinType>
-      1
-    </joinType>
-    <tbl>
-      2
-    </tbl>
-    <tblId>
-      2
     </tblId>
   </tables>
   <timeZone>
