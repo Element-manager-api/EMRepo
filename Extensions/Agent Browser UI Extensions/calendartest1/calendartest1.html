@@ -1,0 +1,91 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="calendartest1.js"></script>
+<style>
+		label {
+            
+			font-weight: var(--ext_label_text_weight);
+			color: var(--ext_label_text_color);
+			/* width: 175px; */
+			display: inline-block;
+			text-align: right;
+			white-space: pre;
+        }
+		
+        :root {
+			font-size: var(--ext_font_size);
+			font-family: var(--ext_font_family);
+		}
+          
+        input {
+			color: var(--ext_input_text_color);
+			border: var(--ext_input_border);
+			height: var(--ext_input_height);
+			padding: var(--ext_input_padding);
+			outline: var(--ext_input_outline);
+			border-radius: var(--ext_input_border_radius);
+			font-family: var(--ext_font_family);
+			font-size: var(--ext_input_font_size);
+			/* width: 514px; */
+			margin-left: 10px;
+        }
+		
+		
+
+		/* .container{ */
+        /* width: 200px; */
+        /* height: 200px; */
+        /* position: relative;
+    }
+    .box{
+        width: 100%;
+        height: 100%;            
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+		.stack-top{
+        z-index: 9;
+		width:calc(100% - 35px);
+        
+    } */
+
+
+		/* .dateSelector{
+		margin-top: 3px;
+		margin-left: 1px;
+		border: none;
+	} */
+
+		/* #labelText{
+		margin-left:30px;
+		margin-top:4px;
+		} */
+
+		#textField:invalid {
+			border: red solid 2px;
+		}
+	
+</style>
+</head>
+<body style="margin-top: 2px;">
+	
+		<div style="margin-bottom: 14px;">
+		<label for="date" style="width: 175px;margin-top: 4px;" id="labelText"></label><span class="asterisk" style="color: red;display:none">&nbsp;*&nbsp;</span>
+			<span style=" width:50%;"><input id="calendar" onchange="updateTextField(this)"  style=" position:absolute; width:calc(100% - 208px);"  type="date"/><input type="text"  onfocus="removeCss()" style="position:absolute; width:calc(100% - 238px)" pattern="((0?[1-9])|(1[0-2]))\/(([1-2](0|9)[0-9][0-9]))" placeholder="MM/YYYY" maxlength = "7" id="textField" >
+			</span>
+		</div>
+</body>
+</html>
+
+<script>
+$("#textField").keypress(function(e){
+	var keyCode = e.which;
+	var value1 = e.target.value;
+	if ( (keyCode != 8 || keyCode ==32 ) && (keyCode < 48 || keyCode > 57)&& keyCode!=47) { 
+		return false;
+	}
+});
+</script>
