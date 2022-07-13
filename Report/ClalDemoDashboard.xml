@@ -25,7 +25,7 @@
       false
     </XSDModified>
     <childAcId>
-      100107
+      100046
     </childAcId>
     <pos>
       0
@@ -35,7 +35,7 @@
         false
       </XSDModified>
       <acId>
-        100107
+        100046
       </acId>
       <acPublic>
         true
@@ -47,7 +47,7 @@
         1.0.1,1.42.1,1.43.1,1.0.2,1.31.2,1.0.3,1.32.3,1.0.53,1.0.126,1.0.542
       </aux>
       <created>
-        2022-07-13T04:59:42Z
+        2022-07-06T06:35:23Z
       </created>
       <image>
         8
@@ -488,7 +488,7 @@
         4
       </opts>
       <ownerAcctId>
-        10
+        3
       </ownerAcctId>
       <tables>
         <XSDModified>
@@ -508,7 +508,7 @@
         0
       </timeZone>
       <updated>
-        2022-07-13T04:59:42Z
+        2022-07-11T17:10:44Z
       </updated>
       <version>
         0
@@ -518,7 +518,7 @@
       &lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ReportUserSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;TimeStamp&gt;2022-07-06T06:35:23Z&lt;/TimeStamp&gt;
-  &lt;AcId&gt;100107&lt;/AcId&gt;
+  &lt;AcId&gt;100046&lt;/AcId&gt;
   &lt;Nodes&gt;
     &lt;XmlDataEntry&gt;
       &lt;Id1&gt;1&lt;/Id1&gt;
@@ -698,7 +698,7 @@
       false
     </XSDModified>
     <childAcId>
-      100106
+      100017
     </childAcId>
     <pos>
       1
@@ -708,7 +708,7 @@
         false
       </XSDModified>
       <acId>
-        100106
+        100017
       </acId>
       <acPublic>
         true
@@ -720,7 +720,7 @@
         1.0.1,1.42.1,1.43.1,1.0.2,1.31.2,1.0.3,1.32.3,1.0.53,1.0.126,1.0.542
       </aux>
       <created>
-        2022-07-13T04:59:41Z
+        2022-05-16T11:16:48Z
       </created>
       <image>
         8
@@ -1038,8 +1038,41 @@
         4
       </opts>
       <ownerAcctId>
-        10
+        3
       </ownerAcctId>
+      <perms>
+        <XSDModified>
+          false
+        </XSDModified>
+        <perms>
+          3
+        </perms>
+        <profileId>
+          3
+        </profileId>
+      </perms>
+      <perms>
+        <XSDModified>
+          false
+        </XSDModified>
+        <perms>
+          3
+        </perms>
+        <profileId>
+          5
+        </profileId>
+      </perms>
+      <perms>
+        <XSDModified>
+          false
+        </XSDModified>
+        <perms>
+          3
+        </perms>
+        <profileId>
+          8
+        </profileId>
+      </perms>
       <tables>
         <XSDModified>
           false
@@ -1065,7 +1098,7 @@
           incidents$1$c_id$$contacts$2$c_id
         </joinDefEnum>
         <joinDefIdx>
-          27
+          26
         </joinDefIdx>
         <joinToTblIdx>
           0
@@ -1084,7 +1117,7 @@
         0
       </timeZone>
       <updated>
-        2022-07-13T04:59:42Z
+        2022-07-11T17:10:44Z
       </updated>
       <version>
         0
@@ -1094,7 +1127,7 @@
       &lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ReportUserSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;TimeStamp&gt;2022-05-16T11:16:49Z&lt;/TimeStamp&gt;
-  &lt;AcId&gt;100106&lt;/AcId&gt;
+  &lt;AcId&gt;100017&lt;/AcId&gt;
   &lt;Nodes&gt;
     &lt;XmlDataEntry&gt;
       &lt;Id1&gt;1&lt;/Id1&gt;
@@ -1428,61 +1461,4 @@
   &lt;/PageSettings&gt;
 &lt;/AnalyticsCoreXmlData&gt;
   </xmlData>
-  <xmlReport>
-    &lt;analytics_core xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:obj.api.rightnow.com"&gt;
-&lt;ac_id&gt;100108&lt;/ac_id&gt;
-&lt;ac_type&gt;2&lt;/ac_type&gt;
-&lt;co_version&gt;5&lt;/co_version&gt;
-&lt;filters&gt;&lt;filter_item&gt;
-&lt;data_type&gt;0&lt;/data_type&gt;
-&lt;fltr_id&gt;1&lt;/fltr_id&gt;
-&lt;oper&gt;1&lt;/oper&gt;
-&lt;opts&gt;0&lt;/opts&gt;
-&lt;type&gt;7&lt;/type&gt;
-&lt;val1&gt;limit&lt;/val1&gt;
-&lt;val1_attrs&gt;32&lt;/val1_attrs&gt;
-&lt;val1_parsed&gt;limit&lt;/val1_parsed&gt;
-&lt;xml_data&gt;&amp;lt;FilterXmlData&amp;gt;&amp;lt;/FilterXmlData&amp;gt;&lt;/xml_data&gt;
-&lt;/filter_item&gt;
-&lt;filter_item&gt;
-&lt;applies_to&gt;100107;2&lt;/applies_to&gt;
-&lt;data_type&gt;0&lt;/data_type&gt;
-&lt;fltr_id&gt;2&lt;/fltr_id&gt;
-&lt;oper&gt;1&lt;/oper&gt;
-&lt;opts&gt;0&lt;/opts&gt;
-&lt;revision&gt;2&lt;/revision&gt;
-&lt;type&gt;7&lt;/type&gt;
-&lt;val1&gt;limit&lt;/val1&gt;
-&lt;val1_attrs&gt;32&lt;/val1_attrs&gt;
-&lt;val1_parsed&gt;limit&lt;/val1_parsed&gt;
-&lt;xml_data&gt;&amp;lt;FilterXmlData&amp;gt;&amp;lt;/FilterXmlData&amp;gt;&lt;/xml_data&gt;
-&lt;/filter_item&gt;
-&lt;filter_item&gt;
-&lt;applies_to&gt;100106;3&lt;/applies_to&gt;
-&lt;data_type&gt;0&lt;/data_type&gt;
-&lt;fltr_id&gt;3&lt;/fltr_id&gt;
-&lt;oper&gt;1&lt;/oper&gt;
-&lt;opts&gt;0&lt;/opts&gt;
-&lt;revision&gt;3&lt;/revision&gt;
-&lt;type&gt;7&lt;/type&gt;
-&lt;val1&gt;limit&lt;/val1&gt;
-&lt;val1_attrs&gt;32&lt;/val1_attrs&gt;
-&lt;val1_parsed&gt;limit&lt;/val1_parsed&gt;
-&lt;xml_data&gt;&amp;lt;FilterXmlData&amp;gt;&amp;lt;/FilterXmlData&amp;gt;&lt;/xml_data&gt;
-&lt;/filter_item&gt;
-&lt;/filters&gt;
-&lt;image&gt;2&lt;/image&gt;
-&lt;interface_id&gt;1&lt;/interface_id&gt;
-&lt;label&gt;&lt;lbl_item&gt;
-&lt;label&gt;ClalDemoDashboard&lt;/label&gt;
-&lt;lang_id&gt;1&lt;/lang_id&gt;
-&lt;/lbl_item&gt;
-&lt;/label&gt;
-&lt;opts&gt;1&lt;/opts&gt;
-&lt;style_id&gt;10&lt;/style_id&gt;
-&lt;time_zone&gt;0&lt;/time_zone&gt;
-&lt;updated&gt;2022-07-13T04:59:43Z&lt;/updated&gt;
-&lt;/analytics_core&gt;
-
-  </xmlReport>
 </AnalyticsCore>
