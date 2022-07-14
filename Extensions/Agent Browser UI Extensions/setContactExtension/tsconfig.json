@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module": "amd",
+        "target": "ES6",
+        "outDir": "web_generated"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

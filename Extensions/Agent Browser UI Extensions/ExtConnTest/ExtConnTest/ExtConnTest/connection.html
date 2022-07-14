@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Connection</title>
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="./connectionScript.js"></script> -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="./connectionScript.js"></script>
+	
+</head>
+<body>
+	<style>
+
+		div {
+		  border-style: solid;
+		  border-color: black;
+		}
+	</style>
+
+	<div class="container">
+	    <table id="tisTable" class="table">
+		    <thead>
+		       <!--  <tr>
+		        	<td>
+		                <input class="form-control" type="text" id="extensionName">
+		            </td>
+		            <td>
+		                <input type="button" class="btn btn-lg btn-block" onclick="getConnections()" id="getConnections" value="Get Connections" />
+		            </td>
+		        </tr> -->
+		    </thead>
+		    <tbody>
+		    	<tr>
+		            <td>
+		                <label class="form-control">Extension Name</label>
+		            </td>
+		            <td>
+		                <input class="form-control" type="text" id="extensionName">
+		            </td>
+		        </tr>
+		        <tr>
+		            <td colspan="2">
+		                <input type="button" class="btn btn-lg btn-block" onclick="getConnections()" id="getConnections" value="Get Connections" />
+		            </td>
+		            
+		        </tr>
+		        <tr>
+		            <td>
+		                <label class="form-control">Connections</label>
+		            </td>
+		            <td>
+		                <select  class="form-control" name="ConnectionsList" id="ConnectionsList" automationid="ConnectionsList">
+		        		</select>
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>
+		                <label class="form-control">HttpMethods</label>
+		            </td>
+		            <td>
+		                <select  class="form-control" name="HttpMethodsList" id="HttpMethodsList" automationid="HttpMethodsList">
+		        		  <option value="GET">GET</option>
+		        		  <option value="POST">POST</option>
+		        		  <option value="PUT">PUT</option>
+		        		  <option value="PATCH">PATCH</option>
+		        		  <option value="DELETE">DELETE</option>
+		        		  
+		        		</select>
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>
+		                <label class="form-control">Relative url</label>
+		            </td>
+		            <td>
+		                <input class="form-control" type="text" id="relativeUrl">
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>
+		                <label class="form-control">Content type</label>
+		            </td>
+		            <td >
+		                <input class="form-control" type="text" id="contentType">
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>
+		                <label class="form-control">Response Type</label>
+		            </td>
+		            <td >
+		                <input class="form-control" type="text" id="responseType">
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>
+		                <label class="form-control">PayLoad</label>
+		            </td>
+		            <td>
+		                <input class="form-control" type="text" id="payLoad">
+		            </td>
+		        </tr>
+		    </tbody>
+		    <tfoot>
+		      
+		    </tfoot>
+		</table>
+		<table id="myTable" class="table order-list">
+		    <thead>
+		        <tr>
+		            <td>Header</td>
+		            <td>Value</td>
+		        </tr>
+		    </thead>
+		    <tbody id="myTableBody">
+		     
+		    </tbody>
+		    <tfoot>
+		        <tr>
+		            <td colspan="5" style="text-align: left;">
+		                <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Header" />
+		            </td>
+		             <td colspan="5" style="text-align: left;">
+		                <input type="button" class="btn btn-lg btn-block " id="execute" onclick="executeRequest()" value="Execute Request" />
+		            </td>
+		        </tr>
+		        <tr>
+		        </tr>
+		    </tfoot>
+	    </table>
+	    <table id="resultTable" class="table order-list">
+		    <!-- <thead>
+		        <tr>
+		            <td>Header</td>
+		            <td>Value</td>
+		        </tr>
+		    </thead> -->
+		    <tbody>
+		        <tr>
+		        	<textarea class="form-control rounded-0" id="result" rows="5" automationid="result"></textarea>
+		           
+		        </tr>
+		    </tbody>
+		    <tfoot>
+		       
+		    </tfoot>
+	    </table>
+	</div>
+
+  
+	<script type="text/javascript">
+		$(document).ready(function () {
+	    	var counter = 0;
+
+		    $("#addrow").on("click", function () {
+		        var newRow = $("<tr>");
+		        var cols = "";
+
+		        cols += '<td><input type="text" class="form-control" name="headerName' + counter + '"/></td>';
+		        cols += '<td><input type="text" class="form-control" name="headerValue' + counter + '"/></td>';
+		     //   cols += '<td><input type="text" class="form-control" name="phone' + counter + '"/></td>';
+
+		        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Remove"></td>';
+		        newRow.append(cols);
+		       // $("table.order-list").append(newRow);
+		        $("#myTable").append(newRow)
+		        counter++;
+		    });
+
+            
+
+
+
+		    $("table.order-list").on("click", ".ibtnDel", function (event) {
+		        $(this).closest("tr").remove();       
+		        counter -= 1
+		    });
+
+
+		});
+
+	</script>
+
+
+	<script type="text/javascript">
+
+		// function getConnections() {
+
+  //           var extensionName = $("#extensionName:text").val();
+
+		// 	var connectionsDropDown = document.getElementById("ConnectionsList");
+		// 	ORACLE_SERVICE_CLOUD.extension_loader.load('ExtensionConnUITest', '34').then(function (extensionProvider) {
+		//         extensionProvider.getGlobalContext().then(function (globalContext) {
+		//             globalContext.getExtensionContext(extensionName).then(function (extensionContext) {
+		//                 extensionContext.getConnections().then(function (extensionConnections) {
+  //                           if(extensionConnections && extensionConnections.extensionConnectionsMap) {
+  //                           	var extensionMap = extensionConnections.extensionConnectionsMap;
+  //                           	var connectionNames = Object.keys(extensionMap);
+  //                           	if (connectionNames && connectionNames.length > 0) {
+  //                           		for (conneName of connectionNames) {
+  //                           			var option1 = document.createElement("option");
+		// 								option1.text = conneName;
+		// 								connectionsDropDown.add(option1);
+  //                           		}
+  //                           	}
+  //                           }
+		//                 });
+		//             });
+		//         });
+		//     });
+		// }
+
+
+		// function executeRequest() {
+		//     var connection = $("#ConnectionsList :selected").text();
+		//     var methodName = $("#HttpMethodsList :selected").text();
+		//     var extensionName = $("#extensionName:text").val();
+		//     var relativeUrl = $("#relativeUrl:text").val();
+		//     var contentType = $("#contentType:text").val(); 
+		//     var resonseType = $("#resonseType:text").val();
+		//     var payLoad = $("#payLoad:text").val();
+		//     var headers = {};
+
+		//     var table = $("#myTableBody");
+		//     var headerTRs = table.find('tr');
+		//     if (headerTRs) {
+		//     	var headerTds = table.find('tr').find('td');
+		//     	if (headerTds) {
+		//     		var headerInputs = table.find('tr').find('td').find('input');
+		//     		if (headerInputs) {
+		//     			headerInputs.each(function(id, elem) {
+		// 				  console.log($(this).val());
+		// 				  console.log($(this).attr('type'));
+		// 				  if ($(this).attr('type') == 'text') {
+		// 				  	var controlName = $(this).attr('name');
+		// 				  	var headerValues = [];
+		// 				  	var index;
+  //                           if (controlName.indexOf('headerName') > -1) {
+		// 						index = controlName.replace('headerName', '');
+  //                           } else if(controlName.indexOf('headerValue') > -1) {
+  //                           	index = controlName.replace('headerValue', '');
+  //                           	headerValues = headers[index];
+  //                           }
+
+		// 				  	var controlValue = $(this).val();
+		// 				  	if (controlValue) {
+		// 				  		headerValues.push(controlValue);
+		// 				  	}
+						  	
+
+		// 				  	headers[index] = headerValues;
+
+		// 				  }
+		// 				})
+		//     		}
+
+		//     	}
+		//     }
+
+
+  //           var headerValuePairs = {};
+		//     var headerIndexes = Object.keys(headers);
+		//     if (headerIndexes) {
+		//    	  for (headerIndex of headerIndexes) {
+		//    		var headValuesArr = headers[headerIndex];
+		//    		headerValuePairs[headValuesArr[0]] = headValuesArr[1];
+  //   		  }
+		//     }
+		//     console.log(headerValuePairs);
+
+		//     if (connection) {
+
+		//     	ORACLE_SERVICE_CLOUD.extension_loader.load('ExtensionConnUITest', '34').then(function (extensionProvider) {
+		// 	        extensionProvider.getGlobalContext().then(function (globalContext) {
+		// 	            globalContext.getExtensionContext(extensionName).then(function (extensionContext) {
+		// 	                extensionContext.getConnections(connection).then(function (extensionConnections) {
+		// 	                    console.log(extensionConnections);
+		// 	                    var extConnRequest = extensionConnections.get(connection);
+		// 	                    extConnRequest.open(methodName, relativeUrl);
+
+		// 	                    var headerIndexes = Object.keys(headers);
+		// 					    if (headerIndexes) {
+		// 					   	  for (headerIndex of headerIndexes) {
+		// 					   		var headValuesResultArr = headers[headerIndex];
+		// 					   		if (headValuesResultArr.length > 0) {
+		// 					   			extConnRequest.addRequestHeader(headValuesResultArr[0],  headValuesResultArr[1]);
+		// 					   		}
+		// 			    		  }
+		// 					    }
+		// 	                    extConnRequest.send(payLoad).then((response) => {
+		// 	                    	console.log(response);
+		// 	                    	$("#result").val(JSON.stringify(response));
+		// 	                    }).catch((error) => {
+		// 	                    	console.log(error);
+		// 	                    	$("#result").val(JSON.stringify(error));
+		// 	                    });
+		// 	                });
+		// 	            });
+		// 	        });
+		// 	    });
+
+		//     }
+
+		//    } 
+		
+	</script>
+</body>
+</html>
