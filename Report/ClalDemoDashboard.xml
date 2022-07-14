@@ -25,7 +25,7 @@
       false
     </XSDModified>
     <childAcId>
-      100046
+      100126
     </childAcId>
     <pos>
       0
@@ -35,7 +35,7 @@
         false
       </XSDModified>
       <acId>
-        100046
+        100126
       </acId>
       <acPublic>
         true
@@ -47,7 +47,7 @@
         1.0.1,1.42.1,1.43.1,1.0.2,1.31.2,1.0.3,1.32.3,1.0.53,1.0.126,1.0.542
       </aux>
       <created>
-        2022-07-06T06:35:23Z
+        2022-07-13T12:11:02Z
       </created>
       <image>
         8
@@ -488,7 +488,7 @@
         4
       </opts>
       <ownerAcctId>
-        3
+        10
       </ownerAcctId>
       <tables>
         <XSDModified>
@@ -508,7 +508,7 @@
         0
       </timeZone>
       <updated>
-        2022-07-11T17:10:44Z
+        2022-07-14T10:30:42Z
       </updated>
       <version>
         0
@@ -518,7 +518,7 @@
       &lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ReportUserSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;TimeStamp&gt;2022-07-06T06:35:23Z&lt;/TimeStamp&gt;
-  &lt;AcId&gt;100046&lt;/AcId&gt;
+  &lt;AcId&gt;100126&lt;/AcId&gt;
   &lt;Nodes&gt;
     &lt;XmlDataEntry&gt;
       &lt;Id1&gt;1&lt;/Id1&gt;
@@ -698,7 +698,7 @@
       false
     </XSDModified>
     <childAcId>
-      100017
+      100124
     </childAcId>
     <pos>
       1
@@ -708,7 +708,7 @@
         false
       </XSDModified>
       <acId>
-        100017
+        100124
       </acId>
       <acPublic>
         true
@@ -720,7 +720,7 @@
         1.0.1,1.42.1,1.43.1,1.0.2,1.31.2,1.0.3,1.32.3,1.0.53,1.0.126,1.0.542
       </aux>
       <created>
-        2022-05-16T11:16:48Z
+        2022-07-13T12:11:01Z
       </created>
       <image>
         8
@@ -1038,41 +1038,8 @@
         4
       </opts>
       <ownerAcctId>
-        3
+        10
       </ownerAcctId>
-      <perms>
-        <XSDModified>
-          false
-        </XSDModified>
-        <perms>
-          3
-        </perms>
-        <profileId>
-          3
-        </profileId>
-      </perms>
-      <perms>
-        <XSDModified>
-          false
-        </XSDModified>
-        <perms>
-          3
-        </perms>
-        <profileId>
-          5
-        </profileId>
-      </perms>
-      <perms>
-        <XSDModified>
-          false
-        </XSDModified>
-        <perms>
-          3
-        </perms>
-        <profileId>
-          8
-        </profileId>
-      </perms>
       <tables>
         <XSDModified>
           false
@@ -1098,7 +1065,7 @@
           incidents$1$c_id$$contacts$2$c_id
         </joinDefEnum>
         <joinDefIdx>
-          26
+          27
         </joinDefIdx>
         <joinToTblIdx>
           0
@@ -1117,7 +1084,7 @@
         0
       </timeZone>
       <updated>
-        2022-07-11T17:10:44Z
+        2022-07-14T10:30:42Z
       </updated>
       <version>
         0
@@ -1127,7 +1094,7 @@
       &lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ReportUserSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;TimeStamp&gt;2022-05-16T11:16:49Z&lt;/TimeStamp&gt;
-  &lt;AcId&gt;100017&lt;/AcId&gt;
+  &lt;AcId&gt;100124&lt;/AcId&gt;
   &lt;Nodes&gt;
     &lt;XmlDataEntry&gt;
       &lt;Id1&gt;1&lt;/Id1&gt;
