@@ -335,6 +335,39 @@
   <ownerAcctId>
     @@@
   </ownerAcctId>
+  <perms>
+    <XSDModified>
+      false
+    </XSDModified>
+    <perms>
+      3
+    </perms>
+    <profileId>
+      3
+    </profileId>
+  </perms>
+  <perms>
+    <XSDModified>
+      false
+    </XSDModified>
+    <perms>
+      3
+    </perms>
+    <profileId>
+      5
+    </profileId>
+  </perms>
+  <perms>
+    <XSDModified>
+      false
+    </XSDModified>
+    <perms>
+      3
+    </perms>
+    <profileId>
+      8
+    </profileId>
+  </perms>
   <tables>
     <XSDModified>
       false
@@ -360,7 +393,7 @@
       incidents$1$c_id$$contacts$2$c_id
     </joinDefEnum>
     <joinDefIdx>
-      27
+      26
     </joinDefIdx>
     <joinToTblIdx>
       0
