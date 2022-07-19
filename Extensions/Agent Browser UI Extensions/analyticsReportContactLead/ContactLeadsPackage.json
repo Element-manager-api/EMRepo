@@ -1,0 +1,183 @@
+{
+    "reportTablePackages": [
+        {
+            "name": "ContactLeads",
+            "tables": [
+                {
+                    "name": "ContactLeadInfo",
+                    "label": "Conatcts Lead Information",
+                    "description": "Lead Information of a Contact",
+                    "columns": [
+						{
+                            "name": "coloring",
+                            "label": "coloring",
+                            "description": "coloring",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": false
+                        },
+                        {
+                            "name": "status_date",
+                            "label": "תאריך שינוי סטטוס",
+                            "description": "Status Date",
+                            "dataType": 2,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": false
+                        },
+						{
+                            "name": "Status",
+                            "label": "סטטוס",
+                            "description": "Status type",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": true,
+                            "isKey": false,
+                            "isNullable": true
+                        },
+                        {
+                            "name": "Account",
+                            "label": "גורם מטפל",
+                            "description": "Assigned Account ID",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": true,
+                            "isKey": false,
+                            "isNullable": true
+                        },
+                        {
+                            "name": "dispositions",
+                            "label": "תוצאה",
+                            "description": "Disposition disp lvl",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": true
+                        },
+                        {
+                            "name": "categories",
+                            "label": "קטגוריה",
+                            "description": "Category lvl2",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": true,
+                            "isKey": false,
+                            "isNullable": true
+                        },
+                        {
+                            "name": "Products",
+                            "label": "מוצר",
+                            "description": "Products lvl",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": true
+                        },
+                        {
+                            "name": "channel_lead_source",
+                            "label": "ערוץ הגעה",
+                            "description": "Channel lead source",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": true,
+                            "isKey": false,
+                            "isNullable": true
+						 },
+                        {
+                            "name": "lead_source",
+                            "label": "מקור הפניה",
+                            "description": "Incident parent lead source - Incident lead source",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": true
+                        },
+                        {
+                            "name": "CreatedTime",
+                            "label": "תאריך פתיחה",
+                            "description": "Incident created",
+                            "dataType": 2,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": false
+                        },
+                        {
+                            "name": "ReferenceNumber",
+                            "label": "מספר ליד",
+                            "description": "Incident ref num",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": false
+                        },
+						{
+                            "name": "status_id_in",
+                            "label": "מיון לפי סטטוס",
+                            "description": "status_id",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": true
+                        },
+						{
+                            "name": "IncidentID",
+                            "label": "מספר ליד",
+                            "description": "Incident ID",
+                            "dataType": 1,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": true,
+                            "isNullable": false
+                        },
+						{
+                            "name": "Thread",
+                            "label": "Thread",
+                            "description": "Thread Data",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": false
+                        },
+						{
+                            "name": "Interaction",
+                            "label": "Interaction",
+                            "description": "Interaction Data",
+                            "dataType": 3,
+                            "canDisplay": true,
+                            "canFilter": true,
+                            "canEdit": false,
+                            "isKey": false,
+                            "isNullable": false
+                        }
+						
+                        
+                    ]
+                }
+            ]
+        }
+    ]
+}

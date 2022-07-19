@@ -1,0 +1,22 @@
+[
+    {
+        "name": "GoodMorning",
+        "defaultValue": "בוקר טוב",
+        "dataType": "string"
+    },
+    {
+        "name": "GoodAfternoon",
+        "defaultValue": "אחר צהריים טובים",
+        "dataType": "string"
+    },
+    {
+        "name": "GoodEvening",
+        "defaultValue": "אחר צהריים טובים",
+        "dataType": "string"
+    },
+    {
+        "name": "Height",
+        "defaultValue": 22,
+        "dataType": "integer"
+    }
+]

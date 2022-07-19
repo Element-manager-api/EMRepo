@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./js/eventmanager.js"></script>
+	<script type="text/javascript" src="./js/customization.js"></script>
+	<script>
+  var click2dialName = "Click2DialAvailabiliter";
+  </script>
+  </head>
+
+  <body>
+    <style>
+      body {
+        margin: 0;
+		direction: rtl;
+      }
+      iframe {
+        border: none;
+      }
+	  
+	 #DialList{
+		  background: white;
+		padding: 5px;
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 14px;
+	}
+	#DialList a{color:#000;text-decoration:underline;}
+	#DialList a:hover{color:#3aabf0;text-decoration:none;}
+	#DialList table th{background:#3aabf0; color:#ffffff}
+	#DialList table{border: 1px solid #CCCCCC;
+    width: 100%;}
+	  
+    </style>
+	<div id="DialList"></div>
+    <iframe
+	id ="amc-iframe"
+      style="height: 100%; width: 100%;"
+      src="https://agent.contactcanvas.com/"
+    ></iframe>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Dialog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            font: 400 14px Arial, sans-serif;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+        }
+
+        html:not([dir="rtl"]) ul {
+            padding-left: unset;
+        }
+
+        html[dir="rtl"] ul {
+            padding-right: unset;
+        }
+
+        li:not(:last-child) {
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="msg"></span>
+    <script>
+        var info = localStorage.getItem("PhoneNumberValidator_modalInfo");
+        info = JSON.parse(info);
+        document.dir = info.dir ? info.dir : "ltr";
+        var msg = info.msg;
+        if (info.msg) {
+            var result = "<ul>"
+            for (var i = 0; i < msg.length; i++) {
+                result += "<li>" + msg[i] + "</li>";
+            }
+            result += "</ul>";
+            document.getElementById('msg').innerHTML = result;
+        }
+        localStorage.removeItem("PhoneNumberValidator_modalInfo");
+    </script>
+</body>
+
+</html>

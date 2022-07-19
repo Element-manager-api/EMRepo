@@ -1,0 +1,137 @@
+[
+	{
+		"name": "QUEUES_LABEL",
+		"defaultValue":"תורים",
+		"dataType": "string"
+	},
+	{
+		"name": "AGENTS_LABEL",
+		"defaultValue":"נציגים",
+		"dataType": "string"
+	},
+	{
+		"name": "hostURL",
+		"defaultValue": "/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	},
+	{
+		"name":"errorMsg",
+		"defaultValue":"Error happened. Please try again.",
+		"dataType":"string"
+	},
+	{
+		"name": "profileNotFound",
+		"defaultValue": "Id Number is not available, please update and try again.",
+		"dataType": "string"
+	},
+	{
+		"name": "queueReportId",
+		"defaultValue": "100632",
+		"dataType": "string"
+	},
+	{
+		"name": "assignedAgentReportId",
+		"defaultValue": "100631",
+		"dataType": "string"
+	},
+	{
+		"name": "reportingAgentReportId",
+		"defaultValue": "100630",
+		"dataType": "string"
+	},
+	{
+		"name": "AgentQueueReportId",
+		"defaultValue": "100633",
+		"dataType": "string"
+	},
+	{
+		"name": "noagentFound",
+		"defaultValue": "לתור הנבחר לא משויכים נציגים",
+		"dataType": "string"
+	},
+	{
+		"name": "noqueueFound",
+		"defaultValue": "לנציג הנבחר לא משויכים תורים",
+		"dataType": "string"
+	},
+	{
+		"name":"AGENTS_DEASSIGNMENT_BUTTON_LABEL",
+		"defaultValue":"הסרת שיוך",
+		"dataType": "string"
+	},
+	{
+		"name":"ERROR_MSG_DEASS_NO_ACCOUNT",
+		"defaultValue":"לא נבחרו נציגים להסרת שיוך",
+		"dataType": "string"
+	},
+	{
+		"name":"ERROR_MSG_DEASS_NO_QEUES",
+		"defaultValue":"לא נבחרו תורים להסרת שיוך",
+		"dataType": "string"
+	},
+	{
+		"name":"AGENT_ASSIGNMENT_BUTTON_LABEL",
+		"defaultValue":"שיוך נציגים",
+		"dataType": "string"
+	},
+	{
+		"name":"ERROR_MSG_ASS_NO_ACCOUNT",
+		"defaultValue":"לא נבחרו נציגים לשיוך",
+		"dataType": "string"
+	},
+	{
+		"name":"QUEUES_DEASSIGNMENT_BUTTON_LABEL",
+		"defaultValue":"הסרת שיוך",
+		"dataType": "string"
+	},
+	{
+		"name":"QUEUES_ASSIGNMENT_BUTTON_LABEL",
+		"defaultValue":"שיוך תורים",
+		"dataType": "string"
+	},
+	{
+		"name":"ERROR_MSG_ASS_NO_QUEUES",
+		"defaultValue":"לא נבחרו תורים לשיוך",
+		"dataType": "string"
+	},
+	{
+		"name":"Menu_Title",
+		"defaultValue":"שיוך נציגים לתורים",
+		"dataType": "string"
+	},
+	{
+		"name":"ADD_AGENTS",
+		"defaultValue":"בחר",
+		"dataType": "string"
+	},
+	{
+		"name":"ADD_QUEUES",
+		"defaultValue":"בחר",
+		"dataType": "string"
+	},
+	{
+		"name":"CANCEL",
+		"defaultValue":"ביטול",
+		"dataType": "string"
+	},
+	{
+		"name":"NO_AGENT_TO_ASSIGN",
+		"defaultValue":"לא קיימים נציגים אותם ניתן להקצות",
+		"dataType": "string"
+	},
+	{
+		"name":"NO_QUEUE_TO_ASSIGN",
+		"defaultValue":"לא קיימים תורים אותם ניתן להקצות",
+		"dataType": "string"
+	},
+	{
+		"name":"AMOUNT_OF_RELATED_AGENTS",
+		"defaultValue":"כמות נציגים משויכים",
+		"dataType": "string"
+	},
+	{
+		"name":"AMOUNT_OF_QUEUES",
+		"defaultValue":"כמות תורים משויכים",
+		"dataType": "string"
+	}
+]

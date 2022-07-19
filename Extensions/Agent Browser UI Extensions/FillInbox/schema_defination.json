@@ -1,0 +1,10 @@
+{
+	"reportRecordCommands":
+	[{
+	"name": "Fill Inbox1",
+	"recordTypes": ["Incident"],
+	"description": "Fill Inbox1",
+	"tooltip": "Fill Inbox1"
+	}]
+	
+}	

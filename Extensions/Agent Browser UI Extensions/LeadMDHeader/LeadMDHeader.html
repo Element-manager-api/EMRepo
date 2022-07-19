@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="/resources/demos/vanilla_theme.css">	
+  <meta charset="utf-8">
+
+	<style>
+	#automplete-1 {
+		color: rgba(0, 0, 0, 0.8);
+		background-color: #fcfcfd;
+		-webkit-appearance: none;
+		-webkit-tap-highlight-color: transparent;
+		font-weight: normal;
+		background-color: #fcfcfd;
+		border: 1px solid #e5e6e6;
+		font-family: system-ui;
+		font-size: 12px;
+		
+		height: 27.43px;
+		margin-left: -8px;
+		text-align: right;
+	}
+	input {
+    background-color: transparent;
+    border-color: transparent;
+    border-left-width: 0;
+    border-right-width: 0;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 1rem;
+    font-weight: normal;
+    padding-left: 0;
+    padding-right: 0;
+}
+	input{
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    font-weight: normal;
+    width: 100%;
+}
+	input{
+    display: inline-block;
+    font-size: 1rem;
+    max-width: 18em;
+    min-width: 8em;
+    width: 100%;
+	max-width: 86%;
+    box-sizing: border-box;
+}
+	.ui-widget{
+		font-family: system-ui;
+		font-size: 12px;
+	}
+	#label{
+	float: right;
+	}
+	ul#ui-id-1 {
+    overflow: scroll;
+    height: 80px;
+}
+@media only screen and (max-width: 980px) {
+   input {
+   max-width: 82%;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  input {
+   max-width: 82%;
+  }
+}
+</style>
+
+</head>
+<body>
+<div class = "ui-widget">
+         <label id = "label" for = "automplete-1">שת"פ מרכז</label>
+         <input id = "automplete-1">
+      </div>
+   </body>
+   <script src="jquery-3.6.0.js"></script> 
+ <script src="jquery-ui.js"></script>
+ <script type= "application/javascript"> 
+
+	
+    var extensibilityApiVersion = '1.0'; // Extensibility API version
+    var globalContext = '';
+	var restUrl = '';
+	var sessionID = '';
+	var recordId = '';
+	var workspaceRecord = '';
+	var value;
+	var interfaceurl;
+	var itemStr = null;
+	var LeadMD_Parent;
+	var reportIDs;
+    	
+    $(document).ready(function() {
+		ORACLE_SERVICE_CLOUD.extension_loader.load("LeadMDHeader",extensibilityApiVersion).then(function(extensionProvider) {
+			extensionProvider.getGlobalContext().then(function(gc){
+				globalContext = gc;
+				interfaceurl = globalContext.getInterfaceUrl();
+				restUrl = globalContext.getInterfaceServiceUrl("REST"); 
+
+				globalContext.getContainerContext('LeadMDHeader').then(function(containerContext) {
+					containerContext.getProperties(['parent_collaborations_reportId']).then(function(collection) {
+						reportIDs = collection.get('parent_collaborations_reportId').getValue();
+						globalContext.getSessionToken().then(function (sessionToken) {
+							sessionID = sessionToken;
+							extensionProvider.registerWorkspaceExtension(function(workspaceRecord){
+								workspaceRecord.getFieldValues(['LeadMD$LeadMDHeader.parent_collaboration']).then(function(IFieldDetails1)
+								{
+									LeadMD_Parent = (IFieldDetails1.getField('LeadMD$LeadMDHeader.parent_collaboration').getValue());
+									//get_parent_collaborationList(reportIDs, sessionID);
+									workspaceRecord.addNamedEventListener('LeadMDHeaderEvent',get_parent_collaborationList(reportIDs, sessionID));
+								});
+								function get_parent_collaborationList(reportIDs, sessionId) {
+									var formData = {psk:sessionID,reportIDs:reportIDs};
+									console.log(formData);
+									// Make an Ajax call to custome script	
+									var proxyscript = interfaceurl + "/php/custom/get_parent_collaborationlist_script.php";
+									//Empty UL element's innerHTML before you get indications and update the UI
+									$.ajax({
+										type: "POST",
+										url: proxyscript, 			
+										dataType: "json", 
+										data:formData,
+										success: function (data) {
+											console.log(data);
+											
+											$( "#automplete-1" ).autocomplete({
+											   source: data,
+											   select:  function( event, ui ) {
+												workspaceRecord.updateField('LeadMD$LeadMDHeader.parent_collaboration', ui.item.label); 
+											},
+											   change: function( event, ui ) {
+												workspaceRecord.updateField('LeadMD$LeadMDHeader.parent_collaboration', ui.item.label); 
+											}
+											});
+											$( "#automplete-1" ).val(LeadMD_Parent);
+											resizeExtension();
+										},
+										
+										error: function (jqXHR, exception) {
+											//Hide loading icon on success / error of AJAX call
+											$('#indication-loading-icon').hide();
+											var msg = '';
+											if (jqXHR.status === 0) {
+												msg = 'Not connect.\n Verify Network.';
+											} else if (jqXHR.status == 404) {
+												msg = 'Requested page not found. [404]';
+											} else if (jqXHR.status == 500) {
+												msg = 'Internal Server Error [500].';
+											} else if (exception === 'parsererror') {
+												msg = 'Can\'t fetch data.Please contact your Admin.';
+											} else if (exception === 'timeout') {
+												msg = 'Time out error.';
+											} else if (exception === 'abort') {
+												msg = 'Ajax request aborted.';
+											} else {
+												msg = 'Uncaught Error.\n' + jqXHR.responseText;
+											}
+											alert(msg);
+											console.log(msg);
+											//addNoIndicationsMessage(noIndicationsMessage.value);
+										}
+									});
+								}
+										
+								function resizeExtension() {
+									var maxHeight = 0;
+									var maxWidth = 0;
+									var minWidth = 500;
+									var minHeight = 120;
+									var heights = $("#ui-widget").map(function ()
+									{
+										return $(this).height();
+									}).get();
+									maxHeight = Math.max.apply(null, heights);
+									maxWidth = $('ui-widget').width();
+									maxWidth = maxWidth > minWidth ? maxWidth : minWidth;
+									maxHeight = maxHeight > minHeight ? maxHeight : minHeight;
+									console.log("Width : "+ maxWidth);
+									console.log("Height : "+ maxHeight);
+									ORACLE_SERVICE_CLOUD.extensionResizeHandler.resize(maxWidth,maxHeight+15);
+								}
+							});
+						});  
+					});
+				});
+			});
+		});
+	});
+		
+</script>	
+
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+	<head>
+		<title>Queue Assignment</title>
+		<meta charset="utf-8">
+		<link rel='stylesheet' href='css/bootstrap.rtl.min.css' />
+		<link rel='stylesheet' href='css/font-awesome.min.css' />
+		<link rel='stylesheet' href='css/jquery-ui.css' />		
+		<link rel='stylesheet' href='css/queueassignment.css' />
+	<head>
+	<body onload="initialize('dialog');" style="font-size:12px;">
+		<!-- Tabs navs -->
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+		  <li class="nav-item">
+			<a class="nav-link active" id="queue-tab" data-toggle="tab" href="#queue" role="tab" aria-controls="queue" aria-selected="true">Queue</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" id="agent-tab" data-toggle="tab" href="#agent" role="tab" aria-controls="agent" aria-selected="false">Agent</a>
+		  </li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content container">
+		  <div class="tab-pane active" id="queue" role="tabpanel" aria-labelledby="queue-tab">
+				<div class="row">
+					<div class="form-group col-sm-12 col-md-6">
+						<label for="inputQueue" id="lblQueue">Queue</label>
+						<input type="text" class="form-control" name="inputQueue" style="width:70%;" id="inputQueue" placeholder="">
+					</div>
+					<div class="form-group col-sm-12 col-md-6" id="agentAssignmentBtn" style="margin-top:10px;display:none;">
+						<button type="button" class="btn btn-primary" id="assign-agents" style="font-size:10px;margin-top:15px;">Assign Agents</button>
+						<button type="button" class="btn btn-primary" id="deassign-agents" style="font-size:10px;margin-top:15px;">Deassign Agents</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-12 col-md-6">
+						<div class="row" style="margin-top:10px;"><h6 id="queueTitle" class="col-md-4" style="margin-right:18px;">Queues</h6><h6 id="queueCountTitle" class="col-md-7">Amount of related Agents</h6></div>
+						<div id="queue-radio-list" style="overflow-x: hidden;height: 95%;overflow-y: auto;">
+						</div>
+					</div>
+					<div class="form-group col-sm-12 col-md-6">
+						<div class="col-sm-12 col-md-4" id="assignedAgentParent" style="display:none;">
+							<h5 id="agentListTitle" style="margin-top:10px;">Agents</h5>
+							<div style="overflow:auto;height:85%;" id="assignedAgents">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+		  </div>
+		  <div class="tab-pane" id="agent" role="tabpanel" aria-labelledby="agent-tab">
+			<div class="row">
+				<div class="form-group col-sm-12 col-md-6">
+					<label for="inputAgent" id="lblAgent">Agents</label>
+					<input type="text" class="form-control" name="inputAgent" style="width:70%;" id="inputAgent" placeholder="">
+				</div>
+				<div class="form-group col-sm-12 col-md-6" id="queueAssignmentBtn" style="margin-top:10px;display:none;">
+					<button type="button" class="btn btn-primary" id="assign-queues" style="font-size:10px;margin-top:15px;">Assign queues</button>
+					<button type="button" class="btn btn-primary" id="deassign-queues" style="font-size:10px;margin-top:15px;">Deassign queues</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-12 col-md-6">
+					<div class="row" style="margin-top:10px;"><h6 id="agentTitle" class="col-md-4" style="margin-right:18px;">Agents</h6><h6 id="agentCountTitle" class="col-md-7">Amount of Queues</h6></div>
+					<div id="agent-radio-list" style="overflow-x: hidden;height: 95%;overflow-y: auto;">
+					</div>
+				</div>
+				<div class="form-group col-sm-12 col-md-6" id="assignedQueueParent" style="display:none;">
+					<h5 id="queueListTitle" style="margin-top:10px;">Queues</h5>
+					<div style="overflow:auto;height:85%;" id="assignedQueues">
+					</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+		<div class="modal" id="element-list" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="list-title"></h5>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				<div class="form-group col-sm-12 col-md-6">
+					<!--<label for="inputFilter" id="lblinputFilter">Agents</label>-->
+					<input type="text" class="form-control" name="inputFilter" style="width:70%;" id="inputFilter" placeholder="">
+				</div>
+				<div id="list-body" style="margin-top:10px;"></div>
+			  </div>
+			  <div class="modal-footer">
+				<input type="hidden" id="current-mode" name="current-mode" value="">
+				<button type="button" class="btn btn-primary" id="submit-request">Choose</button>
+				<button type="button" class="btn btn-secondary" id="modal-cancel" data-bs-dismiss="modal">Cancel</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class="overlay show"></div>
+		<div class="spanner show" style="height:100%;">
+			<div class="loader"></div>
+			<p id="loaderMsg">Loading...</p>
+		</div>
+		<!-- Tabs content -->
+		<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="js/queueassignment.js"></script>
+		<!--<script src="http://localhost:8080/addin-js/queueassignment.js?v=0.1.1.1"></script>-->
+	</body>
+</html>

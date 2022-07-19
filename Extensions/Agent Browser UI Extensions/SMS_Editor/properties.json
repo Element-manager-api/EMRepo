@@ -1,0 +1,217 @@
+[
+    {
+        "name": "Extension_Label",
+        "defaultValue": "SMS",
+        "dataType": "string"
+    },
+    {
+        "name": "Recipients_Label",
+        "defaultValue": "נמענים",
+        "dataType": "string"
+    },
+    {
+        "name": "Recipients_SelectAll_Label",
+        "defaultValue": "בחר הכל",
+        "dataType": "string"
+    },
+    {
+        "name": "Recipients_ClearAll_Label",
+        "defaultValue": "נקה",
+        "dataType": "string"
+    },
+    {
+        "name": "Submit_Button_Label",
+        "defaultValue": "שלח",
+        "dataType": "string"
+    },
+    {
+        "name": "StandardText_Label",
+        "defaultValue": "בחר תבנית",
+        "dataType": "string"
+    },
+    {
+        "name": "FreeText_Label",
+        "defaultValue": "כתוב כאן...",
+        "dataType": "string"
+    },
+    {
+        "name": "Refresh_Label",
+        "defaultValue": "רענון",
+        "dataType": "string"
+    },
+    {
+        "name": "send_to_internal_customer",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "send_to_external_customer",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_sending_to_noncontact_for_incident",
+        "defaultValue": false,
+        "dataType": "boolean"
+    },
+	    {
+        "name": "allow_sending_to_noncontact_for_lead",
+        "defaultValue": false,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_sending_to_noncontact_for_task",
+        "defaultValue": false,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_standard_text",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_free_text",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_sending_to_mobile",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_sending_to_home",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_sending_to_office",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_sending_to_fax",
+        "defaultValue": false,
+        "dataType": "boolean"
+    },
+    {
+        "name": "allow_sending_to_addlPhone",
+        "defaultValue": false,
+        "dataType": "boolean"
+    },
+    {
+        "name": "max_length_for_sms_max255",
+        "defaultValue": 255,
+        "dataType": "integer"
+    },
+    {
+        "name": "Object_Type_IDS",
+        "defaultValue": "1,2",
+        "dataType": "string"
+    },
+    {
+        "name": "Incident_External_Reports_IDS",
+        "defaultValue": "100359",
+        "dataType": "string"
+    },
+    {
+        "name": "Incident_External_Reports_FilterName",
+        "defaultValue": "incidents.i_id",
+        "dataType": "string"
+    },
+    {
+        "name": "Incident_Internal_Reports_IDS",
+        "defaultValue": "100359",
+        "dataType": "string"
+    },
+    {
+        "name": "Incident_Internal_Reports_FilterName",
+        "defaultValue": "incidents.i_id",
+        "dataType": "string"
+    },
+    {
+        "name": "Task_Internal_Reports_IDS",
+        "defaultValue": "100359",
+        "dataType": "string"
+    },
+    {
+        "name": "Task_Internal_Reports_FilterName",
+        "defaultValue": "incidents.i_id",
+        "dataType": "string"
+    },
+	    {
+        "name": "Lead_Internal_Reports_IDS",
+        "defaultValue": "100359",
+        "dataType": "string"
+    },
+    {
+        "name": "Lead_Internal_Reports_FilterName",
+        "defaultValue": "incidents.i_id",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_No_Recipients_found",
+        "defaultValue": "לא נמצאו נמענים",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_Generic",
+        "defaultValue": "בבקשה צור קשר עם מנהל המערכת",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_Select_Recipients",
+        "defaultValue": "בבקשה בחר נמען אחד לפחות",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_SMS_Content_Not_Found",
+        "defaultValue": "בבקשה הזן מלל להודעה",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_SMS_Content_Has_Url",
+        "defaultValue": "אין אפשרות להזין לינק בגוף ההודעה",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_Select_Area_Code",
+        "defaultValue": "בחר קידומת",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_Enter_Phone_Number",
+        "defaultValue": "הזן מספר פלאפון",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_Invalid_Phone_Number_Format",
+        "defaultValue": "מספר לא תקין. הזן 7 ספרות ללא רווחים או תווים מיוחדים",
+        "dataType": "string"
+    },
+    {
+        "name": "Error_Title_For_SubmitDisable",
+        "defaultValue": "אין אפשרות להזין מלל חופשי",
+        "dataType": "string"
+    },
+    {
+        "name": "Area_codes_for_Additional_phone",
+        "defaultValue": "050,052,053,09",
+        "dataType": "string"
+    },
+    {
+        "name": "Number_of_digits_for_Additional_phone",
+        "defaultValue": 7,
+        "dataType": "integer"
+    },
+    {
+        "name": "Report_ID_CN_Mapping",
+        "defaultValue": 100360,
+        "dataType": "integer"
+    },
+    {
+        "name": "Report_Filter_Name_For_STDTexts",
+        "defaultValue": "ID",
+        "dataType": "string"
+    }
+]

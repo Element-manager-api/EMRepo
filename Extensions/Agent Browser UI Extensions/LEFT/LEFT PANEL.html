@@ -1,0 +1,92 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sidebar Slide-In Menu Demo</title>
+<style>
+
+
+#trigger {
+  background: #e74c3c;
+  color: white;
+  display: inline-block;
+  padding: 16px 32px;
+  float: right;
+  margin: 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease-in-out;
+  border: none;
+  border-radius: 4px;
+  border-bottom: 4px solid #c0392b;
+}
+
+#trigger:hover { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); }
+
+#trigger.active {
+  background: #c0392b;
+  transition: all 0.75s ease-in-out;
+}
+
+#menu {
+  background: #ffffff;
+  position: absolute;
+  padding: 0 64px;
+  height: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  transform: translate(-150%, 0px);
+  transition: all 0.75s ease-in-out;
+  width:400px;
+ 
+}
+
+#menu ul {
+  margin: 16px 0;
+  padding: 0;
+  color: white;
+  list-style: none;
+}
+
+#menu ul li {
+  margin: 16px 0;
+  transition: all 0.25s ease-in-out;
+}
+
+#menu ul li:hover {
+  color: #bdc3c7;
+  cursor: pointer;
+}
+
+#menu.active {
+  -webkit-transform: translate(0%, 0px);
+  transform: translate(0%, 0px);
+  transition: all 0.75s ease-in-out;
+}
+
+</style>
+</head>
+
+<body>
+<div id="trigger"> Click Here! </div>
+<div id="menu">
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+  
+</div>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script> 
+<script>
+$("#trigger").click(function() {
+  $("#menu").toggleClass("active");
+  window.open("https://www.google.com","_blank");
+});
+
+$("#trigger").click(function() {
+  $("#trigger").toggleClass("active");
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <title>Click2Dial</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel='stylesheet' href='../css/style.css'>
+    <script src='../js/jquery/jquery.min.js'></script>
+  <script>
+  var click2dialName = "Click2DialLeft";
+
+		function CallNumber(phoneNumber='', IdNumber){
+			let nextId = 0;
+	const entity=[]
+						mytargetFrame=null;
+						paneFrame = window.parent.document.querySelectorAll(".sidePanelBrowserExtension");
+						console.log(paneFrame);
+						for(var win=0; win<paneFrame.length;win++){
+						if(paneFrame[win]){
+							if(paneFrame[win].contentWindow.click2dialName == 'Click2DialAvailabiliter'){
+								mytargetFrame = paneFrame[win].contentWindow;
+								
+								      mytargetFrame.postMessage(
+										{
+										  ContactIDNumber:IdNumber,
+										  id: nextId++,
+										  type: 'clickToDialORACLE',
+										  from: 'OracleCX-for-Davinci',
+										  isReply: false,
+										  message: {
+											phoneNumber,
+											entity
+										  }
+										},
+										'*'
+									  );
+									  
+									  
+									  
+								
+							}
+							}
+						}
+						
+		
+		
+	
+
+	 
+	 }			
+
+  </script>
+       <style>
+      body {
+        margin: 0;
+		direction: rtl;
+      }
+      iframe {
+        border: none;
+      }
+	  
+	 #tab1{
+		  background: white;
+		padding: 5px;
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 14px;
+	}
+	#tab1 a{color:#000;text-decoration:underline;}
+	#tab1 a:hover{color:#3aabf0;text-decoration:none;}
+	#tab1 table th{background:#3aabf0; color:#ffffff}
+	#tab1 table{border: 1px solid #CCCCCC;
+    width: 100%;}
+	  
+    </style>
+ 
+</head>
+
+<body>
+	
+    <div class="container notification_wrp">
+	
+		
+		
+
+		<div class="notification_tab_wrp">	
+			<div class="alltabs" id="tab1">
+		
+				
+				
+			</div>
+	
+	
+			
+		</div>
+ 
+        <div id="errorMsg"></div>
+    </div>
+</body>
+
+</html>

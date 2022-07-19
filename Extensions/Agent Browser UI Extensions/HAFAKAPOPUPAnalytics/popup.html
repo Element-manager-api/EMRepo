@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Hafaka Popup</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel='stylesheet' href='../css/style.css'>
+    <script src="jquery-2.2.4.min.js"></script>
+	<script src="logic.js"></script>
+   
+	
+</head>
+<style>
+body {
+  font: 400 14px Arial, sans-serif;
+}
+.hafaka_loader_wrp{
+width:100%;
+text-align:center;
+height:155px;
+}
+.hafakapop_loading{position: absolute;
+    top: 43%;
+    right: 50%;}
+	
+.loader {
+
+	vertical-align: bottom;
+	display: inline-block;
+  border: 1px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 1px solid blue;
+  border-bottom: 1px solid blue;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.hafakapop thead tr:first-child,
+.hafakapop tbody tr:first-child {
+    background-color: #e5e5ea;
+}
+.getlink{color: blue;
+    text-decoration: underline;}
+.getlink:hover{
+cursor:pointer;
+}	
+.hafakapop tr td{
+border:solid 1px #d9dbde;
+text-align:center;
+}
+.disable { 
+  pointer-events: none; 
+}
+</style>
+<body style="overflow: hidden;text-align: right;margin: 0;">
+
+<div class="hafakapop_loading loader" ></div>
+
+<div class="hafakapop" style="display:none;" id="hafakapop_tb">
+	
+
+</div>
+
+
+</body>
+
+</html>

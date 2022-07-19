@@ -1,0 +1,27 @@
+[
+	{
+		"name": "hostURL",
+		"defaultValue": "/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	},
+	{
+		"name": "reportId",
+		"defaultValue": "100673,100685",
+		"dataType": "string"
+	},
+	{
+		"name":"buttonTitle",
+		"defaultValue":"Fill Inbox",
+		"dataType":"string"
+	},
+	{
+		"name":"ASSIGNED_LEAD_NUM",
+		"defaultValue":1,
+		"dataType":"integer"
+	},
+	{
+		"name":"ERROR_MSG_MAX_ASSIGN",
+		"defaultValue":"לא ניתן להקצות לידים נוספים. אנא טפל בלידים המוקצים לך",
+		"dataType":"string"
+	}
+]

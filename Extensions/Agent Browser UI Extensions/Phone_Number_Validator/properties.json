@@ -1,0 +1,142 @@
+[
+    {
+        "name": "Popup_Heading",
+        "defaultValue": "מספר טלפון לא תקין",
+        "dataType": "string"
+    },
+    {
+        "name": "Home_Label",
+        "defaultValue": "בבית",
+        "dataType": "string"
+    },
+    {
+        "name": "Mobile_Label",
+        "defaultValue": "נייד",
+        "dataType": "string"
+    },
+    {
+        "name": "Fax_Label",
+        "defaultValue": "פקס",
+        "dataType": "string"
+    },
+    {
+        "name": "Additional_Label",
+        "defaultValue": "נוסף",
+        "dataType": "string"
+    },
+    {
+        "name": "Office_Label",
+        "defaultValue": "במשרד",
+        "dataType": "string"
+    },
+    {
+        "name": "Home_Phone_Area_Zones",
+        "defaultValue": "09, 03, 08, 073",
+        "dataType": "string"
+    },
+    {
+        "name": "Home_Phone_Number_Of_Digits",
+        "defaultValue": 7,
+        "dataType": "integer"
+    },
+    {
+        "name": "Mobile_Phone_Area_Zones",
+        "defaultValue": "050, 052, 054",
+        "dataType": "string"
+    },
+    {
+        "name": "Mobile_Phone_Number_Of_Digits",
+        "defaultValue": 7,
+        "dataType": "integer"
+    },
+    {
+        "name": "Fax_Phone_Area_Zones",
+        "defaultValue": "09, 03, 08, 073",
+        "dataType": "string"
+    },
+    {
+        "name": "Fax_Phone_Number_Of_Digits",
+        "defaultValue": 7,
+        "dataType": "integer"
+    },
+    {
+        "name": "Additional_Phone_Area_Zones",
+        "defaultValue": "09, 03, 08, 073,050, 052, 054",
+        "dataType": "string"
+    },
+    {
+        "name": "Additional_Phone_Number_Of_Digits",
+        "defaultValue": 7,
+        "dataType": "integer"
+    },
+    {
+        "name": "Office_Phone_Area_Zones",
+        "defaultValue": "09, 03, 08, 073",
+        "dataType": "string"
+    },
+    {
+        "name": "Office_Phone_Number_Of_Digits",
+        "defaultValue": 7,
+        "dataType": "integer"
+    },
+    {
+        "name": "Msg_Wrong_Area_Code_Error",
+        "defaultValue": "הקשת אזור חיוג לא תקין למספר טלפון מסוג [TYPE] אנא שנה את אזור החיוג",
+        "dataType": "string"
+    },
+    {
+        "name": "Msg_Number_Of_Digits_Error",
+        "defaultValue": "מספר ספרות אינו תקין בטלפון מסוג: [TYPE] אנא תקן ל- [NUMBER] ספרות",
+        "dataType": "string"
+    },
+    {
+        "name": "Msg_Wrong_Format_Error",
+        "defaultValue": "הקשת מספר טלפון בפורמט לא תקין למספר טלפון מסוג [TYPE] אנא שנה את הפורמט לקידומת תקינה ומספר בין [NUMBER] ספרות",
+        "dataType": "string"
+    },
+    {
+        "name": "Separator_For_AreaCode_and_Phone",
+        "defaultValue": "-",
+        "dataType": "string"
+    },
+    {
+        "name": "Validate_Home_Phone",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "Validate_Office_Phone",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "Validate_Mobile_Phone",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "Validate_Additional_Phone",
+        "defaultValue": false,
+        "dataType": "boolean"
+    },
+    {
+        "name": "Validate_Fax_Phone",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "Bypass_Validations",
+        "defaultValue": false,
+        "dataType": "boolean"
+    },
+    {
+        "name": "Bypass_Validations_Pattern",
+        "defaultValue": "0",
+        "dataType": "string"
+    },
+    {
+        "name": "Apply_RTL",
+        "defaultValue": true,
+        "dataType": "boolean"
+    }
+]

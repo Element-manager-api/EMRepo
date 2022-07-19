@@ -1,0 +1,11 @@
+{
+	"reportRecordCommands":
+	[{
+	"name": "Hafaka Popup",
+	"recordTypes": ["Incident", "Contact"],
+	"customObjectRecordTypes": ["CO$InctAssetElm"],
+	"description": "AgentBrowser Report Command",
+	"tooltip": "AgentBrowser Report Command tooltip"
+	}]
+	
+}	

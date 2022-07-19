@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<!--<script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script>-->
+	<script src="jquery-3.6.0.js"></script> 
+ <script src="jquery-ui.js"></script>
+</head>
+<body>
+
+ <script type= "application/javascript"> 
+
+	
+    var extensibilityApiVersion = '1.0'; // Extensibility API version
+    var globalContext = '';
+	var restUrl = '';
+	var sessionID = '';
+	var recordId = '';
+	var workspaceRecord = '';
+	var idType, constants;
+	var idTypeName;
+	var country;
+    	
+    ORACLE_SERVICE_CLOUD.extension_loader.load("ContactValidation",extensibilityApiVersion)
+	.then(function(extensionProvider) {
+		extensionProvider.getGlobalContext().then(function(gc){
+			globalContext = gc;
+			restUrl = globalContext.getInterfaceServiceUrl("REST"); 
+			globalContext.getSessionToken().then(function (sessionToken) {
+			sessionId = sessionToken;	
+			console.log('12start value');           
+		   extensionProvider.registerWorkspaceExtension(function(wr)
+				{
+					workspaceRecord = wr;
+					workspaceRecord.addFieldValueListener('Contact.CO$id_number',ContactValidation).prefetchWorkspaceFields(["contacts.CId", "contacts.CO$id_number",'contacts.CO$id_type','contacts.CO$id_type.LookupName','contacts.ph_office','contacts.CO$country' ]);
+					workspaceRecord.addFieldValueListener('Contact.PhMobile', MobilePhoneValidation);
+					workspaceRecord.addFieldValueListener('Contact.email', EmailValidation);	
+					workspaceRecord.addFieldValueListener('Contact.PhHome', HomePhoneValidation);
+					workspaceRecord.addFieldValueListener('Contact.PhOffice',OfficePhoneValidation);
+					workspaceRecord.addFieldValueListener('Contact.PhFax', FaxPhoneValidation);
+					workspaceRecord.addFieldValueListener('Contact.PhAsst', AssistPhoneValidation);
+										
+				});
+					
+			});
+		});
+	
+
+	function ContactValidation(workspaceRecordEventParameter) 
+	{	
+            var CID = workspaceRecordEventParameter.event.fields['contacts.CId'];
+			var idType = workspaceRecordEventParameter.event.fields['contacts.CO$id_type'];
+			var idNumber = workspaceRecordEventParameter.event.fields['contacts.CO$id_number'];
+			country = workspaceRecordEventParameter.event.fields['contacts.CO$country'];
+			
+			var lookupName = TogetIdGetTypeLookupName(idType);
+			idTypeName = (lookupName.items[0].rows[0][0]);
+			if(idTypeName == "תעודת זהות")
+			{		if(Math.sign(CID) == -1)
+					{
+						console.log("newcontact");
+						var result = IsValidID(idNumber);
+						console.log(result);
+						var msg  = TogetMeassgeBaseValue(1000005);//1000010 //CUSTOM_MSG_NOT_A_VALIDCONTACT
+						if(result==false)
+						{
+							setTimeout(function(){
+							alert(msg);
+						}, 2000);
+							
+						}
+					}
+				
+				idNumber = parseInt(idNumber, 10);
+				console.log(idNumber);
+				workspaceRecord.updateField('contacts.CO$id_number', ""  + idNumber + "");
+				var duplicateId = checkDuplication(idNumber,idTypeName);
+				var msg1  = TogetMeassgeBaseValue(1000006);//1000011 //CUSTOM_MSG_DUPLICATION_MESSAGE
+				if(duplicateId >= 1)
+				{
+					setTimeout(function(){
+				alert(msg1);
+				}, 2000);
+				}
+			}
+			
+			if(idTypeName == "דרכון")
+			{
+				//idNumber = parseInt(idNumber, 10);
+				//console.log(idNumber);
+				//workspaceRecord.updateField('contacts.CO$id_number', ""  + idNumber + "");
+				console.log(idNumber);
+				var duplicatePassport = checkDuplicationPassport(idNumber,country,idTypeName);
+				console.log(duplicatePassport);
+				var msg  = TogetMeassgeBaseValue(1000007);//1000012 //CUSTOM_MSG_DUPLICATE_MESSAGE_PASSPORT
+				if(duplicatePassport >= 1)
+				{
+					setTimeout(function(){
+					alert(msg);
+					}, 2000);
+				}
+				
+			}
+			
+			
+	}
+	
+	
+	
+	function MobilePhoneValidation()
+	{
+		workspaceRecord.getFieldValues(['Contact.PhMobile','Contact.CO$phone_country']).then(function (IFieldDetails) {
+           var  phMobile = IFieldDetails.getField('Contact.PhMobile').getLabel() ? IFieldDetails.getField('Contact.PhMobile').getLabel().trim() : null;
+           var phone_country = IFieldDetails.getField('Contact.CO$phone_country').getLabel() ? IFieldDetails.getField('Contact.CO$phone_country').getLabel().trim() : null;
+			console.log(phone_country);
+			if(phone_country == 'IL')
+			{
+			
+			  checkMobPhoneNumbers(phMobile);
+			}
+	   });
+   
+	}
+	
+	function OfficePhoneValidation()
+	{
+		workspaceRecord.getFieldValues(['Contact.PhOffice','Contact.CO$phone_country']).then(function (IFieldDetails) {
+           var  phOffice = IFieldDetails.getField('Contact.PhOffice').getLabel() ? IFieldDetails.getField('Contact.PhOffice').getLabel().trim() : null;
+          var phone_country = IFieldDetails.getField('Contact.CO$phone_country').getLabel() ? IFieldDetails.getField('Contact.CO$phone_country').getLabel().trim() : null;
+			console.log(phone_country);
+			if(phone_country == 'IL')
+			{
+			  checkHomePhoneNumbers(phOffice);
+			}
+		});
+   
+	}
+	
+	function HomePhoneValidation()
+	{
+		workspaceRecord.getFieldValues(['Contact.PhHome','Contact.CO$phone_country']).then(function (IFieldDetails) {
+        var  phHome = IFieldDetails.getField('Contact.PhHome').getLabel() ? IFieldDetails.getField('Contact.PhHome').getLabel().trim() : null;
+        var phone_country = IFieldDetails.getField('Contact.CO$phone_country').getLabel() ? IFieldDetails.getField('Contact.CO$phone_country').getLabel().trim() : null;
+		if(phone_country == 'IL')
+		{
+			checkHomePhoneNumbers(phHome);
+			
+		}
+		});
+   
+	}
+	
+	function FaxPhoneValidation()
+	{
+		workspaceRecord.getFieldValues(['Contact.PhFax','Contact.CO$phone_country']).then(function (IFieldDetails) {
+		var  phFax = IFieldDetails.getField('Contact.PhFax').getLabel() ? IFieldDetails.getField('Contact.PhFax').getLabel().trim() : null;
+        var phone_country = IFieldDetails.getField('Contact.CO$phone_country').getLabel() ? IFieldDetails.getField('Contact.CO$phone_country').getLabel().trim() : null;
+		if(phone_country == 'IL')
+		{
+			checkHomePhoneNumbers(phFax);
+			
+		}
+		});
+   
+	}
+	
+	function AssistPhoneValidation()
+	{
+		workspaceRecord.getFieldValues(['Contact.PhAsst','Contact.CO$phone_country']).then(function (IFieldDetails) {
+		 var  phAdditional = IFieldDetails.getField('Contact.PhAsst').getLabel() ? IFieldDetails.getField('Contact.PhAsst').getLabel().trim() : null;
+         var phone_country = IFieldDetails.getField('Contact.CO$phone_country').getLabel() ? IFieldDetails.getField('Contact.CO$phone_country').getLabel().trim() : null;
+		if(phone_country == 'IL')
+		{
+			checkHomePhoneNumbers(phAdditional);
+			
+		}
+		});
+   
+	}
+	
+	function EmailValidation()
+	{
+		workspaceRecord.getFieldValues(['Contact.email']).then(function (IFieldDetails) 
+		{
+			var  email = IFieldDetails.getField('Contact.email').getLabel() ? IFieldDetails.getField('Contact.email').getLabel().trim() : null;
+			if(email)
+			{
+				checkEmail(email);
+			}
+		});
+   
+	}
+	
+	function checkEmail(email)
+	{
+		var filter = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		//	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		var msgEmail  = TogetMeassgeBaseValue(1000008);//1000013 //CUSTOM_MSG_EMAIL_VALIDATION
+		if (!filter.test(email))
+		{
+			setTimeout(function(){
+			alert(msgEmail);
+			}, 2000);
+			return false;
+		}
+		
+	}
+	
+	function checkMobPhoneNumbers(phMobile)
+	{       
+        var filter =  /^05([01234895])[ \-]?\d{7}$/;
+		 var msgPh  = TogetMeassgeBaseValue(1000009);//1000014 //CUSTOM_MSG_Mobile_Validation
+		 if (!filter.test(phMobile))
+		{
+			console.log("mobile num");
+			console.log(phMobile);
+			setTimeout(function(){
+			alert(msgPh);
+			}, 2000);
+			return false;
+		}
+		
+	}
+	
+	
+	
+	function checkHomePhoneNumbers(phHome) 
+	{   
+		var filter = /^0([23489])[\-]?\d{7}$/;
+		console.log("Home num");
+		console.log(phHome);
+		var msgHome  = TogetMeassgeBaseValue(1000010);//1000015 //CUSTOM_MSG_Validation_HomePhone
+		
+		if(!phHome.match(filter))
+		{
+			setTimeout(function(){
+			alert(msgHome);
+			}, 2000);
+			return false;
+		}
+		
+	}
+	
+	
+	function checkDuplicationPassport(idNumber,country,idTypeName)
+	{
+	
+		idNumber = '' + idNumber;
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select contacts.id From contacts where contacts.CustomFields.CO.id_number =  '" + idNumber + " ' and  contacts.CustomFields.CO.country = " + country + " and  contacts.CustomFields.CO.id_type.LookupName = '" + idTypeName +" '";
+		
+		console.log(ajaxUrl);
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+				console.log(jsonData);
+				dataResult = jsonData.items[0].count;
+		});
+		return dataResult;
+		
+	}
+
+	function checkDuplication(idNumber,idTypeName)
+	{
+	
+		idNumber = '' + idNumber;
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select contacts.id From contacts where contacts.CustomFields.CO.id_number =  '" + idNumber + " ' and  contacts.CustomFields.CO.id_type.LookupName = '" + idTypeName +" ' LIMIT 1";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+				console.log(jsonData);
+				dataResult = jsonData.items[0].count;
+		});
+		return dataResult;
+		
+	}
+	
+	function TogetMeassgeBaseValue(ID)
+	{
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/messageBases/"+ ID + "";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+				console.log(jsonData.value);
+			dataResult = jsonData.value;
+		});
+		return dataResult;
+		
+	}
+	
+	function TogetIdGetTypeLookupName(idType)
+	{
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select contacts.CustomFields.CO.id_type.LookupName From contacts where contacts.CustomFields.CO.id_type = "  + idType + " LIMIT 1";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+				console.log(jsonData);
+			dataResult = jsonData;
+		});
+		return dataResult;
+		
+	}
+	
+	function pad(number, length, p_paddingChar)
+		{
+			var str = '' + number;
+			while (str.length <  length) {
+			str = p_paddingChar + str;
+		}
+			return str;
+		}
+
+
+	function IsValidID(p_text)
+	{
+			try {
+				var txtId = pad(p_text, 9, '0');
+				var sum = 0;
+				var digit;
+				for (var i = 0; i <  9; i++) {
+				digit = parseInt(txtId[i]);
+				if (i % 2 != 0) {
+				digit *= 2;
+				if (digit >  9) {
+				digit = (digit % 10) + 1;
+				}
+				}
+				sum += digit;
+				}
+
+				sum = (sum % 10);
+				if (sum == 0) {
+				return true;
+				}
+
+			} catch (e) {
+			// todo:
+			alert(e.Message + '----' + e.LineText);
+			}
+
+	return false;
+	}
+	
+	
+		
+		});
+</script>
+
+</body>
+</html>

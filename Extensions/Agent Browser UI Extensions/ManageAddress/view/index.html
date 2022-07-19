@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>Show Address</title>
+		<link rel="stylesheet" href="../css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap.rtl.min.css" >
+		<link rel="stylesheet" href="../css/font-awesome.css" />
+		<link rel="stylesheet" href="../css/custom.css" />
+		<style>
+			html {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body onload="initialize('main');" style="min-height:300px;">
+		<!--<a class="btn-expand" id="open-popup"><i class="fa fa-expand" aria-hidden="true"></i></a>-->
+		<div class="alert alert-danger" style="display:none;" id="warning-msg" role="alert">
+		</div>
+		<div class="alert alert-light" style="display:none;" id="info-msg" role="alert">
+		</div>
+		<div class="table-responsive" style="height:100%;">
+			<a href="#" id="updateAddress" class="btn btn-primary">Manage Address</a>
+		</div>
+		<div class="overlay show"></div>
+		<div class="spanner show" style="height:100%;">
+			<div class="loader"></div>
+			<p>Loading...</p>
+		</div>
+		<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+		<script src="../js/bootstrap.bundle.min.js" ></script>
+		<script src="../js/dataloader.js"></script>
+		<!--<script src="http://localhost:8080/addin-js/dataloader.js"></script>-->
+	</body>
+</html>

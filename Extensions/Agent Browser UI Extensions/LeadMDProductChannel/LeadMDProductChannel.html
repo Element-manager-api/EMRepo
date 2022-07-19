@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="/resources/demos/vanilla_theme.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="jquery-3.6.0.js"></script> 
+ 
+  
+	<meta charset="utf-8">
+
+	
+
+</head>
+<body>
+
+ <script type= "application/javascript"> 
+
+	
+    var extensibilityApiVersion = '1.0'; // Extensibility API version
+    var globalContext = '';
+	var restUrl = '';
+	var sessionID = '';
+	var recordId = '';
+	var workspaceRecord = '';
+	var value;
+	var interfaceurl;
+	var itemStr = null;
+	var LeadMD_Parent;
+	var reportID;
+	var extensionProvidern;
+	var related_leadMDHeader= '';
+	var can_entered_manually= '';
+	var related_product= '';
+	var agent_num= '';
+	var AlertMessage;
+	
+	
+	
+ORACLE_SERVICE_CLOUD.extension_loader.load("LeadMDProductChannel" , extensibilityApiVersion)
+.then(function(extensionProvider)
+	{
+	//extensionProvider.getGlobalContext.then(function(extensionGlobalContext)
+		//{
+			
+		//});
+		
+			extensionProvider.getGlobalContext().then(function(globalContext) {
+		globalContext.getSessionToken().then(function(sessionToken)
+			{
+		interfaceurl = globalContext.getInterfaceUrl();
+				globalContext.getExtensionContext('LeadMDProductChannel').then(function(extensionContext) {
+                extensionContext.getProperties(['leadMD_agent_check_reportId' , 'AlertMessage']).then(function(collection) {
+					reportID = collection.get('leadMD_agent_check_reportId').getValue();
+					AlertMessage = collection.get('AlertMessage').getValue();
+                    //console.log(property.getName());
+                       sessionID = sessionToken;
+					   
+					   
+					   extensionProvider.registerWorkspaceExtension(function(workspaceRecord)
+							{
+			   
+					workspaceRecord.getFieldValues(['LeadMD$LeadMDProductChannel.related_leadMDHeader', 'LeadMD$LeadMDProductChannel.can_entered_manually']).then(function(IFieldDetails1)
+					{
+					related_leadMDHeader = (IFieldDetails1.getField('LeadMD$LeadMDProductChannel.related_leadMDHeader').getValue());
+					can_entered_manually = (IFieldDetails1.getField('LeadMD$LeadMDProductChannel.can_entered_manually').getValue());
+					//related_product = (IFieldDetails1.getField('LeadMD$LeadMDProductChannel.related_product').getValue());
+					//agent_num = (IFieldDetails1.getField('LeadMD$LeadMDProductChannel.agent_num').getValue());
+					//get_parent_collaborationList(reportIDs, sessionID);
+					
+					workspaceRecord.addRecordSavingListener(checkwithreport).prefetchWorkspaceFields(["LeadMD$LeadMDProductChannel.related_leadMDHeader","LeadMD$LeadMDProductChannel.can_entered_manually","LeadMD$LeadMDProductChannel.related_product" , "LeadMD$LeadMDProductChannel.agent_num"]);
+				
+				});
+					   
+					   
+					   
+			
+			
+				 })
+				})
+			
+			
+			});
+		});
+	
+	
+	
+	
+	});
+	
+	});
+	
+	
+function checkwithreport(workspaceRecordEventParameter)
+	{
+	//alert('Save command should cancel by flase as return');
+	related_leadMDHeader = workspaceRecordEventParameter.event.fields["LeadMD$LeadMDProductChannel.related_leadMDHeader"];
+	can_entered_manually = workspaceRecordEventParameter.event.fields["LeadMD$LeadMDProductChannel.can_entered_manually"];
+	agent_num = workspaceRecordEventParameter.event.fields["LeadMD$LeadMDProductChannel.agent_num"];
+	related_product = workspaceRecordEventParameter.event.fields["LeadMD$LeadMDProductChannel.related_product"];
+	//alert(agent_num);
+	if(related_leadMDHeader!=''&& can_entered_manually == 1 && agent_num!=''&& related_product!='' ){
+	
+	
+				var formData = {psk:sessionID,reportID:reportID,related_leadMDHeader:related_leadMDHeader , can_entered_manually:can_entered_manually , related_product:related_product , agent_num:agent_num};
+									console.log(formData);
+				       var ajaxUrl = interfaceurl + "/php/custom/checkinreport.php";
+            	
+																
+										//Empty UL element's innerHTML before you get indications and update the UI
+										$.ajax({
+											type: "POST",
+											async: false,
+											url: ajaxUrl, 			
+											dataType: "json", 
+											data:formData,
+											success: function (data) {
+												console.log(data);
+												var record_count;
+												var related_leadMDHeader_res;
+												record_count = data['record_count'];
+												related_leadMDHeader_res = data['related_leadMDHeader'];		
+												if(record_count > 0){
+												 	 workspaceRecordEventParameter.getCurrentEvent().cancel();
+													 //var alertmsg = 'Unable to save the object, agent num <agent_num> is marked as manual in header id <first_row_result-related_leadMDHeader>';
+													 
+													 AlertMessage = AlertMessage.replace('<agent_num>', agent_num );
+													 AlertMessage = AlertMessage.replace('<first_row_result-related_leadMDHeader>', related_leadMDHeader_res );
+													 alert(AlertMessage);
+													 
+													//alert("Unable to save the object, agent num "+ agent_num +" is marked as manual in header id <first_row_result-related_leadMDHeader>");
+												}
+												
+												//alert();
+												
+											},
+											
+											error: function (jqXHR, exception) {
+												//Hide loading icon on success / error of AJAX call
+												$('#indication-loading-icon').hide();
+												var msg = '';
+												if (jqXHR.status === 0) {
+													msg = 'Not connect.\n Verify Network.';
+												} else if (jqXHR.status == 404) {
+													msg = 'Requested page not found. [404]';
+												} else if (jqXHR.status == 500) {
+													msg = 'Internal Server Error [500].';
+												} else if (exception === 'parsererror') {
+													msg = 'Can\'t fetch data.Please contact your Admin.';
+												} else if (exception === 'timeout') {
+													msg = 'Time out error.';
+												} else if (exception === 'abort') {
+													msg = 'Ajax request aborted.';
+												} else {
+													msg = 'Uncaught Error.\n' + jqXHR.responseText;
+												}
+												alert(msg);
+												console.log(msg);
+												//addNoIndicationsMessage(noIndicationsMessage.value);
+											}
+											
+										});	
+	
+			}
+	//alert('after ajx');
+    
+	
+	
+	
+	 
+
+	// Custom implementation goes here.
+	}
+
+    	
+    
+		
+</script>	
+
+
+</body>
+</html>

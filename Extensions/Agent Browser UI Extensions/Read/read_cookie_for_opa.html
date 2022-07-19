@@ -1,0 +1,107 @@
+<!--code written by srilatha.ck@oracle.com for Merc Benz MBFS implementation to get Unpaid Items for all contracts associated to the contact by order of payment date (with most recent first) from a service on realtime and display on contact workspace- extension for BUI -->
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+    <title>Get Data Display</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script>		
+	<script>
+	$(document).ready(function() {
+		var extensionProvider = "";
+		var workspace = "";
+		var iid = "";var cval = "";var interval = "";
+		var restUrl = "",acctID = "",sessionID = "",globalContext = "",contract_number ="",gotval = false;
+		ORACLE_SERVICE_CLOUD.extension_loader.load("OPA_EVENT_FIRER", "1").then(function (extensionProvider) {
+			extensionProvider.getGlobalContext().then(function(gc){
+				globalContext = gc;
+				restUrl = globalContext.getInterfaceServiceUrl("REST");
+				acctID = globalContext.getAccountId().toString();
+				globalContext.getSessionToken().then(
+				function (sessionToken) {
+					sessionID = sessionToken;		
+					extensionProvider.registerWorkspaceExtension(function(WorkspaceRecord)
+					{
+						var currentWorkspaceObj = WorkspaceRecord.getCurrentWorkspace();
+						var recordtype = currentWorkspaceObj.objectType;
+						workspace = WorkspaceRecord;
+						workspace.addExtensionLoadedListener(readCookie).prefetchWorkspaceFields([ "Incident.IId" ]);
+						workspace.addFieldValueListener('Incident.IId',	readCookie);
+					});
+				});
+			});
+		});
+		function readCookie(parameter)
+		{
+			//console.log(parameter);
+			iid = workspace.getCurrentWorkspace().objectId;
+			var cval;
+			if (iid > 0) {
+				interval = window.setInterval(getCookie, 1000);
+			}
+		}
+		function getCookie(){
+			cname = "opa_event_"+iid;
+			console.log(cname);
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			console.log("ca : "+ca);
+			for(var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					cval =  c.substring(name.length, c.length);
+					gotval = true;
+				}
+			}
+			if(gotval){
+				clearInterval(interval);
+				document.cookie = "opa_event_"+iid+ "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; //delete the cookie again
+				//console.log('cookie val');
+				//console.log(cval);
+			
+		workspace.getFieldValues(['Incident.CatId']).then(function(IFieldDetails)
+			{
+			var catSelected = IFieldDetails.getField('Incident.CatId').getValue();
+			
+			
+			if(catSelected > 0 && (catSelected == 119 || catSelected == 99)){
+			console.log("Firing Save");
+			var testjw = workspace.executeEditorCommand('Save');
+			//var testjw = workspace.executeEditorCommand('Refresh');
+			
+			}else{
+			console.log("Firing Ref");
+			var testjw = workspace.executeEditorCommand('Refresh');
+			}
+			
+			$.when.apply($,[testjw]).then(function(){
+					//console.log("refresh completed");
+					//console.log(testjw);
+					$.each(decodeURIComponent(cval).split(/\|/), function (i, val){ 
+						console.log(val);
+						setTimeout(function(){ workspace.triggerNamedEvent(val); }, 1000);
+						
+						
+						
+					});
+					//console.log(cval + " event triggered");
+				});
+			
+			
+			
+				
+			});
+			
+			}
+		}
+	});
+	</script>
+</head>
+<body>
+<div id="details" style="visibility:hidden">
+<div>
+</body>
+</html>

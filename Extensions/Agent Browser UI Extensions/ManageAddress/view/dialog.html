@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>Show Address</title>
+		<link rel="stylesheet" href="../css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap.rtl.min.css" >
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<link rel="stylesheet" href="../css/font-awesome.css" />
+		<link rel="stylesheet" href="../css/custom.css" />
+		<style>
+			html {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+				font-size: 12px;
+			}
+			.address-card{
+				height:100px;
+				margin-bottom: 20px;
+			}
+			.modal-lg, .modal-xl {
+				max-width: 90%;
+			}
+		</style>
+	</head>
+	<body onload="initialize('dialog');">
+		<a class="modal-close" id="close-popup"><i class="fa fa-times" aria-hidden="true"></i></a>
+		<div class="container-fluid" style="height:100%;overflow:auto;">
+			<div id="btn-group">
+				<button type="button" class="btn btn-primary" data-mdb-toggle="modal" id="createAddress" data-mdb-target="#createAddress">Create Address</button>
+				<button type="button" class="btn btn-primary" data-mdb-toggle="modal" id="updateAddress" data-mdb-target="#createAddress" style="display:none;">Update Address</button>
+			</div>
+			
+			<div id="address-list">
+				<!--<select class="address-type" id="address-type">
+				  <option value="crm-address" id="crmAddress" selected>CRM Address</option>
+				  <option value="interior-minister" id="interiorMinister">Interior Minister</option>
+				</select>-->
+			</div>
+			<div class="row address" id="crm-address">
+				<div class="col-sm-12 col-md-12">
+					<table class="table text-center" >
+					  <thead class="thead-light">
+						<tr id="address-header">
+						  <th scope="col" id="cityHead">City</th>
+						  <th scope="col" id="entHead" >Entrance</th>
+						  <th scope="col" id="streetHead">Street</th>
+						  <th scope="col" id="houseHead">House No.</th>
+						  <th scope="col" id="zipHead">Zip Code</th>
+						  <th scope="col" id="poHead">PO Box</th>
+						</tr>
+					  </thead>
+					  <tbody id="addressBody">
+					  </tbody>
+					</table>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6 text-center" id="contactInfoData">
+					<div class="row">
+						<div class="card col-sm-12 col-md-4 offset-md-1 address-card" >
+						  <div class="card-body">
+							<h5 class="card-title" id="phoneTitle">Phone</h5>
+							<p class="card-text" id="home-phone"></p>
+						  </div>
+						</div>
+						<div class="card col-sm-12 col-md-4 offset-md-1 address-card" >
+						  <div class="card-body">
+							<h5 class="card-title" id="cellTitle">Cellular</h5>
+							<p class="card-text" id="cell-phone"></p>
+						  </div>
+						</div>
+						<div class="card col-sm-12 col-md-4 offset-md-1 address-card" >
+						  <div class="card-body">
+							<h5 class="card-title" id="emailTitle">Email</h5>
+							<p class="card-text" id="email"></p>
+						  </div>
+						</div>
+						<div class="card col-sm-12 col-md-4 offset-md-1 address-card" >
+						  <div class="card-body">
+							<h5 class="card-title" id="faxTitle">Fax</h5>
+							<p class="card-text" id="fax-phone"></p>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6 text-center" id="marketingInfoData">
+					<h3 id="marketingTitle">Marketing Data</h3>
+					<table class="table text-center">
+					  <thead class="thead-light">
+						<tr>
+						  <th scope="col" id="insTitle">Insurance</th>
+						  <th scope="col" id="penTitle">Pension</th>
+						  <th scope="col" id="crossTitle">Cross</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr>
+						  <td><input class="form-check-input" type="checkbox" id="checkInsurance" value="" disabled></td>
+						  <td><input class="form-check-input" type="checkbox" id="checkPension" value="" disabled></td>
+						  <td><input class="form-check-input" type="checkbox" id="checkCross" value="" disabled></td>
+						</tr>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row address text-center" id="interior-minister-address" style="display:none;">
+				<div class="col-sm-12 col-md-12">
+					<table class="table text-center">
+					  <thead class="thead-light">
+						<tr>
+						  <th scope="col" id="intcityHead">City</th>
+						  <th scope="col" id="intentHead" >Entrance</th>
+						  <th scope="col" id="intstreetHead">Street</th>
+						  <th scope="col" id="inthouseHead">House No.</th>
+						  <th scope="col" id="intzipHead">Zip Code</th>
+						  <th scope="col" id="intpoHead">PO Box</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr>
+						  <td>Tel Aviv</td>
+						  <td></td>
+						  <td>Sheinkin</td>
+						  <td>56</td>
+						  <td>5599955</td>
+						  <td>5599955</td>
+						</tr>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade bd-example-modal-lg" id="modalAddress" role="dialog" aria-labelledby="myLargeModalLabel" >
+		  <div class="modal-dialog modal-lg" >
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h4 class="modal-title" id="myLargeModalLabel">Create/Update Address</h4>
+				<button type="button" class="close" data-mdb-dismiss="modal" id="closeCreateAddressModal" aria-label="Close">
+				  <span aria-hidden="true">×</span>
+				</button>
+			  </div>
+			  <div class="modal-body ui-front" >
+				<div class="alert alert-danger" style="display:none;" id="warning-msg" role="alert">
+				</div>
+				<div class="alert alert-light" style="display:none;" id="info-msg" role="alert">
+				</div>
+			    <form id="address-from">
+					<div class="row">
+						<div class="col-sm-12 col-md-12">
+							<div class="row" style="margin-bottom:20px;">
+								<div class="form-group col-sm-12 col-md-4" style="display:none;">
+									<label for="inputCountry" id="lblCntry">Country</label>
+									<input type="text" class="form-control" name="inputCountry" id="inputCountry" placeholder="">
+								</div>
+								<div class="form-group col-sm-12 col-md-4">
+									<div class="form-check form-check-inline" style="margin-top:15px;">
+									  <input class="form-check-input" type="radio" name="address-type-selection" id="radioAddress" value="address" checked>
+									  <label class="form-check-label" for="radioAddress" id="chkAddress">
+										Address
+									  </label>
+									</div>
+									<div class="form-check form-check-inline" style="margin-top:15px;">
+									  <input class="form-check-input" type="radio" name="address-type-selection" id="radioPOBox" value="pobox">
+									  <label class="form-check-label" for="radioPOBox" id="chkPOBox">
+										PO Box
+									  </label>
+									</div>
+								</div>
+								<div class="form-group col-sm-12 col-md-4" id="party-parent" style="display:none;">
+									<label for="inputParty" id="lblparty">Party Type</label>
+									<select class="inputParty form-control" name="inputParty" id="inputParty">
+									  <option value="" selected>----</option>
+									  <option value="1" >סוכן</option>
+									  <option value="2">סוכנות</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-12 col-md-4 text-center" id="addressCrossParent">
+								   <label class="form-check-label" for="addressCross" id="lblCrossAddress">
+									Cross Address
+								  </label>
+								  <input class="form-check-input mx-auto d-block" type="checkbox" name="addressCross" id="addressCross" >
+								</div>
+							</div>
+							<div class="row" style="margin-bottom:20px;">
+								<div class="form-group col">
+									<label for="inputCity" id="lblCity">City</label>
+									<input type="text" class="form-control" name="inputCity" id="inputCity" placeholder="">
+								</div>
+								<div class="form-group col address-part">
+									<label for="inputStreet" id="lblStreet">Street</label>
+									<input type="text" class="form-control" name="inputStreet" id="inputStreet" placeholder="">
+								</div>
+								<div class="form-group col address-part">
+									<label for="inputHouseNo" id="lblHouse">House No</label>
+									<input type="text" class="form-control" name="inputHouseNo" id="inputHouseNo" placeholder="">
+								</div>
+								<div class="form-group col address-part">
+									<label for="inputEntrance" id="lblEnt">Entrance</label>
+									<input type="text" class="form-control" name="inputEntrance" id="inputEntrance" placeholder="">
+								</div>
+								<div class="form-group col" id="pobox-parent" style="display:none;">
+									<label for="inputPOBox" id="lblPOBox">POBox</label>
+									<input type="text" class="form-control" name="inputPOBox" id="inputPOBox" placeholder="">
+								</div>
+								<div class="form-group col">
+									<label for="inputZipCode" id="lblZip">Zip Code</label>
+									<input type="text" class="form-control" name="inputZipCode" id="inputZipCode" placeholder="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" id="contact-info">
+						<div class="col-md-10 col-sm-12">
+							<div class="row">
+								<div class="form-group col-sm-12 col-md-3" style="margin-top:28px;">
+									<label for="inputPhone" id="lblPhone">Phone</label>
+									<input type="text" class="form-control" name="inputPhone" id="inputPhone" >
+								</div>
+								<div class="form-group text-center col-sm-12 col-md-1" id="phoneCrossParent">
+									<label class="form-check-label" for="phoneCross" id="lblPhoneCross">
+										Cross Phone
+									</label>
+									<input class="form-check-input mx-auto d-block" style="margin-top:15px;" type="checkbox" name="phoneCross" id="phoneCross" >
+								</div>
+								<div class="form-group col-sm-12 col-md-3" style="margin-top:28px;">
+									<label for="inputCellular" id="lblCell">Cellular</label>
+									<input type="text" class="form-control" name="inputCellular" id="inputCellular" >
+								</div>
+								<div class="form-group text-center col-sm-12 col-md-1" id="cellularCrossParent">
+									<label class="form-check-label" for="cellularCross" id="lblCrossCell">
+										Cross Cellular
+									</label>
+									<input class="form-check-input mx-auto d-block" style="margin-top:15px;" type="checkbox" name="cellularCross" id="cellularCross" >
+								</div>
+								<div class="form-group col-sm-12 col-md-3" style="margin-top:28px;">
+									<label for="inputEmail" id="lblEmail">Email Address</label>
+									<input type="email" class="form-control" name="inputEmail" id="inputEmail" >
+								</div>
+								<div class="form-group text-center col-sm-12 col-md-1" id="emailCrossParent">
+									<label class="form-check-label" for="emailCross" id="lblEmailCross">
+										Cross Email
+									</label>
+									<input class="form-check-input mx-auto d-block" style="margin-top:15px;" type="checkbox" name="emailCross" id="emailCross" >
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-12">
+							<div class="form-group col-sm-12 col-md-12" style="margin-top:28px;">
+								<label for="inputFax" id="lblFax">Fax</label>
+								<input type="text" class="form-control" name="inputFax" id="inputFax" >
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 col-md-6 text-center" id="marketing-info">
+							<h3 id="lblMktData">Marketing Data</h3>
+							<table class="table text-center">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col" id="lblInst">Insurance</th>
+										<th scope="col" id="lblPen">Pension</th>
+										<th scope="col" id="lblCross">Cross</th>
+									</tr>
+								</thead>
+							<tbody>
+								<tr>
+									<td><input class="form-check-input" type="checkbox" name="insurance" id="insurance" ></td>
+									<td><input class="form-check-input" type="checkbox" name="pension" id="pension"></td>
+									<td><input class="form-check-input" type="checkbox" name="marketingCross" id="marketingCross" ></td>
+								</tr>
+							</tbody>
+							</table>
+						</div>
+					</div>
+				</form>
+				<button type="button" class="btn btn-primary mx-auto" id="submitAddress">Save</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class="overlay show"></div>
+		<div class="spanner show" style="height:100%;">
+			<div class="loader"></div>
+			<p id="loaderMsg">Loading...</p>
+		</div>
+		<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+		<script src="../js/bootstrap.bundle.min.js" ></script>
+		<script src="../js/jquery-ui.js"></script>
+		<script src="../js/jquery.validate.min.js"></script>
+		<script src="../js/additional-methods.min.js"></script>
+		<script src="../js/dataloader.js"></script>
+		<!--<script src="http://localhost:8080/addin-js/dataloader.js?v=0.1.1.1"></script>-->
+	</body>
+</html>

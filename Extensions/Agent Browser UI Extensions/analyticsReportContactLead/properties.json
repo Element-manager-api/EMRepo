@@ -1,0 +1,33 @@
+[
+    
+    {
+        "name": "REPORT_ID_FOR_POLICY_HOLDER_REPORT",
+        "defaultValue": 100639,
+        "dataType": "integer"
+    },
+    {
+        "name": "REPORT_FILTERNAME_FOR_POLICY_HOLDER_REPORT",
+        "defaultValue": "PolicyHolderID",
+        "dataType": "string"
+    },
+    {
+        "name": "REPORT_ID_FOR_LEAD_REPORT_APPLICANT",
+        "defaultValue": 100640,
+        "dataType": "integer"
+    },
+    {
+        "name": "REPORT_FILTERNAME_FOR_LEAD_REPORT_APPLICANT",
+        "defaultValue": "ApplicantID",
+        "dataType": "string"
+    },
+    {
+        "name": "REPORT_ID_FOR_LEAD_REPORT_PHONENUM",
+        "defaultValue": 100641,
+        "dataType": "integer"
+    },
+    {
+        "name": "REPORT_FILTERNAME_FOR_LEAD_REPORT_PHONENUM",
+        "defaultValue": "ApplicantPhoneNumber",
+        "dataType": "string"
+    }
+]

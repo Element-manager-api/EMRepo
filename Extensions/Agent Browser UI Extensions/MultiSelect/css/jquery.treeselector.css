@@ -1,0 +1,244 @@
+.treeSelector-container {
+  position: relative;
+  width: 100%;
+}
+
+body:not([dir="rtl"]) .treeSelector-container ul, body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li {
+  padding-left: 2px;
+  list-style: none;
+}
+
+body[dir="rtl"] .treeSelector-container ul, body[dir="rtl"] .treeSelector-container li.treeSelector-li {
+  padding-right: 2px;
+  list-style: none;
+}
+
+.treeSelector-container .treeSelector-input-box {
+	min-height: 25px;
+	background-color: #fff;
+	width: 100%;
+	border: 1px #DFE4E7 solid;
+	background: #fcfdfe;
+	border-radius: 3px;
+	cursor: pointer;
+  margin-top: 3px;
+}
+
+/* body:not([dir="rtl"]) .treeSelector-container .treeSelector-input-box {
+  padding-left: 5px;
+}
+
+body[dir="rtl"] .treeSelector-container .treeSelector-input-box {
+  padding-right: 5px;
+} */
+
+.treeSelector-container .treeSelector-input-box .title-item {
+  display: inline-block;
+  background-color: #e4e4e4;
+  border: 1px solid #aaa;
+  color: #425050;
+  border-radius: 4px;
+  cursor: default;
+  padding: 0px 5px;
+  margin-right: 2px;
+  margin-left: 2px;
+  margin-top: 4px;
+  margin-bottom: 3px;
+  /* width: 65% */
+}
+
+
+
+.treeSelector-container .treeSelector-input-box .title-item .fa {
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.treeSelector-container li.treeSelector-li .treeSelector-li-title-box {
+  cursor: pointer;
+}
+
+.treeSelector-container li.treeSelector-li{
+	text-overflow: ellipsis;
+    overflow: hidden;
+	white-space: nowrap;
+}
+
+.treeSelector-container li.treeSelector-li .treeSelector-li-box {
+  display: inline;
+}
+
+.treeSelector-container li.treeSelector-li .treeSelector-li-title-box:hover {
+  background-color: #f3f3f3;
+}
+
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-1 .treeSelector-li-box:first-child{
+  padding-left: 20px;
+}
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-2 .treeSelector-li-box:first-child {
+  padding-left: 40px;
+}
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-3 .treeSelector-li-box:first-child {
+  padding-left: 60px;
+}
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-4 .treeSelector-li-box:first-child {
+  padding-left: 80px;
+}
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-5 .treeSelector-li-box:first-child{
+  padding-left: 100px;
+}
+
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-1 .treeSelector-li-box.leaf{
+  padding-left: 24px;
+}
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-2 .treeSelector-li-box.leaf {
+  padding-left: 44px;
+}
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-3 .treeSelector-li-box.leaf {
+  padding-left: 64px;
+}
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-4 .treeSelector-li-box.leaf {
+  padding-left: 84px;
+}
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li.level-5 .treeSelector-li-box.leaf{
+  padding-left: 104px;
+}
+
+body:not([dir="rtl"]) .treeSelector-container li.treeSelector-li .treeSelector-li-box.leaf{
+  padding-left: 4px;
+}
+
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-1 .treeSelector-li-box:first-child{
+  padding-right: 20px;
+}
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-2 .treeSelector-li-box:first-child {
+  padding-right: 40px;
+}
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-3 .treeSelector-li-box:first-child {
+  padding-right: 60px;
+}
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-4 .treeSelector-li-box:first-child {
+  padding-right: 80px;
+}
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-5 .treeSelector-li-box:first-child{
+  padding-right: 100px;
+}
+
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-1 .treeSelector-li-box.leaf{
+  padding-right: 24px;
+}
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-2 .treeSelector-li-box.leaf {
+  padding-right: 44px;
+}
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-3 .treeSelector-li-box.leaf {
+  padding-right: 64px;
+}
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-4 .treeSelector-li-box.leaf {
+  padding-right: 84px;
+}
+body[dir="rtl"] .treeSelector-container li.treeSelector-li.level-5 .treeSelector-li-box.leaf{
+  padding-right: 104px;
+}
+
+body[dir="rtl"] .treeSelector-container li.treeSelector-li .treeSelector-li-box.leaf{
+  padding-right: 4px;
+}
+
+.treeSelector-container label.treeSelector-li-title-box {
+  display: inherit;
+  padding: 4px 0;
+}
+
+.treeSelector-container label.treeSelector-li-title-box input[type=checkbox] {
+  margin-right: 5px;
+}
+
+.treeSelector-container .treeSelector-wrapper {
+  display: none;
+}
+
+.treeSelector-container .treeSelector-wrapper.visible {
+  display: block;
+  position: relative;
+  left: 0;
+  overflow: auto;
+  width: 100%;
+  padding-left: 4px;
+  z-index: 2;
+  border: 1px solid #cbcccd;
+  border-radius: 1px;
+  background-color: white;
+  box-shadow: 1px 1px 3px 0 hsla(0, 0%, 0%,0.35);
+}
+
+.treeSelector-container.disabled {
+  cursor: not-allowed;
+  background: #f3f3f3;
+}
+
+.treeSelector-container.disabled .treeSelector-input-box {
+  background: #eee;
+  border-color: #d2d6de;
+}
+
+.treeSelector-container.disabled .title-item {
+  cursor: not-allowed;
+}
+
+.treeSelector-container.disabled .title-item .fa-times {
+  display: none;
+}
+
+.treeSelector-container.no-options .treeSelector-input-box {
+  padding-top: 5px;
+  color: #999;
+  user-select: none;
+}
+
+body:not([dir="rtl"]) .treeSelector-input-box:after {
+    content: ' ';
+    height: 0;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    width: 0;
+    border: 6px solid rgba(0, 0, 0, 0);
+    border-top-color: #999;
+    margin-top: -3px;
+}
+
+body[dir="rtl"] .treeSelector-input-box:after {
+    content: ' ';
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    width: 0;
+    border: 6px solid rgba(0, 0, 0, 0);
+    border-top-color: #999;
+    margin-top: -3px;
+}
+
+.ms-search input {
+    width: 100%;
+    padding: 4px 5px;
+}
+
+.ms-search {
+    padding: 2px 5px;
+}
+
+.ms-expandall {
+    display: inline-block;
+    font-size: .9em;
+    text-transform: lowercase;
+    text-decoration: none;
+}
+
+.ms-expandall:hover {
+    text-decoration: underline;
+}
+
+.ms-expandall:visited {
+    color: blue;
+}

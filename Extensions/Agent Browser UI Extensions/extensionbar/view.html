@@ -1,0 +1,152 @@
+<html dir="rtl">
+
+<head>
+	<title>Hello World - Extension Bar</title>
+	<meta charset="utf-8">
+	<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+		integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous'>
+	<link rel='stylesheet' href='css/style.css'>
+
+	<head>
+
+	<body onload="greet()">
+		<div class="container">
+			<div>
+				<span id="greetMsg"></span>
+				<b>&nbsp;
+					<span id="acctName"></span>
+				</b>
+			</div>
+			<div>
+				<span id="time"></span>
+				<span>
+					<img src="../extensionbar/images/clock.png" alt="clock">
+				</span>
+			</div>
+			<div>
+				<span id="date"></span>
+				<span>
+					<img src="../extensionbar/images/calendar.png" alt="calender">
+				</span>
+			</div>
+		</div>
+		<script>
+			var props = null;
+			var hour = null, date = 0;
+			function greet() {
+				setDate();
+				startTime();
+				var par = window.parent;
+				var ele = parent.document.querySelectorAll('div[class~="extensionBar"]');
+				if (ele && ele.length > 0) {
+					ele = ele[0].querySelectorAll("div[class~='dockableBar']");
+					if (ele && ele.length > 0) {
+						ele[0].style.backgroundColor = "var(----globalHeaderBarBackgroundColor)";
+					}
+				}
+				ORACLE_SERVICE_CLOUD.extension_loader.load("Greetings Extension", "1").then(function (extensionProvider) {
+					extensionProvider.getGlobalContext().then(function (globalContext) {
+						globalContext.getExtensionContext('extensionbar').then(function (extensionContext) {
+							extensionContext.getProperties(['GoodMorning', 'GoodAfternoon', 'GoodEvening', 'ReportID']).then(function (collection) {
+								props = collection;
+								globalContext.getSessionToken().then(function (sessionToken) {
+									var accountId = globalContext.getAccountId();
+									var restUrl = globalContext.getInterfaceServiceUrl("REST") + "/connect/latest/accounts/" + accountId;
+
+									var xhr = new XMLHttpRequest();
+									xhr.open("GET", restUrl);
+
+									xhr.setRequestHeader("Authorization", "Session " + sessionToken);
+									xhr.setRequestHeader("content-type", "application/json");
+									xhr.setRequestHeader("OSvC-CREST-Application-Context", "getReportData");
+									xhr.send();
+
+									xhr.onload = function () {
+										if (this.status >= 200 && this.status < 300) {
+											if (this.responseText) {
+												var resp = JSON.parse(this.responseText);
+												document.getElementById("greetMsg").innerHTML = getMessage(props);
+												document.getElementById("acctName").innerHTML = resp.name.first;
+											}
+										}
+									}
+
+									xhr.onerror = function () {
+										handleError(props);
+									}
+
+								}).catch(function (err) {
+									console.log("Extension Bar error: ", err);
+									handleError(props);
+								});
+
+							}).catch(function (err) {
+								console.log(err);
+								handleError(null);
+							});
+						}).catch(function (err) {
+							console.log(err);
+							handleError(null);
+						});
+					});
+				});
+			}
+
+			function getMessage(props) {
+				var gm = "Good Morning", ga = "Good Afternoon", ge = "Good Evening";
+				if (props) {
+					var propertiesJSON = props.extensionProperiesMap;
+					gm = propertiesJSON["GoodMorning"].getValue() ? propertiesJSON["GoodMorning"].getValue() : gm;
+					ga = propertiesJSON["GoodAfternoon"].getValue() ? propertiesJSON["GoodAfternoon"].getValue() : ga;
+					ge = propertiesJSON["GoodEvening"].getValue() ? propertiesJSON["GoodEvening"].getValue() : ge;
+				}
+				const date = new Date;
+				let hours = date.getHours();
+				return (hours < 12) ? gm : ((hours <= 16 && hours >= 12) ? ga : ge);
+			}
+
+			function setDate() {
+				const today = new Date();
+				let d = today.getDate();
+				let m = today.getMonth() + 1;
+				let yy = today.getFullYear();
+				d = checkDate(d);
+				m = checkDate(m);
+				document.getElementById('date').innerHTML = d + "." + m + "." + yy;
+			}
+
+			function startTime() {
+				const today = new Date();
+				let h = today.getHours();
+				let min = today.getMinutes();
+				min = checkTime(min);
+				document.getElementById('time').innerHTML = h + ":" + min;
+				if (hour != h) {
+					hour = h;
+					document.getElementById("greetMsg").innerHTML = getMessage(props);
+				}
+				if (date != today.getDate()) {
+					date = today.getDate();
+					setDate();
+				}
+				setTimeout(startTime, 1000);
+			}
+
+			function checkDate(i) {
+				if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+				return i;
+			}
+
+			function checkTime(i) {
+				if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+				return i;
+			}
+
+			function handleError(props) {
+				document.getElementById("greetMsg").innerHTML = getMessage(props);
+				document.getElementById("acctName").innerHTML = "";
+			}
+		</script>
+	</body>
+
+</html>

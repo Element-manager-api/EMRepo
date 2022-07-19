@@ -1,0 +1,16 @@
+[
+	
+	{
+		"name": "leadMD_agent_check_reportId",
+		"defaultValue": 100303,
+		"dataType": "integer",
+		"isWorkspaceProperty": true
+	},
+	
+	{
+		"name": "AlertMessage",
+		"defaultValue": "לא ניתן לשמור את האוביקט, מס' הסוכן <agent_num> מסומן להזנה ידנית במזהה <first_row_result-related_leadMDHeader>",
+		"dataType": "String"
+		
+	}
+]

@@ -1,0 +1,168 @@
+body {
+  font: 400 14px Arial, sans-serif;
+}
+
+.container div {
+    margin-bottom: 1em;
+}
+
+.recipientItem {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em!important;
+}
+
+.refresh-icon {
+    position: absolute;
+    left: 1.5em;
+    color: #34ca20;
+}
+
+#standardTextsList {
+    width: 100%;
+    position: relative;
+    border: 1px #DFE4E7 solid;
+    background: #fcfdfe;
+    border-radius: 3px;
+    max-width: 100%;
+    margin-top: 1px;
+    outline: none;
+    height: 25px;
+    cursor: pointer;
+}
+
+#standardTextsList:disabled {
+    cursor: revert;
+}
+
+.select-empty {
+    color: gray;
+}
+
+#standardTextsList option { color: black; }
+
+.freeTextDiv textarea {
+    resize: vertical;
+    width: 100%;
+    border: 1px #DFE4E7 solid;
+    background: #fcfdfe;
+    border-radius: 3px;
+    margin-top: 1px;
+    outline: none;
+    min-height: 75px;
+    padding-left: 1em;
+}
+
+.freeTextDiv textarea:disabled, #standardTextsList:disabled {
+    background: #8080803d;
+    color: black;
+}
+
+#selectAllNode {
+    font-size: 12px;
+}
+
+.submit {
+    text-align: center;
+}
+
+#submitBtn {
+    background: #259fed;
+    border-radius: 3px;
+    color: white;
+    border: 1px #DFE4E7 solid;
+    height: 5%;
+}
+
+#submitBtn:disabled {
+    background: #259fed80;
+    cursor: not-allowed;
+}
+
+#noRecipients, #errorMsg {
+    margin-top: 1em;
+    color: red;
+    text-align: center;
+}
+
+.disable-click {
+    pointer-events: none;
+}
+
+#recpientsUL, #recpientsUL ul {
+    list-style-type: none;
+}
+
+#recpientsUL {
+    padding: 0;
+}
+
+.caret {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+}
+
+.caret::before {
+    margin-left: 6px;
+}
+
+.nested {
+    display: block;
+}
+
+.inactive {
+    display: none;
+}
+
+.freeTextDiv {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.freeTextDiv:hover > [data-clear-input], #freeTextBox:focus ~ [data-clear-input] {
+    display: block;
+}
+
+.freeTextDiv > [data-clear-input] {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 0 0 0 0.05em;
+    line-height: 1em;
+    cursor: pointer;
+}
+
+.freeTextDiv > textarea::-ms-clear {
+    display: none;
+}
+
+#freeTextBox:disabled ~ [data-clear-input] {
+    display: none;
+}
+
+#nonContact {
+    width: 60%;
+}
+
+#nonContact_areaCode {
+    width: 25%;
+    padding: 1px;
+}
+
+.request-overlay {
+    z-index: 9999;
+    position: fixed; /*Important to cover the screen in case of scolling content*/
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-align: center;
+    background-color: #00000042;
+}

@@ -1,0 +1,37 @@
+[
+	{
+		"name": "hostURL",
+		"defaultValue": "/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	},
+	{
+		"name":"errorMsg",
+		"defaultValue":"Error happened. Please try again.",
+		"dataType":"string"
+	},
+	{
+		"name": "idNotFound",
+		"defaultValue": "Id Number is not available, please update and try again.",
+		"dataType": "string"
+	},
+	{
+		"name": "report_id",
+		"defaultValue": "100630",
+		"dataType": "string"
+	},
+	{
+		"name": "screen_labels",
+		"defaultValue":"Create Address:::יצירת כתובת,Update Address:::עדכון כתובת,CRM Address:::כתובת CRM,Interior Minister:::כתובת משרד הפנים,City:::עיר,Entrance:::כניסה,Street:::רחוב,House No.:::מספר בית,Zip Code:::מיקוד,PO Box:::תא דואר,Phone:::טלפון,Cellular:::טלפון נייד,Email:::אימייל,Fax:::פקס,Marketing Data:::נתונים שיווקיים,Insurance:::ביטוח,Pension:::פנסיה,Cross:::רוחבי,Create/Update Address:::יצירת/עדכון כתובת,Party Type:::גורם מעורב,Country:::מדינה,Address:::כתובת,Cross Phone:::טלפון רוחבי,Cross Cellular:::נייד רוחבי,Cross Email:::אימייל רוחבי,Save:::שמירה,Loading...:::בטעינה,Party Type is required.:::חסר ערך בשדה גורם מעורב ,City is required.:::חסר ערך בשדה עיר,Country is required.:::חסר ערך בשדה מדינה,Street is required.:::חסר ערך בשדה רחוב,House number is required.:::חסר ערך בשדה מספר בית,Entrance is required.:::חסר ערך בשדה כניסה,Zip code is required.:::חסר ערך בשדה מיקוד,PO Box is required.:::חסר ערך בשדה תא דואר,Email address is required.:::חסר ערך בשדה אימייל,Phone number is required as you selected cross field.:::יש למלא ערך בשדה טלפון מאחר שבחרת שדה רוחבי,Mobile number is required as you selected cross field.:::יש למלא ערך בשדה טלפון נייד מאחר שבחרת שדה רוחבי,Cross Address:::כתובת רוחבית,Manage Address:::לנהל כתובת,Update:::עדכן,Delete:::מחק,No address found.:::אף כתובת לא נמצאה,Please enter a valid email address.:::נא להקליד כתובת אימייל חוקית,Please enter a valid mobile number.:::נא להקליד מספר טלפון נייד חוקי,Please enter a valid phone number.:::נא להקליד מספר טלפון חוקי",
+		"dataType": "string"
+	},
+	{
+		"name":"default_country_name",
+		"defaultValue":"ישראל",
+		"dataType": "string"
+	},
+	{
+		"name":"default_country_code",
+		"defaultValue":"IL",
+		"dataType": "string"
+	}
+]

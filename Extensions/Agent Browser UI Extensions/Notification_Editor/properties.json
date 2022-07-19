@@ -1,0 +1,96 @@
+[
+    {
+        "name": "Extension_Label",
+        "defaultValue": "רשימת הודעות",
+        "dataType": "string"
+    },
+	
+	{
+        "name": "SMS_tab_title",
+        "defaultValue": "SMS",
+        "dataType": "string"
+    },
+	
+	{
+        "name": "email_tab_title",
+        "defaultValue": "Email",
+        "dataType": "string"
+    },
+	
+	{
+        "name": "Related_document_email_label",
+        "defaultValue": "רשימת מיילים",
+        "dataType": "string"
+    },
+	
+	{
+        "name": "Easy_tab_title",
+        "defaultValue": "Easysend",
+        "dataType": "string"
+    },
+	
+    {
+        "name": "Recipients_Label",
+        "defaultValue": "נמען",
+        "dataType": "string"
+    },
+    {
+        "name": "Email_Address_Label",
+        "defaultValue": ": מייל אחר",
+        "dataType": "string"
+    },
+   
+    {
+        "name": "Submit_Button_Label",
+        "defaultValue": "שלח",
+        "dataType": "string"
+    },
+    {
+        "name": "Related_document_SMS_Label",
+        "defaultValue": "SMS רשימת",
+        "dataType": "string"
+    },
+    {
+        "name": "Phone_number_Label",
+        "defaultValue": "מספר טלפון אחר:",
+        "dataType": "string"
+    },
+
+	{
+        "name": "Easy_send_option_1_Label",
+        "defaultValue": "העלאת קובץ",
+        "dataType": "string"
+    },
+	
+	{
+        "name": "Easy_send_option_2_Label",
+        "defaultValue": "פורמט מילוי",
+        "dataType": "string"
+    },
+	
+	{
+        "name": "Easy_send_option_3_Label",
+        "defaultValue": "פורמט מילוי + קובץ",
+        "dataType": "string"
+    },
+	
+	{
+        "name": "Easy_send_related_doc_Label",
+        "defaultValue": "Related document",
+        "dataType": "string"
+    },
+	
+	{
+        "name": "Send_by_Label",
+        "defaultValue": "אופן השליחה",
+        "dataType": "string"
+    },
+	
+    
+    {
+        "name": "Object_Type_IDS",
+        "defaultValue": "1,2",
+        "dataType": "string"
+    }
+    
+]

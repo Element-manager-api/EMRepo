@@ -1,0 +1,90 @@
+[
+    {
+        "name": "Parameter",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "focusNamedEvent",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "afterSave_NamedEvent",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "MANDATORY_TEXT",
+        "defaultValue": " is a required field",
+        "dataType": "string"
+    },
+    {
+        "name": "SELECT_ALL_TEXT",
+        "defaultValue": "Select All",
+        "dataType": "string"
+    },
+    {
+        "name": "DESELECT_ALL_TEXT",
+        "defaultValue": "Clear All",
+        "dataType": "string"
+    },
+    {
+        "name": "SEARCH_TEXT",
+        "defaultValue": "Search..",
+        "dataType": "string"
+    },
+    {
+        "name": "PLACEHOLDER",
+        "defaultValue": "Select",
+        "dataType": "string"
+    },
+    {
+        "name": "SELECTED_TEXT",
+        "defaultValue": " selected",
+        "dataType": "string"
+    },
+    {
+        "name": "NO_OPTIONS",
+        "defaultValue": "No items to display",
+        "dataType": "string"
+    },
+    {
+        "name": "DD_SELECT_ALL",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "HIER_DD_checkWithParent",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "HIER_DD_titleWithParent",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "HIER_DD_notViewClickParentTitle",
+        "defaultValue": false,
+        "dataType": "boolean"
+    },
+    {
+        "name": "HIER_DD_EXPAND_ALL",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+    {
+        "name": "HIER_DD_EXPAND_ALL_TEXT",
+        "defaultValue": "Expand all",
+        "dataType": "string"
+    },
+    {
+        "name": "HIER_DD_collapseAllText",
+        "defaultValue": "Collapse all",
+        "dataType": "string"
+    }
+]

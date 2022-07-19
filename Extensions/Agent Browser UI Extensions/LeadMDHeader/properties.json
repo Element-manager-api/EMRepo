@@ -1,0 +1,9 @@
+[
+	
+	{
+		"name": "parent_collaborations_reportId",
+		"defaultValue": 100302,
+		"dataType": "integer",
+		"isWorkspaceProperty": true
+	}
+]

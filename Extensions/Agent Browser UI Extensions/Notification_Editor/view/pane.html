@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <title>Notification Editor</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel='stylesheet' href='../css/style.css'>
+    <script src='../js/jquery/jquery.min.js'></script>
+    <script src='../js/mapping.js'></script>
+    <script src='../js/util.js'></script>
+   
+</head>
+
+<body>
+	<div class="loader" id="mn_loader" >
+	
+	</div>
+    <div class="container notification_wrp" id = "wrp_notification23" style="display:none;">
+	
+		
+		
+		<div class="notification_tab">
+				<span class="tab_hd" id="emailtab" title="" onclick="checktab(1)"><i class="fa fa-envelope tab_hd" id="tab_hd1" aria-hidden="true"></i></span>
+				<span class="tab_hd" id="smstab" title="" onclick="checktab(2)"><i class="fa fa-comment tab_hd" id="tab_hd2" aria-hidden="true"></i></span>
+				<span class="tab_hd" id="easytab" title="" onclick="checktab(3)"><i class="fa fa-address-book-o tab_hd" id="tab_hd3" aria-hidden="true"></i></span>
+		
+		</div>
+		<div class="notification_tab_wrp">	
+			<div class="alltabs" id="tab1">
+			   <div class="nt_row">	
+					<div "nt_lbl" id="related_doc_email" style="font-weight:bold;">Related document email</div>
+					<div>
+						<select name="emaildocuments" id="emaildocs"  onchange="getemaildoc_id(this)">
+							<option value="" selected>--</option>
+							
+						</select>
+					</div>
+				</div>
+				<div class="nt_row">
+					<div class="nt_lbl recepients_lbl">נמען</div>
+														
+					<div class="recepients_wrp" id="recep_wrp">
+
+					</div>
+					
+					
+				</div>
+				<div class="nt_row">
+					<div >
+						<div class="fl recep_wr">
+							<label for="constant_mail" id="email_add_lbl"> Email Address</label><br>
+							<div>
+								<input type="text" id="mmail" name="mnmail">
+							</div>
+							
+						</div>
+						<div class="fr chkbx_wr">
+							 <input type="checkbox" id="constant_mail" name="constant_mail" value="yes">
+						</div>
+						<div class="clr">&nbsp;</div>
+					</div>
+				
+										
+					<div>
+						<button class="sbtn" type="button" onclick="send_emaillist()">Submit</button><span class="ex_loading" ><img class="" id="email_ajx" src="/euf/assets/images/extension/loading-circle-transparent.gif" ></span> 
+					</div>
+				</div>
+				
+			</div>
+			<div class="alltabs" id="tab2">
+					<div class="nt_row">	
+					<div "nt_lbl" id="related_doc_sms" style="font-weight:bold;" >Related document SMS</div>
+					<div>
+						<select name="smsdocuments" id = "smsdocs" onchange="getsmsdoc_id(this)">
+							<option value="" selected>--</option>
+							
+						</select>
+					</div>
+				</div>
+				<div class="nt_row">
+					<div class="nt_lbl recepients_lbl">Recepients</div>
+					<div class="recepients_wrp" id="recep_phwrp">
+
+					</div>
+				</div>
+				<div class="nt_row">
+					<div>
+						<div class="fl recep_wr">
+							<label for="vehicle2" id="phoneno_lbl"> Phone number</label><br>
+							<div>
+								<input type="text" id="mphone" name="mnphone">
+							</div>
+							
+						</div>
+						<div class="fr chkbx_wr">
+							 <input type="checkbox" id="constant_phone" name="constant_phone" value="Yes">
+						</div>
+						<div class="clr">&nbsp;</div>
+					</div>
+				
+										
+					<div>
+						<button class="sbtn"  onclick="send_smslist()" type="button">Submit</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="alltabs" id="tab3">
+					<div class="easysendwrp">
+						<div class="nt_row">	
+							<div  id="easy_send_options">רשימת דפי נחיתה</div>
+							<div>
+								<select name="easy_option_list" id="easy_option_list"  onchange="easytab(this)">
+									<option value="" selected>--</option>
+									<option value="1" >מסמכים להמשך טיפול מוקד און ליין</option>
+									<option value="2" >מסמכים לטיפול בידוק – אחרי סגירת פוליסה</option>
+									<option value="3" >מינוי כתב סוכן</option>
+									
+								</select>
+							</div>
+						</div>
+						<div>
+							<!--<div class="easy_tabs">
+								<span class="tab_hde" id="tabes_hd1"  onclick="easytab(1)">העלאת קובץ</span>
+								<span class="tab_hde" id="tabes_hd2" onclick="easytab(2)">פורמט מילוי</span>
+								<span class="tab_hde" id="tabes_hd3"  onclick="easytab(3)">פורמט מילוי + קובץ</span>
+		
+							</div> -->
+							<!--<div class="easy_tabs">
+								<span class="tab_hde" id="tabes_hd1" onclick="easytab(1)">מסמכים להמשך טיפול מוקד און ליין</span>
+								<span class="tab_hde" id="tabes_hd2" onclick="easytab(2)">מסמכים לטיפול בידוק – אחרי סגירת פוליסה</span>
+								<span class="tab_hde" id="tabes_hd3" onclick="easytab(3)">מינוי כתב סוכן</span>
+		
+							</div>-->
+						</div>
+					</div>
+					<div class="alltabses" id="tabes1" >
+						<div class="nt_row">
+							<!--<h4 id="easy_send_hd1">העלאת קובץ</h4>-->
+							<!--<div class="nt_lbl easy_send_doc">Related document</div>-->
+							<div id="easy_send_op1_doc_list">
+								
+							</div>
+							
+						</div>
+						<div class="nt_row" id="send_by_op1_wrp" >
+							<div class="nt_lbl easy_send_by">Send by</div>
+							<div>
+								<select name="eaysend_by_op1" id="eaysend_by_op1"  onchange="get_easysend_op1_recipients(this)">
+									<option value="" selected>--</option>
+									<option value="email" >במייל</option>
+									<option value="sms" >SMS</option>
+									
+								</select>
+							</div>
+						</div>
+						<div class="nt_row">
+							<div class="nt_lbl recepients_lbl">Recepients</div>
+							<div class="recepients_wrp" id="recep_easysend_op1"></div>
+						</div>
+						<div class="nt_row">
+							<div id="easy_send_constant_ph_op1_wrp" style="display:none;">
+								<div class="fl recep_wr">
+									<label for="constant_phone_op1" id="phoneno_op1_lbl"> Phone number</label><br>
+									<div>
+										<input type="text" id="mphone_easysend_op1" name="mphone_easysend_op1">
+									</div>
+									
+								</div>
+								<div class="fr chkbx_wr">
+									 <input type="checkbox" id="constant_phone_op1" name="constant_phone_op1" value="Yes">
+								</div>
+								<div class="clr">&nbsp;</div>
+							</div>
+							
+							<div id="easy_send_constant_mail_op1_wrp" style="display:none;">
+								<div class="fl recep_wr">
+									<label for="constant_op1_mail" id="email_add_op1_lbl"> Email Address</label><br>
+									<div>
+										<input type="text" id="op1_mail" name="op1mail">
+									</div>
+									
+								</div>
+								<div class="fr chkbx_wr">
+									 <input type="checkbox" id="constant_op1_mail" name="constant_op1_mail" value="yes">
+								</div>
+								<div class="clr">&nbsp;</div>
+							</div>
+							
+					   </div>
+					   
+						<div class="nt_row">
+							<div>
+								<button class="sbtn"  onclick="easy_send_op1_notification(this)" type="button">Send</button>&nbsp;<span id="op1btn_loader" class=""></span>
+							</div>
+						</div>
+					</div>
+					<div class="alltabses" id="tabes2">
+					<!--<h4 id="easy_send_hd2">פורמט מילוי</h4>-->
+						<div class="nt_row">	
+							<!--<div class=="nt_lbl easy_send_doc">Related document</div>-->
+							
+							<div id="easy_send_op2_doc_list_ty3">
+								
+							</div>
+							<div id="easy_send_op2_doc_list_ty2">
+								
+							</div>
+							
+							<!--<div>
+								<select name="easy_send_op2_doc" id="easy_send_op2_doc"  onchange="show_sendby_op1(this)">
+									<option value="" selected>--</option>
+									
+								</select>
+							</div>-->
+							
+						</div>
+						<div class="nt_row" id="send_by_op2_wrp" >
+							<div class="nt_lbl easy_send_by">Send by</div>
+							<div>
+								<select name="eaysend_by_op2" id="eaysend_by_op2"  onchange="get_easysend_op2_recipients(this)">
+									<option value="" selected>--</option>
+									<option value="email" >במייל</option>
+									<option value="sms" >SMS</option>
+									
+								</select>
+							</div>
+						</div>
+						
+						<div class="nt_row">
+							<div class="nt_lbl recepients_lbl">Recepients</div>
+							<div class="recepients_wrp" id="recep_easysend_op2"></div>
+						</div>
+						
+						<div class="nt_row">
+							<div id="easy_send_constant_ph_op2_wrp" style="display:none;">
+								<div class="fl recep_wr">
+									<label for="constant_phone_op2" id="phoneno_op2_lbl"> Phone number</label><br>
+									<div>
+										<input type="text" id="mphone_easysend_op2" name="mphone_easysend_op2">
+									</div>
+									
+								</div>
+								<div class="fr chkbx_wr">
+									 <input type="checkbox" id="constant_phone_op2" name="constant_phone_op2" value="Yes">
+								</div>
+								<div class="clr">&nbsp;</div>
+							</div>
+							
+							<div id="easy_send_constant_mail_op2_wrp" style="display:none;">
+								<div class="fl recep_wr">
+									<label for="constant_op2_mail" id="email_add_op2_lbl"> Email Address</label><br>
+									<div>
+										<input type="text" id="op2_mail" name="op2mail">
+									</div>
+									
+								</div>
+								<div class="fr chkbx_wr">
+									 <input type="checkbox" id="constant_op2_mail" name="constant_op2_mail" value="yes">
+								</div>
+								<div class="clr">&nbsp;</div>
+							</div>
+							
+					   </div>
+						
+						
+						<div class="nt_row">
+							<div>
+								<button class="sbtn"  onclick="easysend_op2_send(this)" type="button">Send</button>
+							</div>
+						</div>
+						
+						
+					</div>
+					<div class="alltabses" id="tabes3">
+					<!--<h4 id="easy_send_hd3">פורמט מילוי + קובץ</h4>-->
+						<div class="nt_row">	
+							<!--<div class="nt_lbl easy_send_doc">Related document</div> -->
+							<!--<div>
+								<select name="easy_send_op3_doc" id="easy_send_op3_doc"  onchange="show_sendby_op3(this)">
+									<option value="" selected>--</option>
+									
+								</select>
+							</div>-->
+							<div id="easy_send_op3_doc_list">
+								
+							</div>
+							
+						</div>
+						<div class="nt_row" id="send_by_op3_wrp" >
+							<div class="nt_lbl easy_send_by">Send by</div>
+							<div>
+								<select name="eaysend_by_op3" id="eaysend_by_op3"  onchange="get_easysend_op3_recipients(this)">
+									<option value="" selected>--</option>
+									<option value="email" >במייל</option>
+									<option value="sms" >SMS</option>
+									
+								</select>
+							</div>
+						</div>
+						<div class="nt_row">
+							<div class="nt_lbl recepients_lbl">Recepients</div>
+							<div class="recepients_wrp" id="recep_easysend_op3"></div>
+						</div>
+						
+						<div class="nt_row">
+							<div id="easy_send_constant_ph_op3_wrp" style="display:none;">
+								<div class="fl recep_wr">
+									<label for="constant_phone_op3" id="phoneno_op3_lbl"> Phone number</label><br>
+									<div>
+										<input type="text" id="mphone_easysend_op3" name="mphone_easysend_op3">
+									</div>
+									
+								</div>
+								<div class="fr chkbx_wr">
+									 <input type="checkbox" id="constant_phone_op3" name="constant_phone_op3" value="Yes">
+								</div>
+								<div class="clr">&nbsp;</div>
+							</div>
+							
+							<div id="easy_send_constant_mail_op3_wrp" style="display:none;">
+								<div class="fl recep_wr">
+									<label for="constant_op3_mail" id="email_add_op3_lbl"> Email Address</label><br>
+									<div>
+										<input type="text" id="op3_mail" name="op3mail">
+									</div>
+									
+								</div>
+								<div class="fr chkbx_wr">
+									 <input type="checkbox" id="constant_op3_mail" name="constant_op3_mail" value="yes">
+								</div>
+								<div class="clr">&nbsp;</div>
+							</div>
+							
+					   </div>
+						
+						<div class="nt_row">	
+							<!--<div class="nt_lbl easy_send_doc">Related document</div> -->
+							
+							<div>
+								<button class="sbtn"  onclick="easysend_op3_send(this)" type="button">Send</button>
+							</div>
+						</div>
+					</div>
+			</div>
+			
+		</div>
+        <!--<div class='recepients' id='recepientsList'>
+            <fieldset id="recepients">
+                <legend>Recepients</legend>
+                <a href="javascript:void(0);" class="select-all" id="selectAllNode">Select All</a>
+                <i class="refresh-icon fa fa-refresh" id="refreshRecipients"></i>
+            </fieldset>
+        </div>
+        <div class='standardText' id='standardTextListDiv'>
+            <select name="standardTexts" id="standardTextsList" class="select-empty">
+                <option value="" selected>--</option>
+            </select>
+        </div>
+        <div class='freeTextDiv' id='freeTextBoxDiv'>
+            <textarea id="freeTextBox" rows="5" cols="30" maxlength="255"
+                onkeyup="javascript:countChar('freeTextBox','charNum');"></textarea>
+            <div id="charNum"></div>
+        </div>
+        <div class='submit' id='submitDiv'>
+            <button type='submit' id='submitBtn' onclick='javascript:validate();'>Submit</button>
+            <div id="submittingDiv" style="display: none">
+                <i class="fa fa-spinner fa-pulse"></i>
+            </div>
+        </div> -->
+        <div id="errorMsg"></div>
+    </div>
+	 <script src='../js/logic.js'></script>
+</body>
+
+</html>
