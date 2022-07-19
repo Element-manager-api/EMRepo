@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>Create Address</title>
+		<link rel="stylesheet" href="../css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap.rtl.min.css" >
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<link rel="stylesheet" href="../css/font-awesome.css" />
+		<link rel="stylesheet" href="../css/custom.css" />
+		<style>
+			html {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+				font-size: 12px;
+			}
+			.address-card{
+				height:100px;
+				margin-bottom: 20px;
+			}
+			.modal-lg, .modal-xl {
+				max-width: 90%;
+			}
+			.m-top-10{
+				margin-top:10px;
+			}
+			.m-top-8{
+				margin-top:8px;
+			}
+		</style>
+	</head>
+	<body onload="initialize('main');">
+		<div class="container-fluid" style="height:100%;overflow:auto;">
+			<div class="alert alert-danger" style="display:none;" id="warning-msg" role="alert">
+			</div>
+			<div class="alert alert-light" style="display:none;" id="info-msg" role="alert">
+			</div>
+			<form id="address-from">
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
+						<div class="row">
+							<div class="form-group col-sm-12 col-md-4" style="display:none;">
+								<label for="inputCountry" id="lblCntry">Country</label>
+								<input type="text" class="form-control" name="inputCountry" id="inputCountry" placeholder="">
+							</div>
+							<div class="form-group col-sm-12 col-md-4">
+								<div class="form-check form-check-inline" style="margin-top:8px;">
+								  <input class="form-check-input" type="radio" name="address-type-selection" id="radioAddress" value="address" checked>
+								  <label class="form-check-label" for="radioAddress" id="chkAddress">
+									Address
+								  </label>
+								</div>
+								<div class="form-check form-check-inline" style="margin-top:8px;">
+								  <input class="form-check-input" type="radio" name="address-type-selection" id="radioPOBox" value="pobox">
+								  <label class="form-check-label" for="radioPOBox" id="chkPOBox">
+									PO Box
+								  </label>
+								</div>
+								<div class="form-check form-check-inline" style="margin-top:8px;">
+								   <label class="form-check-label" for="addressCross" id="lblCrossAddress">
+									Cross Address
+								  </label>
+								  <input class="form-check-input mx-auto d-block" type="checkbox" name="addressCross" id="addressCross" >
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-3 col-md-4 m-top-10">
+								<label for="inputCity" id="lblCity">City</label>
+								<input type="text" class="form-control" name="inputCity" id="inputCity" placeholder="">
+							</div>
+							<div class="form-group col-sm-4 col-md-4 m-top-10 address-part">
+								<label for="inputStreet" id="lblStreet">Street</label>
+								<input type="text" class="form-control" name="inputStreet" id="inputStreet" placeholder="">
+							</div>
+							<div class="form-group col-sm-2 col-md-2 m-top-10 address-part">
+								<label for="inputHouseNo" id="lblHouse">House No</label>
+								<input type="text" class="form-control" name="inputHouseNo" id="inputHouseNo" placeholder="">
+							</div>
+							<div class="form-group col-sm-4 col-md-4 m-top-10" id="pobox-parent" style="display:none;">
+								<label for="inputPOBox" id="lblPOBox">POBox</label>
+								<input type="text" class="form-control" name="inputPOBox" id="inputPOBox" placeholder="">
+							</div>
+							<div class="w-100"></div>
+							<div class="form-group col-sm-2 col-md-2 m-top-10 address-part">
+								<label for="inputEntrance" id="lblEnt">Entrance</label>
+								<input type="text" class="form-control" name="inputEntrance" id="inputEntrance" placeholder="">
+							</div>
+							<div class="form-group col-sm-4 col-md-4 m-top-10">
+								<label for="inputZipCode" id="lblZip">Zip Code</label>
+								<input type="text" class="form-control" name="inputZipCode" id="inputZipCode" placeholder="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" id="contact-info">
+					<div class="col-md-12 col-sm-12">
+						<div class="row">
+							<div class="col-sm-4 col-md-4">
+								<div class="form-group col-sm-12 col-md-12 m-top-10">
+									<label for="inputPhone" id="lblPhone">Phone</label>
+									<input type="text" class="form-control" name="inputPhone" id="inputPhone" >
+								</div>
+							</div>
+							<div class="col-sm-2 col-md-2">
+								<div class="form-group text-center col-sm-12 col-md-12 m-top-10" id="phoneCrossParent">
+									<label class="form-check-label" for="phoneCross" id="lblPhoneCross">
+									Cross Phone
+									</label>
+									<input class="form-check-input mx-auto d-block m-top-8" type="checkbox" name="phoneCross" id="phoneCross" >
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-sm-4 col-md-4" >
+								<div class="form-group col-sm-12 col-md-12 m-top-10">
+									<label for="inputCellular" id="lblCell">Cellular</label>
+									<input type="text" class="form-control" name="inputCellular" id="inputCellular" >
+								</div>
+							</div>
+							<div class="col-sm-2 col-md-2">
+								<div class="form-group text-center col-sm-12 col-md-12 m-top-10" id="cellularCrossParent">
+									<label class="form-check-label" for="cellularCross" id="lblCrossCell">
+									Cross Cellular
+									</label>
+									<input class="form-check-input mx-auto d-block m-top-8" type="checkbox" name="cellularCross" id="cellularCross" >
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-sm-4 col-md-4" >
+								<div class="form-group col-sm-12 col-md-12 m-top-10">
+									<label for="inputEmail" id="lblEmail">Email Address</label>
+									<input type="email" class="form-control" name="inputEmail" id="inputEmail" >
+								</div>
+							</div>
+							<div class="col-sm-2 col-md-2">
+								<div class="form-group text-center col-sm-12 col-md-12 m-top-10" id="emailCrossParent">
+									<label class="form-check-label" for="emailCross" id="lblEmailCross">
+										Cross Email
+									</label>
+									<input class="form-check-input mx-auto d-block m-top-8" type="checkbox" name="emailCross" id="emailCross" >
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-sm-4 col-md-4" >
+								<div class="form-group col-sm-12 col-md-12 m-top-10">
+									<label for="inputFax" id="lblFax">Fax</label>
+									<input type="text" class="form-control" name="inputFax" id="inputFax" >
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--<div class="row">
+					<div class="col-sm-12 col-md-6 text-center" id="marketing-info">
+						<h3 id="lblMktData">Marketing Data</h3>
+						<table class="table text-center">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col" id="lblInst">Insurance</th>
+									<th scope="col" id="lblPen">Pension</th>
+									<th scope="col" id="lblCross">Cross</th>
+								</tr>
+							</thead>
+						<tbody>
+							<tr>
+								<td><input class="form-check-input" type="checkbox" name="insurance" id="insurance" ></td>
+								<td><input class="form-check-input" type="checkbox" name="pension" id="pension"></td>
+								<td><input class="form-check-input" type="checkbox" name="marketingCross" id="marketingCross" ></td>
+							</tr>
+						</tbody>
+						</table>
+					</div>
+				</div>-->
+			</form>
+		</div>
+		<div class="overlay show"></div>
+		<div class="spanner show" style="height:100%;">
+			<div class="loader"></div>
+			<p id="loaderMsg">Loading...</p>
+		</div>
+		<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+		<script src="../js/bootstrap.bundle.min.js" ></script>
+		<script src="../js/jquery-ui.js"></script>
+		<script src="../js/jquery.validate.min.js"></script>
+		<script src="../js/additional-methods.min.js"></script>
+		<script src="../js/createAddress.js"></script>
+		<!--<script src="http://localhost:8080/addin-js/createAddress.js?v=0.1.1.1"></script>-->
+	</body>
+</html>

@@ -1,0 +1,117 @@
+[
+	{
+		"name": "workspacesList",
+		"defaultValue": "246,250,302",
+		"dataType": "string"
+	},
+	{
+		"name": "defaultWorkspace",
+		"defaultValue": "246",
+		"dataType": "string"
+	},
+	{
+		"name": "coulmnConfig",
+		"defaultValue":"DOC_TYPE_NAME,סוג מסמך,Y,1,N;ReceiveDate,תאריך קבלת מסמך,Y,2,N;DocDate,תאריך תיוק מסמך,Y,3,N;PolicyNumber,מספר פוליסה,Y,4,N;Category,קטגוריה,Y,5,N;CATEGORYNAME,תיאור קטגוריה,Y,6,N;F_DOCNUMBER,מזהה מסמך,Y,7,Y",
+		"dataType": "string"
+	},
+	{
+		"name": "hostURL",
+		"defaultValue": "/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	},
+	{
+		"name": "idNotFound",
+		"defaultValue": "Id Number is not available, please update and try again.",
+		"dataType": "string"
+	},
+	{
+		"name": "reportId",
+		"defaultValue": "100067",
+		"dataType": "string"
+	},
+	{
+		"name":"noRecordFound",
+		"defaultValue":"No document found.",
+		"dataType":"string"
+	},
+	{
+		"name":"noDetailsFound",
+		"defaultValue":"No incident details found.",
+		"dataType":"string"
+	},
+	{
+		"name":"errorMsg",
+		"defaultValue":"Error happened. Please try again.",
+		"dataType":"string"
+	},
+	{
+		"name":"documentViewerURL",
+		"defaultValue":"https://shironimqa01.clal-ins/Atala/Default.aspx?System=CrmSign&Op=Request&GUID=",
+		"dataType":"string"
+	},
+	{
+		"name":"docIDCol",
+		"defaultValue":"F_DOCNUMBER",
+		"dataType":"string"
+	},
+	{
+		"name":"policyReportId",
+		"defaultValue":"100676",
+		"dataType":"string"
+	},
+	{
+		"name":"idNumberReportId",
+		"defaultValue":"100675",
+		"dataType":"string"
+	},
+	{
+		"name":"selectionDefault",
+		"defaultValue":"lead_id",
+		"dataType":"string"
+	},
+	{
+		"name":"lblwsList",
+		"defaultValue":"עולם",
+		"dataType":"string"
+	},
+	{
+		"name":"lblStartDate",
+		"defaultValue":"תאריך התחלה",
+		"dataType":"string"
+	},
+	{
+		"name":"lblEndDate",
+		"defaultValue":"תאריך סיום",
+		"dataType":"string"
+	},
+	{
+		"name":"search",
+		"defaultValue":"Search",
+		"dataType":"string"
+	},
+	{
+		"name":"lbl_show_by_lead_id",
+		"defaultValue":"מזהה ליד",
+		"dataType":"string"
+	},
+	{
+		"name":"lbl_show_by_insured_id",
+		"defaultValue":"ת\"ז",
+		"dataType":"string"
+	},
+	{
+		"name":"lbl_show_by_policy_id",
+		"defaultValue":"פוליסה",
+		"dataType":"string"
+	},
+	{
+		"name":"lblPolicyList",
+		"defaultValue":"פוליסה",
+		"dataType":"string"
+	},
+	{
+		"name":"lblIdNumberList",
+		"defaultValue":"ת\"ז",
+		"dataType":"string"
+	}
+]

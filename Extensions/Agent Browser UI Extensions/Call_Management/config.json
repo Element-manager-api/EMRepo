@@ -1,0 +1,57 @@
+[
+  {
+    "name": "parentLeadSourceRptID",
+    "defaultValue": "100908",
+    "dataType": "string"
+  },
+    {
+    "name": "PhoneStatusID",
+    "defaultValue": "2",
+    "dataType": "string"
+  },
+    {
+    "name": "Condition1DispID",
+    "defaultValue": "28",
+    "dataType": "string"
+  },
+    {
+    "name": "Condition1StatusID",
+    "defaultValue": "104",
+    "dataType": "string"
+  },
+    {
+    "name": "Condition1ElseStatusID",
+    "defaultValue": "2",
+    "dataType": "string"
+  },
+    {
+    "name": "Condition2DispID",
+    "defaultValue": "31",
+    "dataType": "string"
+  },
+    {
+    "name": "Condition2StatusID",
+    "defaultValue": "104",
+    "dataType": "string"
+  },
+    {
+    "name": "Condition3DispID",
+    "defaultValue": "29",
+    "dataType": "string"
+  },
+    {
+    "name": "Condition3StatusID",
+    "defaultValue": "104",
+    "dataType": "string"
+  },
+    {
+    "name": "Condition3ElseDispID",
+    "defaultValue": "28",
+    "dataType": "string"
+  }, 
+  {
+    "name": "Condition3ElseStatusID",
+    "defaultValue": "8",
+    "dataType": "string"
+  }
+  ]

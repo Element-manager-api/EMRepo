@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html dir="rtl">
+
+<head>
+    <title>Dialog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="../ID_Validator/openWorkspace.js"></script>
+    <style>
+        body {
+            font: 400 14px Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="msg"></p>
+    <script>
+        var msg = localStorage.getItem("IDValidator_modalMsgDOB");
+        document.getElementById('msg').innerHTML = msg;
+        localStorage.removeItem("IDValidator_modalMsg");
+    </script>
+</body>
+
+</html>

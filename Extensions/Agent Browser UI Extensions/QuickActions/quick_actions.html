@@ -1,0 +1,523 @@
+<!doctype html>
+<html dir="rtl">
+	<head>
+		<!-- <script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script> -->
+		<script src="jquery-3.6.0.js"></script> 
+ <script src="jquery-ui.js"></script>
+ <script type= "application/javascript"> </script>
+		<style>
+			
+			
+			/*.extensionWrapper extensionPlaceHolder{
+			height: 198px;
+			width: 214px;
+			}*/
+			#quick-action-loading-icon-image  {
+			  float: right;
+			  height: 50px;
+			  width: 50px;
+			}
+			.button-loading-icon-image {
+				float: left;
+				height: 30px;
+				width: 30px;
+			}
+			.quick-actions-container {
+				float: left;
+				width: 15%;
+				text-align: center;
+				position: relative;
+			}
+			.button  {
+				color: rgb(61,81,110);
+				padding:5px;
+				border-radius: 5px;
+				border: none;
+				height: 38px;
+				width: 100px;
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				margin:5px;
+			}
+			.button.wide{
+				width: 180px;
+			}
+			table {
+				margin: auto;
+			}
+			#additional-quick-actions{
+			    width: 71%;
+				font-size: 12px;
+				padding: 0;
+			}
+			.input-button {
+				margin-right: 15px;
+				margin-left: 15px;
+				padding:5px;
+				border-radius: 5px;
+				border: none;
+				height: 36px;
+				width: 58px;
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				
+			}
+			#input-1 {
+				margin-left: 0; 
+				padding: 0;
+				width: 25%;
+				margin-right: 5px;
+			}
+			#form-1{
+				width:180px;
+			}
+			.button:enabled {
+				color: rgb(61,81,110);
+			}
+			.button:disabled {
+				color: rgb(167,166,166);
+			}
+			.input-button:enabled {
+			color: rgb(61,81,110);
+			}
+			.input-button:disabled {
+				color: rgb(167,166,166);
+			}
+
+			label {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 0 auto;
+			}
+			select {
+				margin-bottom: 15px;
+				margin-top: 15px;
+				width: 130px;
+				height: 36px;
+				border-color: rgb(61,81,110); 
+				color: black;
+				padding: 10px;
+				font-family:Arial;
+				font-size: 14px;
+			}
+			@media only screen and (min-width: 600px) {
+ 
+				}
+		</style>
+	</head>
+	
+<body id="body">
+
+	<script>
+	
+	var recordType = null;
+	var reportIDs = null;
+	var WSProperty = null;
+	var numberOfButtonsToShow = null;
+	var headerText = null;
+	var listText = null;
+	var chooseButtonText = null;
+	var FontSize = null;
+	var EnableButtonColor = null;
+	var DisableButtonColor = null;
+	var FontType = null;
+	var contactID = null;
+	var IncidentID = null;
+	var interfaceurl = null;
+	var restUrl = null;
+	var sessionID = null;
+	var CategoryId = null;
+	var ProductId = null;
+	var accountId = null;
+	var ProfileData;
+	var ProfileGroup;
+	var UserProfileType;
+	var AccountUserProfile;
+	var Account_UserType;
+	var NumberOfColumnsToShow;
+	ORACLE_SERVICE_CLOUD.extension_loader.load("QuickActions", "1")
+		.then(function(extensionProvider) {
+			extensionProvider.getGlobalContext().then(function(globalContext) {
+			console.log("QuickActions");
+				interfaceurl = globalContext.getInterfaceUrl();
+				restUrl = globalContext.getInterfaceServiceUrl("REST"); 
+				globalContext.getContainerContext('QuickActions').then(function(containerContext) {
+						containerContext.getProperties(['WSProperty','NumberOfButtonsToShow','NumberOfColumnsToShow','HeaderText','ListText','ChooseButtonText','FontSize','EnableButtonColor','DisableButtonColor','FontType']).then(function(collection) {
+						WSProperty = collection.get('WSProperty');
+						NumberOfColumnsToShow = collection.get('NumberOfColumnsToShow').getValue();
+						numberOfButtonsToShow = collection.get('NumberOfButtonsToShow').getValue();
+						headerText = collection.get('HeaderText').getValue();
+						listText = collection.get('ListText').getValue();
+						chooseButtonText = collection.get('ChooseButtonText').getValue();
+						FontSize = collection.get('FontSize').getValue();;
+						EnableButtonColor = collection.get('EnableButtonColor').getValue();
+						DisableButtonColor = collection.get('DisableButtonColor').getValue();
+						FontType = collection.get('FontType').getValue();;
+						console.log("QuickActionsExtension");
+						console.log(`Extensionproperty ${WSProperty.getName()} with dataType ${WSProperty.getDataType()} has value ${WSProperty.getValue()}`);
+						globalContext.getSessionToken().then(function (sessionToken) {
+							accountId = globalContext.getAccountId();
+							sessionID = sessionToken;
+							extensionProvider.registerWorkspaceExtension(function(workspaceRecord)
+							{
+								recordType = workspaceRecord.getWorkspaceRecordType();
+								console.log(recordType);
+								workspaceRecord.addNamedEventListener('QuickActionsRefresh',getWSData);
+								var profileGroupPromise = new ExtensionPromise();
+								function getWSData () {
+									if(recordType == "Incident") {
+											workspaceRecord.getFieldValues(['Incident.ProdID','Incident.CatId','Incident.IID']).then(function(IFieldDetails1)
+											{
+												ProductId = (IFieldDetails1.getField('Incident.ProdID').getValue());
+												CategoryId = (IFieldDetails1.getField('Incident.CatId').getValue());	
+												IncidentID = IFieldDetails1.getField('Incident.IID').getValue();
+												console.log(ProductId);
+												console.log(CategoryId);
+												getProfileGroup(accountId,sessionID);
+												profileGroupPromise.then(function(ProfileGroup){getQuickActions(recordType,ProfileGroup);});
+												profileGroupPromise.catch(function(error) { console.log(error);});
+											});
+									}
+									else if(recordType == "Contact") {
+											workspaceRecord.getFieldValues(['Contact.CId']).then(function(IFieldDetails)
+											{
+												contactID = IFieldDetails.getField('Contact.CId').getLabel();
+												console.log(`Contact ID is: ${contactID}`);
+												getProfileGroup(accountId,sessionID);
+												profileGroupPromise.then(function(ProfileGroup){getQuickActions(recordType,ProfileGroup);});
+												profileGroupPromise.catch(function(error) { console.log(error);});
+											});
+									}
+									else {
+										console.log ("Record Type not supported.");
+									}
+								}
+							
+								function getProfileGroup(accID,sessionID){
+									console.log(accID);
+									var ajaxUrl_Acc = restUrl + "/connect/v1.4/queryResults/?query=SELECT Accounts.CustomFields.CO.ProfileGroup.LookupName FROM Accounts WHERE Accounts.ID =" + accID + ""; 
+									console.log(sessionID);
+									$.ajax({	
+									type: "GET",
+										url: ajaxUrl_Acc,
+										beforeSend: function (xhr) {
+												xhr.setRequestHeader("Authorization", "Session " + sessionID);
+												xhr.setRequestHeader("osvc-crest-application-context", "Quick_Actions_BUI_Extension");
+											},
+									}).done(function (jsonData) {
+										console.log(jsonData);
+										if(("items" in jsonData) && ("rows" in jsonData.items[0]) && ("0" in jsonData.items[0].rows[0]))  {
+											profileGroupPromise.resolve(jsonData.items[0].rows[0][0]);
+										}
+										else {
+											profileGroupPromise.reject("Can't fetch ProfileGroup");
+										}
+									});	
+								}
+								
+								//Call getWSData function for the first time when extension is loaded
+								getWSData();
+								//Function to add an Quick Actions to the workspace (UI)
+								function addQuickActions(data) {
+									//$("#enabled").css('font-size', FontSize);
+									
+									$(".input-button:enabled").css('background-color', EnableButtonColor);
+									$(".input-button:disabled").css('background-color', DisableButtonColor);
+								
+									//Remove No quick actions message if any before displaying the quick actions again
+									$('#no-quick-actions-message').remove();
+									//Clear quick action buttons before populating them again
+									$('#quick-actions-container').empty();
+									var _table = $("<table>", {"id": "table-0"});
+									var _tableHead = $("<thead>", {"id": "tableHead-0"});
+									var _tr_h = $("<tr>", {"id": "tr-head"});
+									var _th = $("<th>", {"id": "th-head","colspan":NumberOfColumnsToShow+1});
+									var _span1 = $("<span>", {"id": "header-text"});
+									_span1.text();
+									_th.append(_span1);
+									_tr_h.append(_th);
+									_tableHead.append(_tr_h);
+									var _tableBody = $("<tbody>", {"id": "tableBody-0"});
+									_table.append(_tableHead);
+									_table.append(_tableBody);
+									$("#quick-actions-container").append(_table);
+									//table for for form with dropdown and submit button
+									var _table1 = $("<table>", {"id": "table-1"});
+									var _tableBody1 = $("<tbody>", {"id": "tableBody-1"});
+									_table1.append(_tableBody1);
+									$("#quick-actions-container").append(_table1);
+									var _tr = null;
+									for(i=0; i<data.length; i++)
+									{
+										if(i<numberOfButtonsToShow) {
+											if(i%NumberOfColumnsToShow == 0)
+											{
+												_tr = $("<tr>", {"id": "tr-"+i});
+											}
+											var _td = $("<td>", {"id": "td-"+i});
+											var className = NumberOfColumnsToShow==1?"button wide":"button";
+											
+											var _button = $("<button>", {"id": "button-"+i,"title":data[i]['ActionToolTip'],"class":className});
+											_button.text(data[i]['ActionName']);
+											_button.click(function() {
+												j = parseInt(this.id.split('-')[1]);
+												var qaData = JSON.stringify(data[j]);	
+
+											//alert( "Fire named event: "+data[j]['EventTrigger'] );
+												var eventTrigger =  data[j]['EventTrigger'];
+												/*if(data[j]['EventTrigger'] == "add_lead"){
+													eventTrigger = data[j]["IndicatorClosingEvent"]!="" ? data[j]['EventTrigger']+"__"+data[j]["IndicatorClosingEvent"] : data[j]['EventTrigger'];
+												}*/
+												localStorage.setItem(""+data[j]['EventTrigger']+"", qaData);
+												workspaceRecord.triggerNamedEvent(eventTrigger); 
+												if((parseInt(data[j]['IndicatorDisplay'])) == 1) {
+												
+													$(this).prop('.disabled', true).addClass('DisableButtonColor');
+													$(this).html('<span>'+data[j]['ActionName']+'</span> <img class="button-loading-icon-image" src="/euf/assets/images/extension/loading-circle-transparent.gif" alt="..." />');
+													_this = this;
+													window.setTimeout( function() {
+															$(_this).prop('disabled', false).addClass('EnableButtonColor');
+															$(_this).text(data[j]['ActionName']);
+														}, 5000 );
+													$(this).on( "IndicationRefresh", function() {
+													  console.log( $( this ).text() );
+													});
+												}
+												/*function enableButton(){
+													$(this).prop('disabled', false);
+													$(this).text(data[i]['ActionName']);
+												};
+												if(parseInt(data[i]['IndicatorDisplay']) == 1) {
+													workspaceRecord.addNamedEventListener(data[i]['IndicatorClosingEvent'],function(){});
+												}
+												window.setTimeout( enableButton, 5000 );*/
+											});
+											if(data[i]['Enable'] != true) {
+												_button.prop('disabled', true).addClass('DisableButtonColor');
+											}
+											_td.append(_button);
+											_tr.append(_td);
+											if(i%NumberOfColumnsToShow== 0 || (i+1 == data.length)) {
+												_tableBody.append(_tr); //Apped the row to the table body after adding two buttons
+											}
+										}
+										else {
+											if(i == numberOfButtonsToShow) {
+											console.log(DisableButtonColor);//This is the first Lov for dropdown so add the dropdown and button
+												var _tr1 = $("<tr>", {"id": "tr-"+i});
+												var _td1 = $("<td>", {"id": "td-"+i});
+												var _form1 = $("<form>", {"id": "form-1"});
+												_form1.submit(function( event ) {
+													//alert( "Handler for .submit() called." );
+													event.preventDefault();
+													namedEvent = $("#additional-quick-actions").find(":selected").val();
+													selectedID = $("#additional-quick-actions").find(":selected").attr('id');
+													k = parseInt(selectedID.split('-')[1]);
+													if(namedEvent != "")
+													{
+														workspaceRecord.triggerNamedEvent(namedEvent);
+														if(k != null && (parseInt(data[k]['IndicatorDisplay'])) == 1) {
+															$("#input-1").prop('disabled', true).addClass('DisableButtonColor');
+															//$("#input-1").css('background-color', DisableButtonColor);
+															$("#input-1").html('<span>'+chooseButtonText+'</span><img class="button-loading-icon-image" src="/euf/assets/images/extension/loading-circle-transparent.gif" alt="..." />');
+															window.setTimeout( function() {
+																	$("#input-1").prop('disabled', false).addClass('EnableButtonColor');
+																	//$("#input-1").css('background-color', DisableButtonColor);
+																	$("#input-1").text(chooseButtonText);
+																}, 5000 );
+														}
+														}
+													
+												});
+												var _input1 = $("<button>", {"id": "input-1","class":"input-button"});
+												_input1.text(chooseButtonText);
+												var _select1 = $("<select>",{"id":"additional-quick-actions"});
+												var _defaultOption = $("<option>",{"id":"default","value":""});
+												//_defaultOption.prop('disabled', true);
+												_defaultOption.prop('selected', true);
+												_defaultOption.text(listText);
+												_select1.append(_defaultOption);
+												_form1.append(_select1);
+												_form1.append(_input1);
+												_td1.append(_form1);
+												_tr1.append(_td1);
+												_tableBody1.append(_tr1);
+												$("#input-1").click(function() {
+													$( "#form-1").submit();
+												});
+											}
+											
+												if(data[i]['Enable'] == true)
+												{
+												console.log(data[i]['Enable']);
+												var _option = $("<option>",{"id":data[i]['ActionName']+"-"+i,"value":data[i]['EventTrigger']});
+												_option.text(data[i]['ActionName']);
+												_select1.append(_option);
+												}
+											
+											
+										}
+										$("#button-"+i).css('font-size', FontSize);
+										$("#button-"+i).css('font-family', FontType);
+										$("#additional-quick-actions").css('font-size', FontSize);
+										$("#additional-quick-actions").css('font-family', FontType);
+										$("#input-1").css('font-size', FontSize);
+										$("#input-1").css('background-color', EnableButtonColor);
+										$("#input-1").css('font-family', FontType);
+										$(".EnableButtonColor").css('background-color', EnableButtonColor);
+										$(".DisableButtonColor").css('background-color', DisableButtonColor);
+										$(".EnableButtonColor").css('background-color', EnableButtonColor);
+										
+										$(".button:enabled").css('background-color', EnableButtonColor);
+										$(".button:disabled").css('background-color', DisableButtonColor);
+									
+									
+									}
+								}
+								//Function to display No QuickActions message on workspace (UI)
+								function addNoQuickActionsMessage(msg) {
+									//Remove Indications/Icons (if any) before displaying no incications message
+									$('#quick-actions-container').empty();
+									$('#no-quick-actions-message').remove();
+									var _div = $("<div>", {"id": "no-quick-actions-message"}); 
+									_div.text(msg);
+									$("#main-content").append(_div);	
+								}
+								function resizeExtension() {
+									var maxHeight = 0;
+									var maxWidth = 0;
+									var minWidth = 500;
+									var minHeight = 50;
+									var heights = $("#main-content img").map(function ()
+									{
+										return $(this).height();
+									}).get();
+									maxHeight = Math.max.apply(null, heights);
+									maxWidth = $('body').width();
+									maxWidth = maxWidth > minWidth ? maxWidth : minWidth;
+									maxHeight = maxHeight > minHeight ? maxHeight : minHeight;
+									console.log("Width : "+ maxWidth);
+									console.log("Height : "+ maxHeight);
+									ORACLE_SERVICE_CLOUD.extensionResizeHandler.resize(maxWidth,maxHeight+15);
+								}
+								//Function to make an AJAX call to custom PHP script (in File Manager) to Fetch quick actions from Infrastructure Table
+								function getQuickActions(recordType,ProfileGroup) {
+									if(recordType == "Incident") {
+										Data = {psk:sessionID,WSProperty:WSProperty.getValue(),ProfileGroup:ProfileGroup,recordType:recordType,ProductId:ProductId,CategoryId:CategoryId,IncidentID:IncidentID};
+											console.log(Data);
+									}
+									if(recordType == "Contact") {
+										Data = {psk:sessionID,WSProperty:WSProperty.getValue(),ProfileGroup:ProfileGroup,recordType:recordType,contactID:contactID};
+									}
+									// Make an Ajax call to custome script
+									var proxyscript = interfaceurl + "/php/custom/get_quick_actions_copy.php";
+									console.log(proxyscript);
+									//Empty UL element's innerHTML before you get indications and update the UI
+									//$('#quick-actions-container').empty();
+									//Show loading icon before making an AJAX call
+									$('#quick-action-loading-icon').show();
+									$.ajax({
+										type: "POST",
+										url: proxyscript, 			
+										dataType: "json", 
+										data: Data,
+										//data:{psk:sessionID,WSProperty:WSProperty.getValue(),ProfileData:ProfileData,recordType:recordType,},
+										success: function (data) {
+											console.log(data);
+											//Hide loading icon on success / error of AJAX call
+											$('#quick-action-loading-icon').hide();
+											if("length" in data && data.length > 0) {
+												addQuickActions(data);
+												//resizeExtension();
+											}
+											else {
+												addNoQuickActionsMessage("No Quick actions to display");
+											}
+										},
+										error: function (jqXHR, exception) {
+											//Hide loading icon on success / error of AJAX call
+											$('#quick-action-loading-icon').hide();
+											var msg = '';
+											if (jqXHR.status === 0) {
+												msg = 'Not connect.\n Verify Network.';
+											} else if (jqXHR.status == 404) {
+												msg = 'Requested page not found. [404]';
+											} else if (jqXHR.status == 500) {
+												msg = 'Internal Server Error [500].';
+											} else if (exception === 'parsererror') {
+												msg = 'Can\'t fetch Quick Actions.Please contact your Admin.';
+											} else if (exception === 'timeout') {
+												msg = 'Time out error.';
+											} else if (exception === 'abort') {
+												msg = 'Ajax request aborted.';
+											} else {
+												msg = 'Uncaught Error.\n' + jqXHR.responseText;
+											}
+											alert(msg);
+										}
+									});
+								} 
+							});
+						});
+					}).catch(function(err) {
+						console.log(err);
+					});
+				}).catch(function(err) {
+					console.log(err);
+				});
+			});
+		});
+	</script>
+		<div id="main-content">
+			<div id="quick-action-loading-icon" > <img id="quick-action-loading-icon-image" src="/euf/assets/images/extension/loading-circle.gif" alt="loading..." /></div>
+			
+			<div id="quick-actions-container"> 
+				<!--<table class="table">
+				  <thead>
+					<tr>
+					  <th colspan="3"><h2>פעולות מהירות</h2></th>
+					</tr>
+				  </thead>
+				  <tbody>
+						<tr>
+							 <td>
+								<button class="button">Action 1</button>
+							  </td>
+							  <td>
+							  <button class="button">Action 2</button>
+							  </td>
+						</tr>
+						<tr>
+							  <td>
+								<button class="button">Action 3</button>
+							  </td>
+							  <td>
+							  <button class="button" disabled>Action 4</button>
+							  </td>
+
+						</tr>
+						<tr>
+							<td id="chooseList">
+							 <input type="submit" value="בחר" class="button" />
+							</td>
+							<td id="DropDown">
+							<select name="" id="lang">
+							<option value="">פעולות נוספות</option>
+							<option value="">Action 5</option>
+							<option value="">Action 6</option>
+							<option value="">Action 7</option>
+							<option value="">Action 8</option>
+							<option value="">Action 9</option>
+							<option value="">Action 10</option>
+							</td>
+						</tr>
+				  </tbody>
+				</table> -->
+
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,11 @@
+[
+	
+	{
+		"name": "validationsapp",
+		"defaultValue": "sale_with_no_policy,no_sale_with_policy,no_sale_no_offer_no_policy,stop_lead_close_open_task,sale_no_cancel_property_answer,sale_no_cancel_property_form",
+		"dataType": "String",
+		"isWorkspaceProperty": true
+	}
+	
+
+]

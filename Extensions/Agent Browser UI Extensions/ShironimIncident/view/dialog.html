@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Get Documents</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap.rtl.min.css" >
+		<!--<link rel="stylesheet" href="../css/bootstrap-datepicker3.min.css" >-->
+		<link rel="stylesheet" href="../css/jquery-ui.min.css">
+		<link rel="stylesheet" href="../css/font-awesome.css" />
+		<link rel="stylesheet" href="../css/custom.css" />
+	</head>
+	<body onload="initialize('dialog');">
+		<div class="alert alert-danger" style="display:none;" id="warning-msg" role="alert">
+		</div>
+		<div class="alert alert-light" style="display:none;" id="info-msg" role="alert">
+		</div>
+		<a class="modal-close" id="close-popup"><i class="fa fa-times" aria-hidden="true"></i></a>
+		<div class="overlay show"></div>
+		<div class="spanner show" style="height:100%;">
+			<div class="loader"></div>
+			<p>Loading...</p>
+		</div>
+		<div class="row" id="document-viewer">	
+		</div>
+		<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+		<script src="../js/bootstrap.bundle.min.js" ></script>
+		<!--<script src="../js/bootstrap-datepicker.min.js" ></script>-->
+		<script src="../js/jquery-ui.min.js"></script>
+		<script src="../js/shironim_incident.js"></script>
+		<!--<script src="http://localhost:8080/addin-js/shironim_incident.js?v=0.1.1.1"></script>-->
+	</body>
+</html>

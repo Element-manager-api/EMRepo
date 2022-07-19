@@ -1,0 +1,18 @@
+[
+	{
+		"name": "startURL",
+		"defaultValue": "https://clalins-oia--tst2.custhelp.com/web-determinations/secure/startsession/",
+		"dataType": "string"
+	},
+	{
+		"name":"resumeURL",
+		"defaultValue":"https://clalins-oia--tst2.custhelp.com/web-determinations/secure/resumesession/",
+		"dataType":"string"
+	},
+	
+	{
+		"name": "hostURL",
+		"defaultValue": "https://clalins--tst2.custhelp.com/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	}
+]

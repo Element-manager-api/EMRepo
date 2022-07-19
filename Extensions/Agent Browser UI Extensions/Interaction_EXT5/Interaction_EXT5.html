@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<!-- <script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script> -->
+	<script src="jquery-3.6.0.js"></script> 
+ <script src="jquery-ui.js"></script>
+</head>
+<body>
+ <script type= "application/javascript"> 
+
+	
+    var extensibilityApiVersion = '1.0'; // Extensibility API version
+    var globalContext = '';
+	var interfaceurl;
+	var restUrl = '';
+	var sessionID = '';
+	var recordId = '';
+	var workspaceRecord = '';
+	var value;
+	var Lead_MetaData_prod_ID ;
+	var Intcontact_id = 0;;
+	var WSContact_ID;
+	var CID;
+	var id_number;
+	var intercationID = null;
+	//var itemStr;
+    	
+    ORACLE_SERVICE_CLOUD.extension_loader.load("Interaction_EXT5",extensibilityApiVersion)
+	.then(function(extensionProvider) {
+		
+		extensionProvider.getGlobalContext().then(function(gc){
+			globalContext = gc;
+			interfaceurl = globalContext.getInterfaceUrl();
+			restUrl = globalContext.getInterfaceServiceUrl("REST"); 
+			globalContext.getSessionToken().then(function (sessionToken) {
+			sessionId = sessionToken;	
+			console.log("testvalue");
+			
+			  	extensionProvider.registerWorkspaceExtension(function(wr)
+				{
+					workspaceRecord = wr;
+					workspaceRecord.getFieldValues(['Contacts.CId','Contacts.CO$id_number']).then(function(IFieldDetails1)
+					{
+						CID = (IFieldDetails1.getField('Contacts.CId').getValue());	
+						id_number = (IFieldDetails1.getField('Contacts.CO$id_number').getValue());	
+						console.log(CID);
+						console.log(typeof(CID));
+						
+						console.log(Math.sign(CID));
+					
+					
+					if(Math.sign(CID) == -1)
+					{
+						console.log("addrecordsaving");
+						workspaceRecord.addRecordSavedListener(NewContacts);
+					}
+					else{
+						console.log("elseaddrecordsaving");
+						ReportContacts();
+					}
+					});
+				});
+			});
+		});
+	
+	
+	
+	function ReportContacts(){
+	if(id_number)
+	{
+	console.log(id_number);
+	var intercationID_data = sessionStorage.getItem("interaction_" + id_number + ""); //Till ext1 gets ready hardcoding the intercation ID
+	intercationID_json = JSON.parse(intercationID_data);
+	if(intercationID_json){
+		intercationID = intercationID_json.interactionID;
+		}
+		console.log(intercationID);
+		//sessionStorage.removeItem("interaction_" + id_number + "");
+		//var intercationID1 = 240;
+		itemStr = intercationID;
+		WSContact_ID = CID;
+		
+		if(intercationID)
+		{
+				var AjaxContact = TogetContactID(intercationID);// function to get the contact id n Lead_MetaData_prod_ID data linked from the interaction
+				if(AjaxContact.items.length > 0)
+				{
+					Intcontact_id = (AjaxContact.items[0].rows[0][0]);
+					Lead_MetaData_prod_ID = (AjaxContact.items[0].rows[0][1]);
+					endTime = (AjaxContact.items[0].rows[0][2]);
+				}
+				if(Intcontact_id == null)
+				{
+					var result = scriptCall_toUpdateContactID(intercationID,WSContact_ID,sessionId); //function to update the interaction with the contact data
+					//call a script to update this interaction with the contact id to it.
+					if(Lead_MetaData_prod_ID)
+					{
+						var relatedProducts = toget_Related_Products(Lead_MetaData_prod_ID); //function to fetch the related products
+						var dataVal = (relatedProducts.items[0].rows[0][0]);
+						console.log(dataVal);
+						if(dataVal){
+							workspaceRecord.updateField('Contact.CO$product_from_interaction',dataVal);
+						}
+						if(endTime)
+						{
+							endTime = (Date.parse(endTime));
+							var dateobj = new Date();
+							var currentTime = dateobj.toISOString();
+								currentTime = Date.parse(currentTime);
+								if(endTime<currentTime)
+								{
+									workspaceRecord.updateField('Contact.CO$product_from_interaction',null);
+								}
+						}
+						
+					}
+				}
+		}
+		}
+	}
+	
+	function NewContacts(){
+	if(id_number)
+	{
+	var intercationID_data = sessionStorage.getItem("interaction_" + id_number + ""); //Till ext1 gets ready hardcoding the intercation ID
+	 intercationID_json = JSON.parse(intercationID_data);
+	 console.log(intercationID_json);
+	 if(intercationID_json.interactionID){
+		intercationID = intercationID_json.interactionID;
+		}
+		//sessionStorage.removeItem("interaction_" + id_number + "");
+		workspaceRecord.getFieldValues(['Contacts.CId']).then(function(IFieldDetails1)
+			{
+					CID = (IFieldDetails1.getField('Contacts.CId').getValue());	
+					console.log(CID);
+					//var intercationID = 240;
+					itemStr = intercationID;
+					WSContact_ID = CID;
+			if(intercationID)
+			{
+					var AjaxContact = TogetContactID(intercationID);// function to get the contact id n Lead_MetaData_prod_ID data linked from the interaction
+					if(AjaxContact.items.length > 0)
+					{
+					Intcontact_id = (AjaxContact.items[0].rows[0][0]);
+					Lead_MetaData_prod_ID = (AjaxContact.items[0].rows[0][1]);
+					endTime = (AjaxContact.items[0].rows[0][2]);
+					}
+					if(Intcontact_id == null)
+					{
+					console.log(WSContact_ID);
+					var result = scriptCall_toUpdateContactID(intercationID,WSContact_ID,sessionId); //function to update the interaction with the contact data
+					//call a script to update this interaction with the contact id to it.
+					if(Lead_MetaData_prod_ID)
+					{
+						var relatedProducts = toget_Related_Products(Lead_MetaData_prod_ID); //function to fetch the related products
+						var dataVal = (relatedProducts.items[0].rows[0][0]);
+						console.log(dataVal);
+						if(dataVal){
+							workspaceRecord.updateField('Contact.CO$product_from_interaction',dataVal);
+						}
+						if(endTime)
+						{
+							console.log(endTime);
+							endTime = (Date.parse(endTime));
+							var dateobj = new Date();
+							var currentTime = dateobj.toISOString();
+								currentTime = Date.parse(currentTime);
+								if(endTime<currentTime)
+								{
+									console.log("Interaction has ended");
+									workspaceRecord.updateField('Contact.CO$product_from_interaction',null);
+								}
+						}
+						
+					}
+				}
+		}
+	});
+	}
+}
+	
+	
+	function TogetContactID(intercationID)
+	{
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select CO.InteractionsClal.contact_id, CO.InteractionsClal.Lead_MetaData_prod_ID, CO.InteractionsClal.EndDateTime from CO.InteractionsClal where CO.InteractionsClal.ID =" + intercationID + "";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+			
+			console.log(jsonData);
+			dataResult = jsonData;
+		
+		});
+		return dataResult;
+	}
+	
+	
+	
+	
+	function toget_Related_Products(Lead_MetaData_prod_ID)
+	{
+		var dataVal;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select LeadMD.LeadMDProductChannel.related_product from LeadMD.LeadMDProductChannel where LeadMD.LeadMDProductChannel.ID =" + Lead_MetaData_prod_ID + "";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+			console.log(jsonData);
+		 dataVal = (jsonData);
+		console.log(dataVal);
+		
+		});
+		return dataVal;
+	}
+	
+	
+	
+	
+	
+	
+	
+	function scriptCall_toUpdateContactID(intercationID,WSContact_ID,psk)
+	{
+		console.log(WSContact_ID);
+		var formData = {psk:sessionId,intercationID:intercationID,WSContact_ID:WSContact_ID};
+		console.log(formData);
+		// Make an Ajax call to custome script	
+		var proxyscript = interfaceurl + "/php/custom/link_interaction_to_contact.php";
+		//Empty UL element's innerHTML before you get indications and update the UI
+		$.ajax({
+			type: "POST",
+			url: proxyscript, 			
+			dataType: "json", 
+			data:formData,
+			success: function (data) {
+				console.log(data);
+			},
+				
+		error: function (jqXHR, exception) {
+			//Hide loading icon on success / error of AJAX call
+			//$('#indication-loading-icon').hide();
+			var msg = '';
+			if (jqXHR.status === 0) {
+				msg = 'Not connect.\n Verify Network.';
+			} else if (jqXHR.status == 404) {
+				msg = 'Requested page not found. [404]';
+			} else if (jqXHR.status == 500) {
+				msg = 'Internal Server Error [500].';
+			} else if (exception === 'parsererror') {
+				msg = 'Can\'t fetch data.Please contact your Admin.';
+			} else if (exception === 'timeout') {
+				msg = 'Time out error.';
+			} else if (exception === 'abort') {
+				msg = 'Ajax request aborted.';
+			} else {
+				msg = 'Uncaught Error.\n' + jqXHR.responseText;
+			}
+			alert(msg);
+			console.log(msg);
+			
+			}
+		});
+	}
+
+});
+</script>
+
+</body>
+</html>

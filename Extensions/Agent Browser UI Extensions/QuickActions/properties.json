@@ -1,0 +1,62 @@
+[
+	{
+		"name": "WSProperty",
+		"defaultValue": "ELM_Lead",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "NumberOfButtonsToShow",
+		"defaultValue": 4,
+		"dataType": "integer",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "NumberOfColumnsToShow",
+		"defaultValue": 2,
+		"dataType": "integer",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "HeaderText",
+		"defaultValue": "פעולות מהירות" ,
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "ListText",
+		"defaultValue": "פעולות נוספות",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "ChooseButtonText",
+		"defaultValue": "בחר",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "FontSize",
+		"defaultValue": 14,
+		"dataType": "integer",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "EnableButtonColor",
+		"defaultValue": "rgb(243,156,18)",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "DisableButtonColor",
+		"defaultValue": "rgb(253,209,178)" ,
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "FontType",
+		"defaultValue": "Arial",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	}
+]

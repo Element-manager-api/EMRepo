@@ -1,0 +1,77 @@
+[
+	{
+		"name": "daysBeforeToday",
+		"defaultValue": 90,
+		"dataType": "integer"
+	},
+	{
+		"name": "coulmnConfig",
+		"defaultValue":"DESCRIPTION,תיאור הפניה,Y,1,N,M;ZCREATE_DATE,תאריך יצירת הפניה,Y,2,N,M;EMP_TREAT_FULLNA,גורם מטפל,Y,3,N,M;DIRECTION_TXT,כיוון,Y,4,N,M;CATEGORY_TXT,קטגוריה,Y,5,N,M;ACT_REASON_DESC,סיבה,Y,6,N,M;ACT_STA_DESC,סטטוס,Y,7,N,M;ACT_RESULT_DESC,תוצאה,Y,8,N,M;OBJECT_ID,מספר פניה בSAP,Y,9,N,A;APPLY_SOURCE,מקור הפנייה,Y,10,N,A;",
+		"dataType": "string"
+	},
+	{
+		"name": "hostURL",
+		"defaultValue": "/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	},
+	{
+		"name": "idNotFound",
+		"defaultValue": "Id Number is not available, please update and try again.",
+		"dataType": "string"
+	},
+	{
+		"name": "reportId",
+		"defaultValue": "100367",
+		"dataType": "string"
+	},
+	{
+		"name":"noRecordFound",
+		"defaultValue":"לא נמצאו פניות",
+		"dataType":"string"
+	},
+	{
+		"name":"noDetailsFound",
+		"defaultValue":"No incident details found.",
+		"dataType":"string"
+	},
+	{
+		"name":"errorMsg",
+		"defaultValue":"זמנית יש בעיה בהבאת הנתונים",
+		"dataType":"string"
+	},
+	{
+		"name":"showMore",
+		"defaultValue":"הצג עוד",
+		"dataType":"string"
+	},
+	{
+		"name":"incidentDetails",
+		"defaultValue":"פרטי פעילות",
+		"dataType":"string"
+	},
+	{
+		"name":"messagesLbl",
+		"defaultValue":"היסטוריית הערות עובד",
+		"dataType":"string"
+	},
+	{
+		"name":"threeMonths",
+		"defaultValue":"3 חודשים",
+		"dataType":"string"
+	},
+	{
+		"name":"sixMonths",
+		"defaultValue":"חצי שנה",
+		"dataType":"string"
+	},
+	{
+		"name":"oneYear",
+		"defaultValue":"שנה",
+		"dataType":"string"
+	},
+	{
+		"name":"Process_Type",
+		"defaultValue":"ZELM,ZME1,Z101,ZIR1",
+		"dataType":"string"
+	}
+]

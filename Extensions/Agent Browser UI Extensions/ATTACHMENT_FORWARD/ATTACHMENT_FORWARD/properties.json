@@ -1,0 +1,58 @@
+[{
+        "name": "Apply_RTL",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+	{
+        "name": "show_extn_button",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+	{
+		"name": "hostURL",
+		"defaultValue": "/php/custom/attachment_forward.php",
+		"dataType": "string"
+	},
+	{
+		"name": "trigger_event",
+		"defaultValue": "open_forward",
+		"dataType": "string"
+	},
+	{
+		"name": "forward_complete_event",
+		"defaultValue": "forward_sent",
+		"dataType": "string"
+	},
+	{
+		"name": "report_filter",
+		"defaultValue": "related_incident",
+		"dataType": "string"
+	},
+	{
+		"name": "Lead_reportId",
+		"defaultValue": 101047,
+		"dataType": "integer"
+	},
+	{
+		"name": "SR_reportId",
+		"defaultValue": 101059,
+		"dataType": "integer"
+	},
+	{
+		"name": "Task_reportId",
+		"defaultValue": 101042,
+		"dataType": "integer"
+	},
+	{
+		"name": "button_caption",
+		"defaultValue": "לְהַמשִׁיך",
+		"dataType": "string"
+	},
+	{
+		"name": "modal_title",
+		"defaultValue": "אנא בחר קובץ מצורף",
+		"dataType": "string"
+	}	
+	
+]
+

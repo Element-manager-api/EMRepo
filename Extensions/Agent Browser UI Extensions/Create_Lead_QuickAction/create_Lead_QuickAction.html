@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<!--<script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script>-->
+
+<script src="jquery-3.6.0.js"></script> 
+ <script src="jquery-ui.js"></script>
+ 
+</head>
+<body>
+ <script type= "application/javascript"> 
+
+	
+    var extensibilityApiVersion = '1.0'; // Extensibility API version
+    var globalContext = '';
+	var restUrl = '';
+	var sessionID = '';
+	var workspaceRecord = '';
+	var itemStr = null;
+	var restUrl;
+	var QuickActionID;
+	var QACategoryID;
+	var QAProductID;
+	var IntChannel = null;
+	var IntDirection = null;
+	var IntrPhone = null;
+	var QALeadMDProductChannelID;
+	var LeadMDProductChannelID ;
+	var IntrLeadMDProductChannelID ;
+	var IntrProdCategory = null;
+	var InteractionProduct = null;
+	var InteractionCategory = null;
+	var interfaceurl;
+	var dataResult;
+	var QAProdCategory;
+	var vars;
+	var dataResult_script;
+	var reportLeadMDProductChannelID;
+	var NewLeadData;
+	var Contact_ID;
+    var lead_stage;	
+	var IntrContact_id = null; 
+	var intercationID_session1 =  0;
+	var intercationID_session =  0;
+	var CH_value = " ";
+	var productInc;
+	var agentNum;
+	var QAClosingEvent;
+	var QAID;
+	var id_number;
+    ORACLE_SERVICE_CLOUD.extension_loader.load("Create_Lead_QuickAction",extensibilityApiVersion)
+	.then(function(extensionProvider) {
+		
+		extensionProvider.getGlobalContext().then(function(gc){
+			globalContext = gc;
+			interfaceurl = globalContext.getInterfaceUrl();
+			restUrl = globalContext.getInterfaceServiceUrl("REST"); 
+			globalContext.getSessionToken().then(function (sessionToken) {
+			sessionId = sessionToken;	
+			extensionProvider.registerWorkspaceExtension(function(wr)
+			{
+				workspaceRecord = wr;
+				workspaceRecord.addNamedEventListener('add_lead',Add_lead).prefetchWorkspaceFields(["Contacts.CId", "Contacts.CO$id_number"]);
+				/*workspaceRecord.addNamedEventListener('add_lead__inform_creation_status',Add_lead).prefetchWorkspaceFields(["Contacts.CId"]);
+				workspaceRecord.addNamedEventListener('add_lead__navigate_new_lead',Add_lead).prefetchWorkspaceFields(["Contacts.CId"]); */
+			});
+		});
+	});
+	
+	
+	function Add_lead(param)
+		{
+		var LocalStorageAdd_Lead =  JSON.parse(localStorage.getItem('add_lead'));
+		QAID = LocalStorageAdd_Lead.ID;
+		console.log(LocalStorageAdd_Lead);
+		localStorage.removeItem('add_lead');
+		lead_stage = 2;
+		
+		Contact_ID = param.event.fields['Contacts.CId'];
+		id_number = param.event.fields['Contacts.CO$id_number'];
+			console.log(Contact_ID);
+				QAProdCategory = TogetQAProdCategory();
+				if(QAProdCategory.items[0].count > 0){
+				QuickActionID = QAProdCategory.items[0].rows[0][0];
+				QACategoryID = QAProdCategory.items[0].rows[0][1];
+				QAProductID = QAProdCategory.items[0].rows[0][2];
+				QAClosingEvent = QAProdCategory.items[0].rows[0][3];
+				}
+				/*var eventDetails = (this.namedEvent).split("__");
+				if(eventDetails[1]!=undefined && eventDetails[1]!=""){
+					QAClosingEvent = (this.namedEvent).split("__")[1];
+				} else {
+					QAClosingEvent = QAProdCategory.items[0].rows[0][3];
+				} */
+				
+				if(QAProductID && QACategoryID)
+				{
+				//call a custom script or REST to execute the report 100687 - result will be LeadMDProductChannelID of the quick action.
+				var formData = {psk:sessionId,QAProductID:QAProductID,QACategoryID:QACategoryID};
+				console.log(formData);
+				// Make an Ajax call to custome script	
+				var proxyscript = interfaceurl + "/php/custom/quickaction_createlead.php"; // to get the Quick action LeadMDProductChannelID
+				$.ajax({
+					type: "POST",
+					url: proxyscript, 			
+					dataType: "json", 
+					data:formData,
+					beforeSend: function (xhr) {
+							xhr.setRequestHeader("Authorization", "Session " + sessionId);
+							xhr.setRequestHeader("osvc-crest-application-context", "1");
+						},
+					}).done(function (jsonData) {
+					
+					var isAjax = false;
+					console.log(jsonData);
+					QALeadMDProductChannelID = jsonData.LeadMDProductChannelID;
+					if(id_number){
+					intercationID_session1 = sessionStorage.getItem("interaction_" + id_number + ""); //Interaction ID from Session.//need to update 
+					if(intercationID_session1){
+					intercationID_json = JSON.parse(intercationID_session1);
+					intercationID_session = intercationID_json.interactionID;
+					}
+					}
+					
+					console.log(intercationID_session);
+					//intercationID_session = 538; //538 for testing, need to remove 
+					if((!intercationID_session))
+						{
+							LeadMDProductChannelID = QALeadMDProductChannelID;
+							CH_value = "CUSTOM_MSG_InteractionNull_chValue";//$msg2 = RNCPHP\MessageBase::fetch("CUSTOM_CFG_InteractionNot_ChValue")->Value;
+						} 
+						
+					if(intercationID_session)
+					{	
+						itemStr = TogetInteractionData(intercationID_session); //function to get the direction and channel from interaction storedin session
+						if((itemStr.items[0].count) > 0)
+						{
+							IntChannel = (itemStr.items[0].rows[0][0]);	
+							IntDirection = (itemStr.items[0].rows[0][1]);	
+							IntrLeadMDProductChannelID = (itemStr.items[0].rows[0][2]);
+							IntrPhone = (itemStr.items[0].rows[0][3]);
+							IntrContact_id =  (itemStr.items[0].rows[0][4]);
+						}
+			
+						if((IntChannel == 'טלפון')&&(IntDirection == 'יוצא') ) // if interaction is outgoing call then LeadMDProductChannelID will be QALeadMDProductChannelID
+						{
+							LeadMDProductChannelID = QALeadMDProductChannelID;
+							CH_value = "CUSTOM_MSG_Outgoing_ChValue";
+						}
+						
+						else{
+							if(IntrLeadMDProductChannelID){
+							IntrProdCategory = TogetIntrProdCategory(IntrLeadMDProductChannelID); // function to get interaction product and category through LeadMDProdChannel object
+							if(IntrProdCategory.items[0].count > 0){
+							InteractionProduct = (IntrProdCategory.items[0].rows[0][0]);
+							InteractionCategory = (IntrProdCategory.items[0].rows[0][1]);
+							console.log(InteractionProduct);
+							console.log(InteractionCategory);
+							}
+							}
+							if((InteractionProduct == QAProductID) && (InteractionCategory == QACategoryID))
+								{
+									LeadMDProductChannelID = IntrLeadMDProductChannelID; //LeadMDProductChannelID will be same as Interaction LeadMDProductChannelI
+									CH_value = "CUSTOM_MSG_Ingoing_IntercationCH_value";
+								}
+							else
+								{
+									CH_value = "CUSTOM_MSG_IngoingCall_ChValue";
+									isAjax = true;
+									var result = 0;
+										var formData = {psk:sessionId,QAProductID:QAProductID,QACategoryID:QACategoryID,IntrPhone:IntrPhone,IntrLeadMDProductChannelID:IntrLeadMDProductChannelID};
+										console.log(formData);
+										// Make an Ajax call to custome script	
+										var proxyscript = interfaceurl + "/php/custom/togetleadmdproductchannelidphone_qa.php";
+										$.ajax({
+											type: "POST",
+											url: proxyscript, 			
+											dataType: "json", 
+											data:formData,
+											success: function (data) {
+													result = data;
+											if(result)
+											{
+												LeadMDProductChannelID = data;
+											}
+											if(!result)
+											{
+												LeadMDProductChannelID = QALeadMDProductChannelID;
+											}
+											CreateLeadWithMDInformation(LeadMDProductChannelID,Contact_ID,IntrContact_id,IntrPhone,lead_stage);
+											
+										},
+										error: function (jqXHR, exception) {
+											if (jqXHR.status === 0) {
+												msg = 'Not connect.\n Verify Network.';
+											} else if (jqXHR.status == 404) {
+												msg = 'Requested page not found. [404]';
+											} else if (jqXHR.status == 500) {
+												msg = 'Internal Server Error [500].';
+											} else if (exception === 'parsererror') {
+												msg = 'Can\'t fetch data.Please contact your Admin.';
+											} else if (exception === 'timeout') {
+												msg = 'Time out error.';
+											} else if (exception === 'abort') {
+												msg = 'Ajax request aborted.';
+											} else {
+												msg = 'Uncaught Error.\n' + jqXHR.responseText;
+											}
+											//alert(msg);
+										}
+									
+									
+									});
+									
+									 // Lead obtained from Report with QAProduct and QA Category as filters  
+									//execute the report with QAProduct and QA Category as filters 
+						}
+						
+				}
+				
+			}
+			if(!isAjax){
+					//call your function
+					NewLeadData = CreateLeadWithMDInformation(LeadMDProductChannelID,Contact_ID,IntrContact_id,IntrPhone,lead_stage);
+					console.log(NewLeadData);
+				}
+			
+		});
+		// By now by any one condition we should have got LeadMDProductChannelID to create a lead ************
+		
+		// NewLeadData = CreateLeadWithMDInformation(LeadMDProductChannelID,Contact_ID,IntrContact_id,IntrPhone,lead_stage);
+		 
+		 
+		  
+	}
+		
+		
+		
+}
+	
+	function TogetInteractionData(interactionID)
+	{
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select CO.InteractionsClal.Channel.LookupName,CO.InteractionsClal.Direction.LookupName, CO.InteractionsClal.Lead_MetaData_prod_ID,CO.InteractionsClal.Phone_num_customer_Called_to, CO.InteractionsClal.contact_id.ID from CO.InteractionsClal where CO.InteractionsClal.ID =" + interactionID + "";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+			
+			console.log(jsonData);
+			dataResult = jsonData;
+		
+		});
+		return dataResult;
+		
+	}
+	
+	function TogetIntrProdCategory(IntrLeadMDProductChannelID)
+	{
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select LeadMD.LeadMDProductChannel.related_product.ID,  LeadMD.LeadMDProductChannel.category.ID From LeadMD.LeadMDProductChannel where LeadMD.LeadMDProductChannel.LeadMDProductChannelID =" + IntrLeadMDProductChannelID + "";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+			
+			console.log(jsonData);
+			dataResult = jsonData;
+		
+		});
+		return dataResult;
+		
+	}
+	
+	function TogetQAProdCategory()
+	{
+		var	QAResults; 
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select CO.InfrastructreTable.ID, CO.InfrastructreTable.IncidentCategory.ID, CO.InfrastructreTable.IncidentProduct.ID, CO.InfrastructreTable.IndicatorClosingEvent From CO.InfrastructreTable where CO.InfrastructreTable.WSProperty = 'ELM_Contact' and CO.InfrastructreTable.ID = " + QAID + "";
+			$.ajax({
+				type: "GET",
+				async: false,
+				url: ajaxUrl,
+				beforeSend: function (xhr) { xhr.setRequestHeader("Authorization", "Session " + sessionId);
+											xhr.setRequestHeader("osvc-crest-application-context", "1"); }
+			}).done(function (data) {
+				console.log(data);
+			QAResults = data;
+				
+				})
+				
+		return QAResults;
+		
+	}
+	
+	function CreateLeadWithMDInformation(LeadMDProductChannelID,Contact_ID,IntrContact_id,IntrPhone,lead_stage)
+	{
+	
+		console.log(LeadMDProductChannelID);
+		var dataResult; 
+		var ajaxUrl = interfaceurl + "/php/custom/create_lead_with_md_data.php?session="+sessionId+"&leadMDProdChannelID="+LeadMDProductChannelID+"&source='osvc'&contact_id="+Contact_ID+"&agent_number&applicant_name&applicant_id_number="+IntrContact_id+"&applicant_phone="+IntrPhone+ "&lead_stage="+lead_stage+ "";
+		console.log(ajaxUrl);
+		$.ajax({	
+		type: "POST",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Session", sessionId);
+					//xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+			
+			console.log(jsonData);
+			dataResult = jsonData;
+		
+		});
+		if(dataResult.Is_success == false)
+		{
+			alert("קרתה שגיאה בעת יצירת הליד, הליד לא נוצר");
+		}
+		else
+		{
+		console.log(QAClosingEvent);
+			if(QAClosingEvent == "inform_creation_status")
+			{
+			alert("creation was succeeded");
+			}
+			if(QAClosingEvent == "navigate_new_lead")
+			{
+				workspaceRecord.editWorkspaceRecord('Incident',dataResult.ID);
+			}
+			connectBenefitsWithLead(dataResult.ID);
+			createLeadAttribute(dataResult.ID,CH_value);
+			alfonsoCall(dataResult.ID);
+			//test();
+		}
+			
+		
+	}
+	
+	function connectBenefitsWithLead(IncidentID)
+	{
+		var dataResult;
+		var ajaxUrl = interfaceurl + "/php/custom/connect_benefits_to_lead.php?session="+sessionId+"&lead_id="+IncidentID+" ";
+		console.log(ajaxUrl);
+		$.ajax({	
+		type: "POST",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Session", sessionId);
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+			
+			console.log(jsonData);
+			dataResult = jsonData;
+		
+		});
+		return dataResult;
+		
+	}
+	
+	
+	function createLeadAttribute(IncidentID,CH_value)
+	{
+		var result;
+		var formData = {psk:sessionId,IncidentID:IncidentID,CH_value:CH_value};
+								console.log(formData);
+								// Make an Ajax call to custome script	
+								var proxyscript = interfaceurl + "/php/custom/quickaction_createlead.php";
+								$.ajax({
+									type: "POST",
+									url: proxyscript, 			
+									dataType: "json", 
+									data:formData,
+									success: function (data) {
+											console.log(data);
+											
+											
+										},
+										error: function (jqXHR, exception) {
+											//Hide loading icon on success / error of AJAX call
+											$('#quick-action-loading-icon').hide();
+											var msg = '';
+											if (jqXHR.status === 0) {
+												msg = 'Not connect.\n Verify Network.';
+											} else if (jqXHR.status == 404) {
+												msg = 'Requested page not found. [404]';
+											} else if (jqXHR.status == 500) {
+												msg = 'Internal Server Error [500].';
+											} else if (exception === 'parsererror') {
+												msg = 'Can\'t fetch details.Please contact your Admin.';
+											} else if (exception === 'timeout') {
+												msg = 'Time out error.';
+											} else if (exception === 'abort') {
+												msg = 'Ajax request aborted.';
+											} else {
+												msg = 'Uncaught Error.\n' + jqXHR.responseText;
+											}
+											//alert(msg);
+										}
+									
+									
+									});
+									
+		console.log(result);
+	}
+	
+	function alfonsoCall(IncidentID)
+	{
+	console.log(IncidentID);
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=SELECT Incidents.Product.LookupName,Incidents.CustomFields.CO.agent_no FROM Incidents WHERE Incidents.ID = " + IncidentID + " ";
+	 	$.ajax({
+				url: ajaxUrl,
+				type: "GET",
+                url: ajaxUrl,
+				processData: false,
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+					
+				},
+		}).done(function (jsonData) {
+			
+			console.log(jsonData);
+			productInc = (jsonData.items[0].rows[0][0]);
+			agentNum = (jsonData.items[0].rows[0][1])
+			console.log(productInc);
+			console.log(agentNum);
+		
+		
+		var formData = {psk:sessionId,IncidentID:IncidentID,productInc:productInc,agentNum:agentNum};
+										console.log(formData);
+										// Make an Ajax call to custome script	
+										var proxyscript = interfaceurl + "/php/custom/alfonso_scriptcall.php";
+										$.ajax({
+											type: "POST",
+											url: proxyscript, 			
+											dataType: "json", 
+											data:formData,
+											success: function (data) {
+													console.log(data);
+											
+										},
+										error: function (jqXHR, exception) {
+											if (jqXHR.status === 0) {
+												msg = 'Not connect.\n Verify Network.';
+											} else if (jqXHR.status == 404) {
+												msg = 'Requested page not found. [404]';
+											} else if (jqXHR.status == 500) {
+												msg = 'Internal Server Error [500].';
+											} else if (exception === 'parsererror') {
+												msg = 'Can\'t fetch data.Please contact your Admin.';
+											} else if (exception === 'timeout') {
+												msg = 'Time out error.';
+											} else if (exception === 'abort') {
+												msg = 'Ajax request aborted.';
+											} else {
+												msg = 'Uncaught Error.\n' + jqXHR.responseText;
+											}
+											alert(msg);
+										}
+									
+									
+									});
+									});
+	}
+
+});
+</script>
+
+</body>
+</html>

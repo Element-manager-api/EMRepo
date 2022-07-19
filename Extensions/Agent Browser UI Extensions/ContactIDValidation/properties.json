@@ -1,0 +1,38 @@
+[
+	
+	{
+		"name": "NOT_A_VALIDCONTACT_MSG",
+		"defaultValue": "מספר תעודת הזהות אינו תקין. יש לעדכן את מספר תעודת זהות",
+		"dataType": "String"
+	},
+	
+	{
+		"name": "DUPLICATION_Title",
+		"defaultValue": "תעודת זהות כבר קיימת",
+		"dataType": "String"
+	},
+	
+	{
+		"name": "VALID_Title",
+		"defaultValue": "מספר תעודת זהות לא תקין",
+		"dataType": "String"
+	},
+	
+	{
+		"name": "DUPLICATION_MESSAGE",
+		"defaultValue": "תעודת הזהות שהוקשה כבר קיימת במערכת. יש לעדכן את מספר תעודת הזהות.",
+		"dataType": "String"
+	},
+	
+	{
+		"name": "DUPLICATION_PASSPORT_TITLE",
+		"defaultValue": "מספר הדרכון כבר קיים.",
+		"dataType": "String"
+	},
+	
+	{
+		"name": "DUPLICATE_MESSAGE_PASSPORT",
+		"defaultValue": "הדרכון כבר קיים במערכת. יש לעדכן את פרטי הדרכון.",
+		"dataType": "String"
+	}
+]

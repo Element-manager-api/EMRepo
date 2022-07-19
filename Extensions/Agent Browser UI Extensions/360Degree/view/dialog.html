@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Get Records</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap.rtl.min.css" >
+		<link rel="stylesheet" href="../css/font-awesome.css" />
+		<link rel="stylesheet" href="../css/custom.css" />
+		<style>
+			body{
+				font-size:12px;
+			}
+			.table{
+				font-size:12px;
+			}
+		</style>
+	</head>
+	<body onload="initialize('dialog');">
+		<a class="modal-close" id="close-popup"><i class="fa fa-times" aria-hidden="true"></i></a>
+		<div class="container-fluid" style="height:100%;overflow:auto;">
+			<div class="alert alert-danger" style="display:none;" id="warning-msg" role="alert">
+			</div>
+			<div class="alert alert-light" style="display:none;" id="info-msg" role="alert">
+			</div>
+			<div id="list-parent">
+			</div>
+		</div>
+		<div class="overlay show"></div>
+		<div class="spanner show" style="height:100%;">
+			<div class="loader"></div>
+			<p>Loading...</p>
+		</div>
+		<div class="modal fade bd-example-modal-lg" id="agentDetails" style="display:none;" role="dialog" aria-labelledby="myLargeModalLabel" >
+		  <div class="modal-dialog modal-lg" >
+			<div class="modal-content">
+			  <div class="modal-header" style="display:block;">
+				<button type="button" class="close" data-mdb-dismiss="modal" id="closeAgentDetails" aria-label="Close" style="float:left;">
+				  <span aria-hidden="true">×</span>
+				</button>
+			  </div>
+			  <div class="modal-body ui-front" id="modalBody">
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+		<script src="../js/bootstrap.bundle.min.js" ></script>
+		<script src="../js/dataloader.js"></script>
+	</body>
+</html>

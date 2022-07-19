@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+ <script type= "application/javascript"> 
+var appId="OpenInterview";
+var apiVersion="1.0";
+var constants = {
+    sesToken: null,
+    startURL: null,
+	resumeURL: null,
+	recordId: null,
+	processName: null,
+    _extensionProvider: null,
+	workspaceRecord: null
+};
+
+
+
+	ORACLE_SERVICE_CLOUD.extension_loader.load(appId, apiVersion).then(function (extensionProvider) {
+		constants._extensionProvider = extensionProvider;
+		extensionProvider.registerWorkspaceExtension(function(workspaceRecord){			
+			constants.workspaceRecord = workspaceRecord;
+				workspaceRecord.addNamedEventListener('OpenInterviewRefresh' ,OpenInterview);
+		
+			//workspaceRecord.addRecordSavedListener(function(workspaceRecordEventParameter){
+				//console.log('Save called.');
+				//workspaceRecordEventParameter.executeEditorCommand('Refresh', function(wpRecord){
+				//	console.log('Refresh');
+				//});
+			//});
+			
+			function OpenInterview(){
+				console.log("inside the function");
+			workspaceType = workspaceRecord.getWorkspaceRecordType();
+			var fieldDetails;
+			if(workspaceType == "Incident"){
+				fieldDetails = ['Incident.i_id'];
+			} else {
+				return;
+			}
+			//Following code will retrieve Incident fields. 
+			workspaceRecord.getFieldValues(fieldDetails).then(function(IFieldDetails){
+				if(workspaceType == "Incident"){
+					constants.recordId = IFieldDetails.getField('Incident.i_id').getLabel();
+				}
+				//Following code will retrieve session token. 
+				IFieldDetails.getParent().parent.getExtensionProvider().getGlobalContext().then(function(globalContext) {
+					globalContext.getSessionToken().then(function(sessionToken)
+					{
+						constants.sesToken = sessionToken;
+						//Following code will retrieve configuration properties. 
+						globalContext.getExtensionContext('OpenInterview').then(function(extensionContext) {
+							extensionContext.getProperties(['startURL','resumeURL','processName','hostURL']).then(function(collection) {
+								constants.startURL = collection.get('startURL').value;
+								constants.resumeURL = collection.get('resumeURL').value;
+								constants.processName = collection.get('processName').value;
+								constants.hostURL = collection.get('hostURL').value;
+								
+								//Following code will prepare payload for checking existing checkpoint.
+								var params = { method: 'GetInterviewStatus',session_id: constants.sesToken, policy_model:constants.processName,incident_id:constants.recordId };
+								console.log(params);
+								
+								//Following code will retrive data related to checkpoint.
+								$.ajax({
+									url : constants.hostURL,
+									type: "POST",
+									data : params,
+									success: function(data, textStatus, jqXHR)
+									{
+										try {
+											var resp = JSON.parse(data);
+											$('div.overlay').removeClass('show');
+											$('div.spanner').removeClass('show');
+											if(resp["count"] > 0 ){
+												location.replace(constants.resumeURL+constants.recordId);
+											} else {
+												location.replace(constants.startURL+constants.recordId);
+											}
+										} catch (e) {
+											showError(data);
+										}
+										$($('#'+window.frameElement.id,window.parent.document).parent().parent()).css('min-height','100%');
+										//ORACLE_SERVICE_CLOUD.extensionResizeHandler.resize();
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//showError("<p>"+constants.errorMsg+"</p>");
+										console.log(errorThrown);
+									}
+								});
+
+							});
+						});
+					});
+				});
+		
+			});
+			}
+		});
+	
+	});
+
+
+
+//This will show error in case if any error happens.
+//Param: msg- Error Message
+function showError(msg){
+	$('#warning-msg').show();
+	$('#warning-msg').html(msg);
+	$('div.overlay').removeClass('show');
+	$('div.spanner').removeClass('show');
+}
+
+//This function will reload the page on save.
+function refreshWindow(workspaceRecordEventParameter){
+	workspaceRecord.executeEditorCommand('Refresh', function(workspaceRecord){ console.log("Refresh");});
+}
+</script>
+
+</body>
+</html>

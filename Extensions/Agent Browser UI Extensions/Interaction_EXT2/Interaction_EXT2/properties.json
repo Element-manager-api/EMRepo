@@ -1,0 +1,7 @@
+[
+    {
+        "name": "Apply_RTL",
+        "defaultValue": true,
+        "dataType": "boolean"
+    }
+]

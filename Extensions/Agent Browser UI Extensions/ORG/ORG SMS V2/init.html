@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>ORG SMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="../../ExtCommons/jquery-3.1.1.js"></script>
+    <script src="orgsms.js"></script>
+  <link rel="stylesheet" href="../../ExtCommons/jquery-ui.css">
+  <script src="../../ExtCommons/jquery-ui.js"></script>
+  <script src="datepicker-he.js"></script>
+  
+  <link rel="stylesheet" href="../../ExtCommons/extstyles.css">
+  <script>
+  
+ /* 
+  
+  $( function() {
+    $( "#datefrom" ).datepicker({
+		changeMonth: true,
+        changeYear: true});
+	$( "#dateto" ).datepicker({
+		changeMonth: true,
+        changeYear: true}
+		);
+  } );
+  
+  */
+  
+  
+  
+    $( function() {
+    $( "#datefrom_sms" ).datepicker($.datepicker.regional[ "he" ] );
+	$( "#dateto_sms" ).datepicker( $.datepicker.regional[ "he" ] );
+	
+	$( "#datefrom_email" ).datepicker($.datepicker.regional[ "he" ] );
+	$( "#dateto_email" ).datepicker( $.datepicker.regional[ "he" ] );
+	
+	
+	
+	var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = dd + '/' + mm + '/' + yyyy;
+
+var startdate = new Date();
+startdate.setDate(startdate.getDate() - 6);
+var startdate_dd = String(startdate.getDate()).padStart(2, '0');
+var startdate_mm = String(startdate.getMonth() + 1).padStart(2, '0'); //January is 0!
+var startdate_yyyy = startdate.getFullYear();
+startdate = startdate_dd + '/' + startdate_mm + '/' + startdate_yyyy;
+
+
+document.getElementById('dateto_sms').value=today;
+document.getElementById('dateto_email').value=today;
+document.getElementById('datefrom_sms').value=startdate;
+document.getElementById('datefrom_email').value=startdate;
+
+  } );
+  
+  </script>
+	 	<link rel="stylesheet" href="css/bootstrap.rtl.min.css" >
+		<link rel="stylesheet" href="css/font-awesome.css" />
+		<link rel="stylesheet" href="css/custom.css" />
+		
+			 <style>
+	
+	 
+.dialogHeader {
+  color: black !important;
+  direction: ltr !important;
+}
+	    
+	  
+
+
+
+	 </style>
+	
+<script language="javascript">
+//console.log(displayString)
+
+function loadSMS(){
+document.getElementById('emaildata').style.display='none';
+document.getElementById('emailserach').style.display='none';
+//document.getElementById('sounddata').style.display='none';
+document.getElementById('smsesdata').style.display='';
+document.getElementById('smsserach').style.display='';
+$("#smstab").removeClass("active");
+$("#emailtab").addClass("active");
+//$("#emptyd").removeClass("active");
+
+
+}
+function loadEmails(){
+document.getElementById('smsesdata').style.display='none';
+document.getElementById('smsserach').style.display='none';
+//document.getElementById('sounddata').style.display='none';
+document.getElementById('emaildata').style.display='';
+document.getElementById('emailserach').style.display='';
+$("#emailtab").removeClass("active");
+$("#smstab").addClass("active");
+//$("#emptyd").removeClass("active");
+}
+function loadEmpty(){
+document.getElementById('smsesdata').style.display='none';
+document.getElementById('smsserach').style.display='none';
+//document.getElementById('sounddata').style.display='';
+document.getElementById('emaildata').style.display='none';
+document.getElementById('emailserach').style.display='none';
+$("#emailtab").removeClass("active");
+$("#smstab").removeClass("active");
+//$("#emptyd").addClass("active");
+}
+
+function switchParameters(val){
+
+if(val == 'mobilenumber_s'){
+document.getElementById('mobile_number').style.display='';
+document.getElementById('mobile_label').style.display='';
+document.getElementById('id_number_value').style.display='none';
+document.getElementById('id_label').style.display='none';
+ 
+}else if(val == 'idnumber_s'){
+	document.getElementById('mobile_number').style.display='none';
+	document.getElementById('id_number_value').style.display='';
+	document.getElementById('mobile_number').value ='';
+	document.getElementById('mobile_label').style.display='none';
+	document.getElementById('id_label').style.display='';
+}
+else if(val == 'emailaddress_e'){
+
+	document.getElementById('email_data').style.display='';
+	document.getElementById('email_label_e').style.display='';
+	document.getElementById('id_label_e').style.display='none';
+	document.getElementById('id_number_value_e').style.display='none';
+}else if(val == 'idnumber_e'){
+	document.getElementById('email_data').style.display='none';
+	document.getElementById('email_data').value ='';
+	document.getElementById('email_label_e').style.display='none';
+	document.getElementById('id_label_e').style.display='';
+	document.getElementById('id_number_value_e').style.display='';
+}
+}
+
+var mymodalWindow={};
+</script>
+</head>
+
+<body style="text-align: right;">
+<img src="icon-sms.png" id="emailButton"  style="display:none;cursor: pointer;" onclick="javascript:renderDialogSMSEM();" title="SMS/WhatsApp"/>
+
+<!--
+<a id="closeButton" style="display:none;float: left;" href="javascript:closeDialogSMSEM();">סגור</a>
+-->
+    <div id="LoadingData" >
+	<div class="table-responsive" id="list-parent">
+			<div class="bd-example">
+				<ul class="nav justify-content-center" id="nav-tab" style="direction:rtl;">
+				
+				<li class="nav-item" ><a id="smstab" class="nav-link" id="nav-0-tab" data-bs-toggle="tab" data-bs-target="#nav-0" type="button" role="tab" aria-controls="nav-0" aria-current="page" href="javascript:loadSMS();">SMS/WhatsApp</a></li>
+				
+				<li class="nav-item" ><a id="emailtab" class="nav-link active" id="nav-2-tab" data-bs-toggle="tab" data-bs-target="#nav-2" type="button" role="tab" aria-controls="nav-2" aria-current="page" href="javascript:loadEmails();">מיילים</a></li>
+				
+				</ul>
+			</div>
+	</div>
+	
+	
+	<div id="smsserach" style="padding-bottom: 1em;">
+	<div style="padding-bottom: 1em;display:none;">
+	<input type="radio" id="mobilenumber_s" name="search_method" value="mobilenumber_s" onclick="switchParameters(this.value);">
+  <label for="mobilenumber_s">מספר טלפון נייד</label>&nbsp;
+  <input type="radio" id="idnumber_s" name="search_method" value="idnumber_s" checked="checked"  onclick="switchParameters(this.value);">
+  <label for="idnumber_s">מספר תעודת זהות</label>&nbsp;	
+	</div>
+	
+	<div>
+	<span id ="mobile_label"  style="display:none;">טלפון נייד:&nbsp;</span><input  type="text" id="mobile_number" autocomplete="off" class="searchbox" style="height: 35px;display:none;"/>&nbsp;
+	<span id ="id_label">תעודת זהות:&nbsp;</span><input type="text" id="id_number_value" value="" autocomplete="off" class="searchbox" readonly="readonly" style="height: 35px; width:300px;"/>&nbsp;
+		מתאריך:<input readonly="readonly" type="text" id="datefrom_sms" autocomplete="off"  style="height: 35px;">
+	&nbsp;
+	
+עד תאריך:<input readonly="readonly" autocomplete="off" type="text" id="dateto_sms"  style="height: 35px;">
+&nbsp;
+ 
+	
+	<input class="searchbox-button" type="button" name="search", id="search" value="חיפוש" onclick="javascript:doSearch('SMS');">
+	</div></div>
+	
+<div id="smsesdata" style="overflow: auto;height: 100%;width:100%">
+	  
+	   <img src="/euf/assets/images/extension/loading-circle.gif" alt="loading..." />
+	   </div>
+	
+	
+	
+       
+	   
+	   	<div id="emailserach" style="display:none;padding-bottom: 1em;" >
+		
+				<div style="padding-bottom: 1em;display:none;">
+	<input type="radio" id="emailaddress_e" name="search_method_e" value="emailaddress_e" onclick="switchParameters(this.value);">
+  <label for="emailaddress_e">כתובת מייל</label>&nbsp;
+  <input type="radio" id="idnumber_e" name="search_method_e" value="idnumber_e" checked="checked"  onclick="switchParameters(this.value);">
+  <label for="idnumber_e">מספר תעודת זהות</label>&nbsp;	
+	</div><div>
+		
+		
+	<span id ="id_label_e">תעודת זהות:&nbsp;</span><input type="text" id="id_number_value_e" value="" autocomplete="off" class="searchbox" readonly="readonly" style="height: 35px; width:300px;"/>&nbsp;	
+	<span id ="email_label_e" style="display:none;">כתובת מייל:&nbsp;</span><input type="text" id="email_data" autocomplete="off" class="searchbox" style="width: 300px;height: 35px;display:none;"/>&nbsp; מתאריך: <input  style="height: 35px;" type="text" id="datefrom_email" autocomplete="off" readonly="readonly"> &nbsp;עד תאריך:&nbsp;<input  style="height: 35px;" readonly="readonly" autocomplete="off" type="text" id="dateto_email">&nbsp; <input class="searchbox-button" type="button" name="search", id="search" value="חפש" onclick="javascript:doSearch('EMAIL');"  style="height: 35px;">
+	</div></div>
+	
+	
+	    <div id="emaildata" style="display:none;overflow: auto;height: 100%;width:100%" ><img src="/euf/assets/images/extension/loading-circle.gif" alt="loading..." />
+		</div>
+		
+		
+		
+ 
+        <div id="errorMsg"></div>
+    </div>
+</body>
+
+</html>

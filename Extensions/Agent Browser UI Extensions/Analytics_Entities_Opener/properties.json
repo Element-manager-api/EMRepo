@@ -1,0 +1,257 @@
+[
+	{
+        "name": "ICON_CLASS",
+        "defaultValue": "open-icon",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_1",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_2",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_3",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_4",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_5",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_6",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_7",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_8",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_9",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_10",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_11",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_12",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_13",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_14",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_15",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_16",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_17",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_18",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_19",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_20",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_21",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_22",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_23",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_24",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_25",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_26",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_27",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_28",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_29",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_30",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_31",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_32",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_33",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_34",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_35",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_36",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_37",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_38",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_39",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_40",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_41",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_42",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_43",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_44",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_45",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_46",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_47",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_48",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_49",
+        "defaultValue": "",
+        "dataType": "string"
+    },
+	{
+        "name": "COMMAND_50",
+        "defaultValue": "",
+        "dataType": "string"
+    }
+]

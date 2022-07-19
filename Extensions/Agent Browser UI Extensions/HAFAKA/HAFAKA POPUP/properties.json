@@ -1,0 +1,62 @@
+[{
+        "name": "Apply_RTL",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+	{
+        "name": "show_extn_button",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+	{
+		"name": "hostURL",
+		"defaultValue": "/php/custom/hafaka_middleware.php",
+		"dataType": "string"
+	},
+	
+	{
+		"name": "CarProductGroupName",
+		"defaultValue":"רכב ",
+		"dataType": "string"
+	},
+	{
+		"name": "oicURL",
+		"defaultValue": "/ic/api/integration/v1/flows/rest/HAFAKA_POP_UP/1.0/HafakaPopUp",
+		"dataType": "string"
+	},
+	{
+		"name": "Lead_reportId",
+		"defaultValue": 100351,
+		"dataType": "integer"
+	},
+	{
+		"name": "InctAssetElm_reportId",
+		"defaultValue": 100352,
+		"dataType": "integer"
+	},
+	{
+		"name": "LeadAttribute_reportId",
+		"defaultValue": 100353,
+		"dataType": "integer"
+	},
+	{
+		"name": "trigger_event",
+		"defaultValue": "POPUP_HAFAKA",
+		"dataType": "string"
+	},
+	{
+		"name": "loaded_event",
+		"defaultValue": "HAFAKA_LOAD_COMPLETED",
+		"dataType": "string"
+	},
+	{
+		"name": "lead_attribute_filters",
+		"defaultValue": "'Body claims in last 3 years','License revocation in last 3 year','Claim first year','Claim second year','Claim second year','Claim third year'",
+		"dataType": "string"
+	},
+	{
+		"name": "mendatory_param_message",
+		"defaultValue": "One of the mandatory parameter is missing.",
+		"dataType": "string"
+	}
+]

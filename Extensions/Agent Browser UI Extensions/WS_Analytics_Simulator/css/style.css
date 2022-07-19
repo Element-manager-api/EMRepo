@@ -1,0 +1,36 @@
+body{
+    font: 400 14px Arial, sans-serif;
+    margin: 2px;
+}
+
+.recordLayout {
+    font-size: 9pt;
+    overflow: auto;
+    /* border: 1px solid #e0e1e1; */
+    border-collapse: separate;
+    border-spacing: 0 0.25em;
+    min-width: max-content;
+    width: inherit;
+    /* height: inherit; */
+}
+
+.tableLayout {
+    font-size: 9pt;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: inherit;
+    overflow: auto;
+}
+
+.tableLayout th{
+    font-size: 10pt;
+    border: 1px solid #e0e1e1;
+    padding: 5px;
+}
+
+.tableLayout td{
+    border: 1px solid #e0e1e1;
+    border-top: none;
+    padding: 3px;
+}

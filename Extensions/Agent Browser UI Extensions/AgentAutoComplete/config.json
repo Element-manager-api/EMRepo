@@ -1,0 +1,55 @@
+[
+	{
+		"name": "TargetField",
+		"defaultValue": "incidents.CO$new_agent",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "MenuReport",
+		"defaultValue": "101137",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "LookupField",
+		"defaultValue": "מספר סוכן",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "ColumnsOrder",
+		"defaultValue": "מספר סוכן,מקור הפניה",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "NoValue",
+		"defaultValue": "[ללא ערך]",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "PlaceHolder",
+		"defaultValue": "חיפוש..",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "WSFilter",
+		"defaultValue": "Incident.ProdId,product;",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "AgentLabel",
+		"defaultValue": "מס' סוכן חדש",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "hostURL",
+		"defaultValue": "/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	}
+]

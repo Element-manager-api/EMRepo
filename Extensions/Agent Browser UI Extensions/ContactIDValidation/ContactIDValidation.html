@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<!--<script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script>-->
+	<script src="jquery-3.6.0.js"></script> 
+ <script src="jquery-ui.js"></script>
+</head>
+<body>
+
+ <script type= "application/javascript"> 
+
+	
+    var extensibilityApiVersion = '1.0'; // Extensibility API version
+    var globalContext = '';
+	var restUrl = '';
+	var sessionID = '';
+	var recordId = '';
+	var workspaceRecord = '';
+	var idType, constants;
+	var idTypeName;
+	var country;
+	var CID = null;
+	var validContactMSG;
+	var birthDate;
+	var appName = "ID_Validator";
+	var appVersion = "1.0"
+	var validContact_labelVal;
+	var _extProvider, _globalContext, _wsRecord, constants, validationLogic, addZeroes = false;
+	var restUrl, sessionToken, recordID, recordType;
+	var idNumber, formattedIDNumber, idsToCheck, DUPLICATION_Title, VALID_Title, DUPLICATION_MESSAGE, DUPLICATION_PASSPORT_TITLE,DUPLICATE_MESSAGE_PASSPORT;
+	
+    ORACLE_SERVICE_CLOUD.extension_loader.load("ContactIDValidation",extensibilityApiVersion)
+	.then(function(extensionProvider) {
+		extensionProvider.getGlobalContext().then(function(gc){
+			globalContext = gc;
+			restUrl = globalContext.getInterfaceServiceUrl("REST"); 
+			globalContext.getSessionToken().then(function (sessionToken) {
+			globalContext.getExtensionContext('ContactIDValidation').then(function(extensionContext) {
+			sessionId = sessionToken;	
+			extensionProvider.registerWorkspaceExtension(function (workspaceRecord) {
+			extensionContext.getProperties(['NOT_A_VALIDCONTACT_MSG','DUPLICATION_Title','VALID_Title','DUPLICATE_MESSAGE_PASSPORT','DUPLICATION_MESSAGE','DUPLICATION_PASSPORT_TITLE']).then(function(collection) {
+						rec = 1;
+						validContactMSG = collection.get('NOT_A_VALIDCONTACT_MSG');
+						DUPLICATION_Title = collection.get('DUPLICATION_Title').value;
+						VALID_Title = collection.get('VALID_Title').value;
+						DUPLICATION_MESSAGE = collection.get('DUPLICATION_MESSAGE').value;
+						DUPLICATION_PASSPORT_TITLE  = collection.get('DUPLICATION_PASSPORT_TITLE').value;
+						DUPLICATE_MESSAGE_PASSPORT = collection.get('DUPLICATE_MESSAGE_PASSPORT').value;
+						
+						validContact_labelVal = validContactMSG.value;
+						console.log(validContact_labelVal);
+						console.log(DUPLICATION_Title);
+						console.log(VALID_Title);
+						console.log(DUPLICATION_MESSAGE);
+						console.log(DUPLICATION_PASSPORT_TITLE);
+						console.log(DUPLICATE_MESSAGE_PASSPORT);
+						
+						});
+                    recordID = workspaceRecord.getWorkspaceRecordId();
+                    recordType = workspaceRecord.getWorkspaceRecordType();			
+					_wsRecord = workspaceRecord;
+					workspaceRecord.addRecordSavingListener(validateIDForContact).prefetchWorkspaceFields(["contacts.CId", "contacts.CO$id_number",'contacts.CO$birth_date','contacts.CO$id_type','contacts.CO$id_type.LookupName','contacts.ph_office','contacts.CO$country' ]);					
+					workspaceRecord.addRecordSavedListener(callNamedEventtoTrigger);	
+				
+				});
+				});	
+			});
+		});
+						
+	function validateIDForContact(workspaceRecordEventParameter) 
+	{	
+			clearErrorBoxForContactWS();
+			clearErrorListForContactWS();
+            CID = workspaceRecordEventParameter.event.fields['contacts.CId'];
+			idType = workspaceRecordEventParameter.event.fields['contacts.CO$id_type'];
+			idNumber = workspaceRecordEventParameter.event.fields['contacts.CO$id_number'];
+			country = workspaceRecordEventParameter.event.fields['contacts.CO$country'];
+			birthDate = workspaceRecordEventParameter.event.fields['contacts.CO$birth_date'];
+			
+			var lookupName = TogetIdGetTypeLookupName(idType);
+			idTypeName = (lookupName.items[0].rows[0][0]);
+			if(idTypeName == "תעודת זהות")
+			{		if(Math.sign(CID) == -1)
+					{
+						console.log("newcontact");
+						if((idNumber))
+						{
+						var result = IsValidID(idNumber);
+						console.log(result);
+						if(result==false)
+						{
+							workspaceRecordEventParameter.getCurrentEvent().cancel();
+							createErrorPopUpForContactWS(VALID_Title, validContact_labelVal, false);
+							console.log(validContact_labelVal);
+							return;
+						}
+						}
+						console.log(birthDate);
+						var birthDateTime = (Date.parse(birthDate));
+						console.log("NEW TRY");
+						var dateobj = new Date();
+						var currentTime = dateobj.toISOString();
+						currentTime = Date.parse(currentTime);
+						var msgDOB = 'תאריך הלידה שנבחר הינו תאריך עתידי. אנא עדכן/ני את התאריך.';
+						var msgTitle = 'תאריך הלידה עתידי';
+						if(birthDateTime > currentTime)
+						{
+							console.log('Inalid Date of Birth. DOB can not be a future date');
+							
+							workspaceRecordEventParameter.getCurrentEvent().cancel();
+							createErrorPopUpForContactWS(msgTitle, msgDOB, false);
+							//alert('.תאריך הלידה שנבחר הינו תאריך עתידי. יש לעדכן את התאריך.');
+							return;
+						}
+						
+					}
+				if(idNumber)
+				{
+				idNumber = parseInt(idNumber, 10);
+				console.log(idNumber);
+				_wsRecord .updateField('contacts.CO$id_number', ""  + idNumber + "");
+				}
+				if((idNumber))
+				{
+				var duplicateId = checkDuplication(idNumber,idTypeName);
+				if(duplicateId >= 1)
+				{
+							workspaceRecordEventParameter.getCurrentEvent().cancel();
+							createErrorPopUpForContactWS(DUPLICATION_Title, DUPLICATION_MESSAGE, true);
+							console.log(DUPLICATION_Title);
+								return;
+				}
+				}
+			}
+			
+			if(idTypeName == "דרכון")
+			{
+				if(Math.sign(CID) == -1)
+					{
+						console.log(birthDate);
+						var birthDateTime = (Date.parse(birthDate));
+						console.log("NEW TRY");
+						var dateobj = new Date();
+						var currentTime = dateobj.toISOString();
+						currentTime = Date.parse(currentTime);
+						var msgDOB = 'תאריך הלידה שנבחר הינו תאריך עתידי. אנא עדכן/ני את התאריך.';
+						var msgTitle = 'תאריך הלידה עתידי';
+						if(birthDateTime > currentTime)
+						{
+							console.log('Inalid Date of Birth. DOB can not be a future date');
+							
+							workspaceRecordEventParameter.getCurrentEvent().cancel();
+							createErrorPopUpForContactWS(msgTitle, msgDOB, false);
+							//alert('.תאריך הלידה שנבחר הינו תאריך עתידי. יש לעדכן את התאריך.');
+							return;
+						}
+					}
+				console.log(idNumber);
+				if((idNumber) )
+				{
+				var duplicatePassport = checkDuplicationPassport(idNumber,country,idTypeName);
+				console.log(duplicatePassport);
+				if(duplicatePassport >= 1)
+				{
+							workspaceRecordEventParameter.getCurrentEvent().cancel();
+							createErrorPopUpForContactWS(DUPLICATION_PASSPORT_TITLE, DUPLICATE_MESSAGE_PASSPORT, true);
+								return;
+				}
+				}
+				
+				
+			}
+			
+			
+	}
+	
+	function callNamedEventtoTrigger() 
+	{
+		//console.log('calledNamedEventtoTrigger');
+		_wsRecord.triggerNamedEvent('MoveTo360');
+	}
+	
+	function checkDuplicationPassport(idNumber,country,idTypeName)
+	{
+		idNumber = '' + idNumber;
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select contacts.id From contacts where contacts.CustomFields.CO.id_number =  '" + idNumber + " ' and  contacts.CustomFields.CO.country = " + country + " and  contacts.CustomFields.CO.id_type.LookupName = '" + idTypeName +" ' and  contacts.id != " + CID +"";
+		
+		console.log(ajaxUrl);
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+				console.log(jsonData);
+				dataResult = jsonData.items[0].count;
+		});
+		return dataResult;
+		
+	}
+
+
+
+	function checkDuplication(idNumber,idTypeName)
+	{
+		idNumber = '' + idNumber;
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select contacts.id From contacts where contacts.CustomFields.CO.id_number =  '" + idNumber + " ' and  contacts.CustomFields.CO.id_type.LookupName = '" + idTypeName +" ' and  contacts.id != " + CID +"  LIMIT 1";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+				console.log(jsonData);
+				dataResult = jsonData.items[0].count;
+		});
+		return dataResult;
+		
+	}
+	
+	
+	function TogetMeassgeBaseValue(ID)
+	{
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/messageBases/"+ ID + "";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+				console.log(jsonData.value);
+			dataResult = jsonData.value;
+		});
+		return dataResult;
+		
+	}
+	
+	
+	
+	function TogetIdGetTypeLookupName(idType)
+	{
+		var dataResult;
+		var ajaxUrl = restUrl + "/connect/v1.4/queryResults/?query=select Menues.id_type.LookupName From Menues.id_type where Menues.id_type.ID = "  + idType + " ";
+		$.ajax({	
+		type: "GET",
+			async: false,
+			url: ajaxUrl,
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Session " + sessionId);
+					xhr.setRequestHeader("osvc-crest-application-context", "1");
+				},
+		}).done(function (jsonData) {
+				console.log(jsonData);
+			dataResult = jsonData;
+		});
+		return dataResult;
+		
+	}
+	
+	
+	
+	function pad(number, length, p_paddingChar)
+	{
+			var str = '' + number;
+			while (str.length <  length) {
+			str = p_paddingChar + str;
+		}
+			return str;
+	}
+
+
+	function IsValidID(p_text)
+	{
+			try {
+				var txtId = pad(p_text, 9, '0');
+				var sum = 0;
+				var digit;
+				for (var i = 0; i <  9; i++) {
+				digit = parseInt(txtId[i]);
+				if (i % 2 != 0) {
+				digit *= 2;
+				if (digit >  9) {
+				digit = (digit % 10) + 1;
+				}
+				}
+				sum += digit;
+				}
+
+				sum = (sum % 10);
+				if (sum == 0) {
+				return true;
+				}
+
+			} catch (e) {
+			// todo:
+			alert(e.Message + '----' + e.LineText);
+			}
+
+	return false;
+	}
+	
+	
+	function clearErrorBoxForContactWS() {
+    var par = window.parent;
+    if (par.document.getElementById(recordType + "_" + appName + '_' + recordID + '_errMsg')) {
+        par.document.getElementById(recordType + "_" + appName + '_' + recordID + '_errMsg').parentElement.classList.remove("oj-invalid");
+        par.document.getElementById(recordType + "_" + appName + '_' + recordID + '_errMsg').remove();
+    }
+    if (par.document.getElementById(recordType + "_" + appName + '_' + recordID + '_script')) {
+        par.document.getElementById(recordType + "_" + appName + '_' + recordID + '_script').remove();
+    }
+	}
+
+
+	function clearErrorListForContactWS() {
+    if (recordID > 0) {
+        var par = window.parent;
+        var ele = parent.document.querySelector('div[data-recordtype="' + recordType + '"][data-recordid="' + recordID + '"]');
+        ele = ele.querySelector('div[class="validationErrorsPanel"]');
+        if (par.document.getElementById(recordType + '_li_' + appName + '_' + recordID + '_errMsg')) {
+            par.document.getElementById(recordType + '_li_' + appName + '_' + recordID + '_errMsg').remove();
+            if (ele.querySelector('ol[class="localValidationErrorList"]').childElementCount < 1) {
+                ele.style.display = "none";
+            }
+			}
+		}
+	}
+	
+	
+	function errHtmlForContact(msg) {
+    return '<div class="oj-messaging-inline-container" id="' + recordType + '_' + appName + '_' + recordID + '_errMsg" aria-live="polite" style="direction:rtl">' +
+        '<div class="oj-message oj-message-error">' +
+        '<span class="oj-component-icon oj-message-status-icon oj-message-error-icon" title="Error" role="img"></span>' +
+        '<span class="oj-message-content" style="padding-right:5px"><div class="oj-message-summary">' + msg + '</div><div class="oj-message-detail">' +
+        '<span> </span></div></span></div></div>';
+	}
+	
+	
+	var duplicateForContact = {
+    id: 0,
+    name: ""
+	};
+	
+	
+	function createErrorPopUpForContactWS(heading, msg, forDuplicate) {
+    if (forDuplicate) {
+        
+            if (!parent.document.getElementById(recordType + "_" + appName + '_' + recordID + '_script')) {
+                var js = document.createElement("script");
+                js.setAttribute('id', recordType + "_" + appName + '_' + recordID + '_script');
+                js.type = "text/javascript";
+                var src = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + "/openWorkspace.js";
+                js.src = src;
+                parent.document.head.appendChild(js);
+            }
+            if (recordID > 0) {
+                var link = "<a href='javascript:void(0);' onclick='javascript:openContact(" + duplicateForContact.id + ", false);'>" + duplicateForContact.name + "</a>";
+            } else {
+                var link = "<a href='javascript:void(0);' onclick='javascript:openContact(" + duplicateForContact.id + ", true);'>" + duplicateForContact.name + "</a>";
+            }
+            //var link = "<a href='javascript:void(0);' onclick='javascript:openContact(" + duplicateForContact.id + ");'>" + duplicateForContact.name + "</a>";
+            msg = msg.replace('contact.full_name', link);
+       
+			}
+		if (recordID > 0) {
+			var e1 = createErrorBoxForContactWS(msg);
+			var e2 = addtoErrorListForContactWS(msg);
+			if (!e1 && !e2) {
+				createModal(heading, msg);
+			}
+		}
+		else {
+			createModal(heading, msg);
+		}
+	}
+	
+	
+function createErrorBoxForContactWS(msg) {
+    if (recordID > 0) {
+        var ele = parent.document.querySelector('div[data-recordtype="' + recordType + '"][data-recordid="' + recordID + '"]');
+        ele = ele.querySelector('[automationid="Contact.C$IdentificationNumber"]');
+        if (ele) {
+            ele.insertAdjacentHTML("beforeend", errHtmlForContact(msg));
+            return true;
+            /* var parentEle = ele.parentElement.parentElement;
+            if (parentEle) {
+                parentEle.parentElement.classList.add("oj-invalid");
+                parentEle.insertAdjacentHTML("afterend", errHtmlForContact(msg));
+            } */
+        } else {
+            return false;
+        }
+    }
+}
+
+
+function addtoErrorListForContactWS(msg) {
+    if (recordID > 0) {
+        var ele = parent.document.querySelector('div[data-recordtype="' + recordType + '"][data-recordid="' + recordID + '"]');
+        ele = ele.querySelector('div[class="validationErrorsPanel"]');
+        var list = ele.querySelector('ol[class="localValidationErrorList"]');
+        if (ele && list) {
+            var li = document.createElement('li');
+            li.setAttribute('id', recordType + '_li_' + appName + '_' + recordID + '_errMsg');
+            li.setAttribute('tabindex', '0');
+            li.setAttribute('class', 'validationErrorPanelMessage validationErrorPanelLink');
+            li.setAttribute("style", "direction: rtl;");
+            li.innerHTML = msg;
+            li.setAttribute('onclick', 'document.querySelector(\'div[data-recordtype="' + recordType + '"][data-recordid="' + recordID + '"]\').querySelector(\'[automationid="Contact.C$IdentificationNumber"] input\').focus();');
+            list.appendChild(li);
+            ele.style.display = "block";
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+function createModal(heading, msg) {
+   return new Promise(function (resolve, reject) {
+       extensionProvider.registerUserInterfaceExtension(function (IUserInterfaceContext) {
+           IUserInterfaceContext.getModalWindowContext().then(function (IModalWindowContext) {
+                localStorage.setItem("IDValidator_modalMsg", msg);
+                var modalWindow = IModalWindowContext.createModalWindow();
+                modalWindow.setTitle(heading);
+				modalWindow.setContentUrl("dialog.html");
+                modalWindow.setWidth("400px");
+                modalWindow.setHeight("50px");
+                modalWindow.render();
+                resolve();
+            });
+        });
+    });
+}
+		
+});
+</script>
+
+</body>
+</html>

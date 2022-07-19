@@ -1,0 +1,8 @@
+[
+	{
+	 "name": "alert_meassage",
+        "defaultValue": "Status updated successfully",
+        "dataType": "string"
+	}	
+	
+]

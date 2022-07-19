@@ -1,0 +1,26 @@
+[
+	{
+		"name": "ReportIDs",
+		"defaultValue": "100520",
+		"dataType": "string",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "NoIndicationsMessage",
+		"defaultValue": "אין אינדיקציות",
+		"dataType": "string"
+		
+	},
+	{
+		"name": "MaxIconsInRow",
+		"defaultValue": 10,
+		"dataType": "integer",
+		"isWorkspaceProperty": true
+	},
+	{
+		"name": "FolderURL",
+		"defaultValue": "https://clalins--tst3.custhelp.com/rnt/rnw/img/enduser/",
+		"dataType": "string"
+		
+	}
+]

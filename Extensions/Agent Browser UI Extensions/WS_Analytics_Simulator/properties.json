@@ -1,0 +1,140 @@
+[
+    {
+        "name": "NoInfoFound",
+        "defaultValue": "מידע לא קיים",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "borderless_record_layout",
+        "defaultValue": true,
+        "dataType": "boolean",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "column_header_alignment",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "column_header_background_color",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "column_header_font_color",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "column_header_font_size",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "column_header_text_bold",
+        "defaultValue": true,
+        "dataType": "boolean",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "data_alignment",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "data_background_color",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "data_font_color",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "data_font_size",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "data_text_bold",
+        "defaultValue": false,
+        "dataType": "boolean",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "filterName",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "filterValue",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "font",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "height",
+        "defaultValue": "100%",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "open_object_id",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "open_object_link",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "open_object_type",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "order_of_columns",
+        "defaultValue": "",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "recordLayout",
+        "defaultValue": true,
+        "dataType": "boolean",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "reportID",
+        "defaultValue": 0,
+        "dataType": "integer",
+        "isWorkspaceProperty": true
+    },
+    {
+        "name": "width",
+        "defaultValue": "100%",
+        "dataType": "string",
+        "isWorkspaceProperty": true
+    }
+]

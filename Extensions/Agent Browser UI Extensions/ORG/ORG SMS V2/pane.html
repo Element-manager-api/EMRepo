@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <title>ORG Messages</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script>
+	 <script src="https://localhost/clal/orgsmspane.js"></script>
+	 
+	 	<link rel="stylesheet" href="css/bootstrap.rtl.min.css" >
+		<link rel="stylesheet" href="css/font-awesome.css" />
+		<link rel="stylesheet" href="css/custom.css" />
+	 <style>
+	
+	 
+
+	    
+	  
+
+
+.searchbox{
+	border:1px solid #cccccc;
+	height:35px; width:150px;
+}
+.searchbox-button{
+	border:1px solid #cccccc;
+	height:35px; width:50px;
+}
+.searchbar{margin: 5px;}
+.table{font-size: 12px; }
+.table tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+	 </style>
+	
+<script language="javascript">
+//console.log(displayString)
+
+function loadSMS(){
+document.getElementById('emaildata').style.display='none';
+document.getElementById('sounddata').style.display='none';
+document.getElementById('smsesdata').style.display='';
+$("#emailtab").removeClass("active");
+$("#smstab").addClass("active");
+$("#emptyd").removeClass("active");
+
+
+}
+function loadEmails(){
+document.getElementById('smsesdata').style.display='none';
+document.getElementById('sounddata').style.display='none';
+document.getElementById('emaildata').style.display='';
+$("#smstab").removeClass("active");
+$("#emailtab").addClass("active");
+$("#emptyd").removeClass("active");
+}
+function loadEmpty(){
+document.getElementById('smsesdata').style.display='none';
+document.getElementById('sounddata').style.display='';
+document.getElementById('emaildata').style.display='none';
+$("#smstab").removeClass("active");
+$("#emailtab").removeClass("active");
+$("#emptyd").addClass("active");
+}
+</script>
+</head>
+
+<body>
+    <div class="">
+	<div class="table-responsive" id="list-parent">
+			<div class="bd-example">
+				<ul class="nav justify-content-center" id="nav-tab" style="direction:rtl;">
+				
+				<li class="nav-item" ><a id="smstab" class="nav-link active" id="nav-0-tab" data-bs-toggle="tab" data-bs-target="#nav-0" type="button" role="tab" aria-controls="nav-0" aria-current="page" href="javascript:loadSMS();">SMS/WhatsApp</a></li>
+				
+				<li class="nav-item" ><a id="emailtab" class="nav-link " id="nav-2-tab" data-bs-toggle="tab" data-bs-target="#nav-2" type="button" role="tab" aria-controls="nav-2" aria-current="page" href="javascript:loadEmails();">מיילים</a></li>
+				<li class="nav-item" ><a  id="emptyd" class="nav-link " id="nav-4-tab" data-bs-toggle="tab" data-bs-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-current="page" href="javascript:loadEmpty();">שירונים</a></li>
+				</ul>
+			</div>
+	</div>
+	
+	
+	
+	
+	
+	<div class="searchbar"><input type="text" name="mobile_number" class="searchbox"/><input class="searchbox-button" type="button" name="search", id="search" value="חפש"></div>
+	
+	
+       <div id="smsesdata" >
+	  
+	   <img src="/euf/assets/images/extension/loading-circle.gif" alt="loading..." />
+	   </div>
+	    <div id="emaildata" style="display:none;"></div>
+		 <div id="sounddata" style="display:none;"></div>
+ 
+        <div id="errorMsg"></div>
+    </div>
+</body>
+
+</html>

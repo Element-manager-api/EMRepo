@@ -1,0 +1,173 @@
+[{
+        "name": "Apply_RTL",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+	{
+        "name": "show_extn_button",
+        "defaultValue": true,
+        "dataType": "boolean"
+    },
+	{
+		"name": "hostURL",
+		"defaultValue": "/php/custom/org_sms.php",
+		"dataType": "string"
+	},
+	{
+		"name": "oicURL",
+		"defaultValue": "/ic/api/integration/v1/flows/rest/GET_ORGANIZA_EMAILS_SMS/1.0/GetOrganizationalEmailsSMS",
+		"dataType": "string"
+	},
+	{
+		"name": "trigger_event",
+		"defaultValue": "SHOW_ORGSMS",
+		"dataType": "string"
+	},
+	{
+		"name": "loaded_event",
+		"defaultValue": "SHOW_ORGSMS_COMPLETED",
+		"dataType": "string"
+	},
+	{
+		"name": "mendatory_param_message",
+		"defaultValue": "אחד הערכים בשדות החובה חסר",
+		"dataType": "string"
+	},
+	{
+		"name": "Date_Comparision_Error",
+		"defaultValue": "תאריך ההתחלה צריך להיות קטן או שווה לתאריך הסיום",
+		"dataType": "string"
+	},
+	{
+		"name": "Mobile_Number_Empty_Error",
+		"defaultValue": "חסר ערך בשדה מספר טלפון נייד",
+		"dataType": "string"
+	},{
+		"name": "EMAIL_ADDRESS_INVALID_ERROR",
+		"defaultValue": "כתובת המייל שהוזנה אינה תקינה",
+		"dataType": "string"
+	},
+	{
+		"name": "EMAIL_ADDRESS_NULL_ERROR",
+		"defaultValue": "חסר ערך בשדה כתובת אימייל",
+		"dataType": "string"
+	},
+	{
+		"name": "MOBILE_OR_EMAIL_EMPTY_ERROR",
+		"defaultValue": "אחד הערכים בשדות החובה חסר",
+		"dataType": "string"
+	},
+	{
+        "name": "Separator_For_AreaCode_and_Phone",
+        "defaultValue": "-",
+        "dataType": "string"
+    },
+    {
+        "name": "Msg_Wrong_Format_Error",
+        "defaultValue": "הקשת מספר טלפון בפורמט לא תקין למספר טלפון מסוג [TYPE] אנא שנה את הפורמט לקידומת תקינה ומספר בין [NUMBER] ספרות",
+        "dataType": "string"
+    },
+    {
+        "name": "Msg_Number_Of_Digits_Error",
+        "defaultValue": "מספר ספרות אינו תקין בטלפון מסוג: [TYPE] אנא תקן ל- [NUMBER] ספרות",
+        "dataType": "string"
+    },
+    {
+        "name": "Msg_Wrong_Area_Code_Error",
+        "defaultValue": "הקשת אזור חיוג לא תקין למספר טלפון מסוג [TYPE] אנא שנה את אזור החיוג",
+        "dataType": "string"
+    },
+    {
+        "name": "Sent_Date_Label",
+        "defaultValue": "תאריך שליחה",
+        "dataType": "string"
+    },
+    {
+        "name": "SMS_Text_Label",
+        "defaultValue": "התחלת תוכן ה SMS (חמש מילים ראשונות)",
+        "dataType": "string"
+    },
+    {
+        "name": "Sent_Time_Label",
+        "defaultValue": "שעת שליחה",
+        "dataType": "string"
+    },
+    {
+        "name": "ID_Label",
+        "defaultValue": "תז שאליה נשלח ה- SMS",
+        "dataType": "string"
+    },
+    {
+        "name": "Sending_System_Label",
+        "defaultValue": "מערכת שולחת",
+        "dataType": "string"
+    },
+    {
+        "name": "Activity_Number_Label",
+        "defaultValue": "מס' פעילות",
+        "dataType": "string"
+    },
+    {
+        "name": "Cellular_Number_Label",
+        "defaultValue": "מספר סלולרי",
+        "dataType": "string"
+    },
+    {
+        "name": "Status_Label",
+        "defaultValue": "סטטוס מסרון",
+        "dataType": "string"
+    },
+    {
+        "name": "Email_Status_Label",
+        "defaultValue": "סטטוס שליחה",
+        "dataType": "string"
+    },
+    {
+        "name": "Email_Sent_date_Label",
+        "defaultValue": "תאריך שליחת מייל",
+        "dataType": "string"
+    },
+    {
+        "name": "Mail_Title_Label",
+        "defaultValue": "כותרת המייל",
+        "dataType": "string"
+    },
+    {
+        "name": "Email_Sent_Tile_Label",
+        "defaultValue": "שעת שליחת מייל",
+        "dataType": "string"
+    },
+    {
+        "name": "Message_Content_Label",
+        "defaultValue": "תוכן ההודעה",
+        "dataType": "string"
+    },
+    {
+        "name": "No_data_Found",
+        "defaultValue": "לא נמצאו נתונים.",
+        "dataType": "string"
+    },
+	{
+        "name": "Mobile_Phone_Number_Of_Digits",
+        "defaultValue": 7,
+        "dataType": "integer"
+    },
+    {
+        "name": "Mobile_Phone_Area_Zones",
+        "defaultValue": "050, 052, 054",
+        "dataType": "string"
+    },
+    {
+        "name": "Mobile_Label",
+        "defaultValue": "נייד",
+        "dataType": "string"
+    },
+    {
+        "name": "SMS_Content_Label",
+        "defaultValue": "תוכן ה SMS",
+        "dataType": "string"
+    }
+	
+	
+]
+

@@ -1,0 +1,42 @@
+[
+	{
+		"name": "hostURL",
+		"defaultValue": "/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	},
+	{
+		"name": "reportId",
+		"defaultValue": "100473",
+		"dataType": "string"
+	},
+	{
+		"name":"columnTitle",
+		"defaultValue":"הקלטת נייס",
+		"dataType":"string"
+	},
+	{
+		"name":"channelColumnName",
+		"defaultValue":"ערוץ",
+		"dataType":"string"
+	},
+	{
+		"name":"IDColumnName",
+		"defaultValue":"מספר אינטראקציה",
+		"dataType":"string"
+	},
+	{
+		"name":"ciscoIdError",
+		"defaultValue":"Cisco id is not available.",
+		"dataType":"string"
+	},
+	{
+		"name":"interacitonIdError",
+		"defaultValue":"Interaciton id is not available.",
+		"dataType":"string"
+	},
+	{
+		"name":"urlNotFound",
+		"defaultValue":"URL not found!.",
+		"dataType":"string"
+	}
+]

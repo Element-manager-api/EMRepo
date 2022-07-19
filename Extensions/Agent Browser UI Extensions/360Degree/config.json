@@ -1,0 +1,148 @@
+[
+	{
+		"name": "productSequence",
+		"defaultValue":"Elementar,Gemel,Pensia,Health,Life",
+		"dataType": "string"
+	},
+	{
+		"name": "visibleProduct",
+		"defaultValue":"Elementar,Gemel,Pensia,Health,Life",
+		"dataType": "string"
+	},
+	{
+		"name": "hostURL",
+		"defaultValue": "/cgi-bin/clalins.cfg/php/custom/bui_oic_middleware.php",
+		"dataType": "string"
+	},
+	{
+		"name": "reportId",
+		"defaultValue": "100367",
+		"dataType": "string"
+	},
+	{
+		"name": "noProductFound",
+		"defaultValue": "No Product Found.",
+		"dataType": "string"
+	},
+	{
+		"name":"errorMsg",
+		"defaultValue":"Error happened. Please try again.",
+		"dataType":"string"
+	},
+	{
+		"name": "idNotFound",
+		"defaultValue": "Id Number is not available, please update and try again.",
+		"dataType": "string"
+	},
+	{
+		"name":"lifeColumns",
+		"defaultValue":"POLISA,מספר פוליסה,M,1,Y,string;LF_KOD_KVUTZAT_MUTZAR,סוג פוליסה,M,2,N,string;MUTZAR_MERAKEZ,תוכנית,M,3,N,string;TR_TCHILAT_POLISA,תא. תחילה,M,4,N,date;TR_SIYUM_POLISA,תא. סיום,M,5,N,date;LF_SCHUM_PIDYON,ערך פדיון / יתרה,M,6,N,number;M_SOCHEN,מספר סוכן,M,7,N,number;SHEM_SOCHEN,שם סוכן,M,8,N,number;BAAL_POLISA_ID,תז בעל פוליסה,A,0,N,string;BAAL_POLISA_NAME,שם בעל פוליסה,A,0,N,string;LF_MEVUTACH_MISHNI_ID,שם מבוטח משני,A,0,N,number;LF_MEVUTACH_MISHNI_SHEM,שם מבוטח משני,A,0,N,string;LF_SUM_AT_RISK,סכום ביטוח במקרה מוות,A,0,N,number;KISUI,כיסוי,A,0,N,number;LF_SHEM_KISUY_MEUCHAD,שם כיסוי,A,0,N,string;LF_POLICY_STATUS,סטטוס,A,0,N,number;LF_FLAG_PAIL,פוליסה פעילה,A,0,N,ana;LF_TEUR_OFEN_TASHLUM_PR,אופן תשלום הפרמיה,A,0,N,string;LF_SCHUM_CHOV_POL,יתרת חוב,A,0,N,number;LF_TNAEI_HITUM,תנאי חיתום,A,0,N,number;LF_FLAG_CHOV_POL,חוב,A,0,N,number;DN_ACC,אחוז דמי ניהול מצבירה,A,0,N,number;DN_PRM,אחוז דמי ניהול הפקדה,A,0,N,number;LF_HP_MASSIK,מעסיק,A,0,N,string;LF_TR_IDKUN_ITRAT_CHOV,ת.עדכון יתרת חוב,A,0,N,date;LF_OMEK_CHOV,עומק חוב,A,0,N,number;LF_TR_HATRAA_ACHARON,ת.עדכון התראה אחרונה,A,0,N,date;LF_MISPAR_HATRAOT,מספר התראות,A,0,N,number;LF_FLAG_SHIABUD,שעבוד,A,0,N,ynu;LF_TEUR_OFEN_GVIA,סוג גבייה,A,0,N,string;PREMIA_HAFKADA_SHNATIT,פרמיה,A,0,N,number;PREMIA_HAFKADA_chodshit,סכום הפקדה אחרונה,A,0,N,number;",
+		"dataType": "string"
+	},
+	{
+		"name": "lifeShowMore",
+		"defaultValue":true,
+		"dataType": "boolean"
+	},
+	{
+		"name":"healthColumns",
+		"defaultValue":"POLISA,מספר פוליסה,M,1,Y,string;SHEM_SOCHEN,שם סוכן,M,2,N,string;KISUI,קוד כיסוי,M,3,N,string;BR_SHEM_KISUY,סוג מוצר/תוכנית ביטוח,M,4,N,string;MUTZAR_MISHNI,מוצר משני,M,5,N,string;BR_TR_TCHILAT_POLISA,תאריך תחילה,M,6,N,date;BR_TR_SIYUM_POLISA,תאריך סיום,M,7,N,date;BR_TEUR_SIBAT_STATUS_POLISA,סיבת סטטוס פוליסה,M,8,N,string;BR_TEUR_TAFKID_MEVUTACH,תפקיד מבוטח,A,0,N,string;BR_M_ZIHUI_BAAL_HAPOLISA,בעל פוליסה,A,0,N,int;PREMIA_HAFKADA_SHNATIT,פרמיה נוכחית בפוליסה,A,0,N,double;PREMIA_HAFKADA_CHODSHIT,פרמיה חודשית,A,0,N,double;M_SOCHEN,מספר סוכן,A,0,N,int;BR_TR_TCHILAT_TOKEF_KISUI,תאריך תחילת תוקף כיסוי,A,0,N,date;BR_TR_SIUM_TOKEF_KISUI,תאריך סיום תוקף כיסוי,A,0,N,date;M_ZIHUI_GOREM_MESHALEM,זיהוי גורם משלם,A,0,N,string;BR_FLG_KISUI_BSISI,אינדיקציית כיסוי בסיס,A,0,N,yn;BR_GIL_KNISA,גיל כניסה,A,0,N,number;BR_TEUR_STATUS_POLISA_KISUI,סטטוס פוליסה כיסוי,A,0,N,string;BR_ACHUZ_HANACHOT,אחוז הנחה,A,0,N,number;SHEM_SNIF_MERAKEZ,מרחב,A,0,N,string;BR_FLG_PAIL,אינדיקציה פעיל,A,0,N,ana;BR_FLG_POLISAT_KOLEKTIV,אינדיקציה קולקטיב,A,0,N,yn;BR_TZ_BEIT_AV,זיהוי בית אב,A,0,N,int;BR_SHEM_MUTZAR,שם מוצר,A,0,N,string;BR_FLG_CHOV,אינדיקציית חוב,A,0,N,yn;BR_TEUR_STATUS_POLISA,סטטוס פוליסה,A,0,N,string;BR_SCHUM_CHOV,יתרת חוב,A,0,N,double;",
+		"dataType": "string"
+	},
+	{
+		"name": "healthShowMore",
+		"defaultValue":true,
+		"dataType": "boolean"
+	},
+	{
+		"name":"pensiaColumns",
+		"defaultValue":"CLIENT_ID,תז עמית,M,1,Y,number;MUTZAR_MERAKEZ,סוג קרן,M,2,N,string;PN_SHEM_MAASIK,שם מעסיק,M,3,N,string;PN_TEUR_STATUS_AMIT,סטטוס עמית,M,5,N,string;DBT_TOTAL_BLN,סה\"כ יתרה צבורה,M,4,N,number;M_SOCHEN,מספר סוכן,M,6,N,number;SHEM_SOCHEN,שם סוכן,M,7,N,number;PN_SHEM_MASLUL,מסלול פנסיה,M,8,N,string;PN_TEUR_SUG_M_SOCEN,סוג הפצה,A,0,N,string;PN_TR_HITZRFUT,ת. תחילת חברות,A,0,N,date;PN_ITRAT_HALVAA,יתרה הלוואה,A,0,N,number;PN_ITRAT_PUGRIM,יתרה פיגור,A,0,N,number;PN_FLAG_IKUL,עיקול (כן/לא),A,0,N,ana;PN_FLG_ATZMAI_CALC,מעמד עמית,A,0,N,ana;PN_MASLUL_HASHKAA,מסלול השקעה,A,0,N,string;TR_NECHONUT,ת. עדכון יתרה צבורה,A,0,N,date;PN_FLG_PAIL,סטטוס,A,0,N,ana;KISUI,כיסוי,A,0,N,number;PN_ITRAT_PIZUIM,יתרה צבורה פיצויים,A,0,N,number;PN_ITRAT_OVED,יתרה צבורה תגמולי עובד,A,0,N,number;PN_PR_HAFKADA_CURR_YEAR,סכום הפקדה אחרונה,A,0,N,number;DN_ACC||PN_AHUZ_DNM_HAFKADA,אחוז דמי ניהול הפקדות,A,0,N,string;PN_TRHAFKADA_ACHRONA,תאריך הפקדה אחרונה,A,0,N,date;PN_TR_HAFKADA_RISHONA,תאריך הפקדה ראשונה,A,0,N,date;PN_TR_HITZRFUT,ת. הצטרפות,A,0,N,date;PN_HP_MAASIK,חפ מעסיק,A,0,N,string;PN_AHUZ_DNM_TZVIRA ,אחוז דמי ניהול צבירה,A,0,N,number;PN_AHUZ_DNM_HAFKADA,אחוז דמי ניהול הפקדה,A,0,N,number;",
+		"dataType": "string"
+	},
+	{
+		"name": "pensiaShowMore",
+		"defaultValue":true,
+		"dataType": "boolean"
+	},
+	{
+		"name":"gemelColumns",
+		"defaultValue":"GML_AMIT,מספר חשבון,M,1,Y,string;MUTZAR_MISHNI,שם קופה,M,2,N,string;GML_SHEM_SUG_GOREM_HAFAZA,שם סוג גורם הפצה,M,3,N,string;M_SOCHEN,מספר סוכן,M,4,N,number;SHEM_SOCHEN,שם סוכן,M,5,N,string;GML_FLG_ATZMAI,מעמד עמית,M,6,N,ana;GML_SHEM_MAAVID,שם מעסיק,M,7,N,string;GML_SHEM_KISUI_KOD_KUPA,קוד קופה,A,0,N,string;POLISA,מספר פוליסה,A,0,N,string;GML_SHEM_KISUI_KUPA,שם מסלול,A,0,N,string;GML_KOD_MAAVID,מספר מעסיק,A,0,N,string;KISUI,מספר מס הכנסה גמל,A,0,N,number;GML_FLG_PAIL,אינדיקציה פעיל,A,0,N,ana;GML_AMIT_OLD,מספר חשבון פועלים,A,0,N,string;ITRA,יתרה,A,0,N,number;GML_TR_VETEK,תאריך וותק,A,0,N,date;GML_TR_HITZTARFUT,תאריך קבלת טופס הצטרפות,A,0,N,date;GML_FLG_IKUL,עיקול (כן/לא),A,0,N,ana;GML_ACHUZ_DMEI_NIHUL,אחוז דמי ניהול,A,0,N,number;GML_TR_HAFKADA_LAST,תאריך הפקדה אחרונה,A,0,N,date;GML_KIDUD_MOTZAR,מזהה מוצר חסכון,A,0,N,string;GML_AZDMN_HAFKADA,אחוז דמי ניהול מהפקדה,A,0,N,number;GML_OLDCONTRACTID,מספר הסכם סוכן גמל,A,0,N,number;GML_SACH_ITRA_3112005,סכום הפקדות עד 31.12.2005,A,0,N,number;GML_SACH_ITRA_0106_1207,סכום הפקדות מ 01.01.2006 עד 31.12.2007,A,0,N,number;GML_SACH_ITRA_0108_AD_LV,סכום הפקדות מ01.01.2008 עד תאריך נוכחי,A,0,N,number;GML_SACH_ITRA_OVED,יתרה – תגמולי עובד,A,0,N,number;GML_SACH_ITRA_MAVID,יתרה – תגמולי מעביד,A,0,N,number;GML_SACH_ITRA_PIZUIM,יתרה – פיצויים,A,0,N,number;GML_SACH_ITRA_AZMAI,יתרה – עצמאי,A,0,N,number;GML_TR_NEZILOT1,תאריך נזילות 1,A,0,N,date;GML_TR_NEZILOT_CALC,תאריך נזילות מחושב,A,0,N,date;GML_TR_NEZILOT2,תאריך נזילות 2,A,0,N,date;GML_TR_NEZILOT3,תאריך נזילות 3,A,0,N,date;",
+		"dataType": "string"
+	},
+	{
+		"name": "gemelShowMore",
+		"defaultValue":true,
+		"dataType": "boolean"
+	},
+	{
+		"name":"elementarColumns",
+		"defaultValue":"POLISA,מס פוליסה,M,1,Y,string;MUTZAR_MERAKEZ,מוצר,M,2,N,string;MUTZAR_MISHNI,תת מוצר,M,3,N,string;EL_SHEM_ANAF_RASHI,שם ענף,M,4,N,string;KISUI,מספר ענף,M,5,N,string;EL_FLG_PAIL,סטטוס,M,6,N,ana;PREMIA_HAFKADA_SHNATIT,פרמית הפקדה שנתית,M,7,N,number;EL_TR_TCHILAT_POLISA,ת.תחילה,M,8,N,date;EL_TR_SIYUM_POL,ת.סיום,M,9,N,date;SHEM_SOCHEN,שם סוכן,M,10,N,string;M_SOCHEN,מספר סוכן,M,11,N,number;EL_M_RECHEV,מספר רישוי רכב,A,0,N,number;EL_MISPAR_BAIT_DIRA_1||EL_SHEM_RECHOV_DIRA_1||EL_SHEM_YESHUV_DIRA_1,כתובת 1 עבור מבנה,A,0,N,string;EL_MISPAR_BAIT_DIRA_2||EL_SHEM_RECHOV_DIRA_2||EL_SHEM_YESHUV_DIRA_2,כתובת 2 עבור מבנה,A,0,N,string;EL_MISPAR_BAIT_TCHULA_1||EL_SHEM_RECHOV_TCHULA_1||EL_SHEM_YESHUV_TCHULA_1,כתובת  עבור תכולה,A,0,N,string;EL_TEUR_PEULA,פעולה,A,0,N,string;PREMIA_HAFKADA_CHODSHIT,פרמיה חודשית,A,0,N,int;EL_SHEM_CHATAM,חתם,A,0,N,string;EL_SHEM_MEKISHA,מקישה,A,0,N,string;EL_SHEM_GOVE,גובה,A,0,N,string;EL_YITRAT_TASKUMIN,יתרת תשלומים פוליסה,A,0,N,number;EL_KAMUT_TASHLUMIM,כמות תשלומים,A,0,N,number;EL_SUG_EMTZAI_TASHLUM,אמצעי תשלום ,A,0,N,string;EL_SCHUM_MIVNE_1,סכום ביטוח מבנה 1,A,0,N,string;EL_SCHUM_MIVNE_2,סכום ביטוח מבנה 2,A,0,N,string;EL_SCHUM_TCHULA_1,סכום ביטוח תכולה,A,0,N,string;EL_TEUR_SUG_KISUI_RECHEV,סוג כיסוי רכב,A,0,N,string;EL_KOD_HODAAT_HIDUSH,קוד סיבת אי חידוש,A,0,N,string;EL_TEUR_HODAAT_HIDUSH,סיבת אי חידוש,A,0,N,string;TEUR_TAFKID,תיאור תפקיד,R,0,N,string;SHEM_MALE,שם מלא,R,0,N,string;CLIENT_ID,תעודת זהות,R,0,N,number;SUG_TAFKID,סוג תפקיד,R,0,N,string;NUMERATORID,מס' נומרטור,C,0,N,string;NUMERATOR_TEUR,שם כיסוי,C,0,N,string;DESCRIPTION,פירוט,C,0,N,string;",
+		"dataType": "string"
+	},
+	{
+		"name": "elementarShowMore",
+		"defaultValue":true,
+		"dataType": "boolean"
+	},
+	{
+		"name":"elementarClaimColumns",
+		"defaultValue":"M_TVIAA,מס' תביעה,M,1,Y,string;TR_MIKRE_BITUACH,תאריך אירוע,M,2,N,date;MUTZAR_MISHNI,יישות,M,3,N,string;KISUI,ענף ראשי,M,4,N,string;MUTZAR_MERAKEZ,ענף משנה,M,5,N,string;TEUR_STATUS,סטטוס התביעה,M,6,N,string;TR_PTICHA,תאריך פתיחה,M,7,N,date;SCH_TASHLUM,סכום ששולם בשקלים,M,8,N,int;KOD_MUTZAR_MERAKEZ,ענף משנה ,A,0,N,string;SUG_ERUA,סוג אירוע,A,0,N,string;TEUR_KOD_NEZEK,תיאור נזק,A,0,N,string;SCH_TASHLUM_PITZUY,סכום שולם פיצוי בשקלים,A,0,N,int;SCH_TASHLUM_HOTZAA,סכום שולם הוצאה בשקלים,A,0,N,int;",
+		"dataType": "string"
+	},
+	{
+		"name":"agentDetailColumns",
+		"defaultValue":"ID_SUG_SOCHEN_SOCHNUT,סוג סוכנות,Y;M_ZIHUI,חפ סוכן,Y;SHEM_PRATI_H,שם פרטי סוכן,Y;SHEM_MISHPAHA_H,שם משפחה סוכן,Y;TEL_AVODA,מס' טלפון עבודה,Y;TEL_BAIT,מסי טלפון בית,Y;CELL_PHONE,נייד,Y;EMAIL,אימייל,Y;SHEM_YESHUV,שם ישוב,Y;RECHOV,רחוב,Y;M_BAIT,מס' בית,Y;MIKUD,מיקוד,Y;",
+		"dataType": "string"
+	},
+	{
+		"name": "elementarClaimShowMore",
+		"defaultValue":true,
+		"dataType": "boolean"
+	},
+	{
+		"name": "showProducts",
+		"defaultValue":"all",
+		"dataType": "string"
+	},
+	{
+		"name":"contactAlreadyOpen",
+		"defaultValue":"לקוח זה כבר פתוח במערכת",
+		"dataType": "string"
+	},
+	{
+		"name":"contactNotExist",
+		"defaultValue":"הלקוח לא קיים במערכת",
+		"dataType": "string"
+	},
+	{
+		"name":"noClaimData",
+		"defaultValue":"לא נמצאו תביעות",
+		"dataType": "string"
+	},
+	{
+		"name":"alfonsoPopupTitle",
+		"defaultValue":"נתוני הסוכן",
+		"dataType": "string"
+	},
+	{
+		"name":"active",
+		"defaultValue":"פעיל",
+		"dataType": "string"
+	},
+	{
+		"name":"inactive",
+		"defaultValue":"לא פעיל",
+		"dataType": "string"
+	},
+	{
+		"name":"claimActive",
+		"defaultValue":"",
+		"dataType": "string"
+	},
+	{
+		"name":"claimInActive",
+		"defaultValue":"",
+		"dataType": "string"
+	}
+	
+]

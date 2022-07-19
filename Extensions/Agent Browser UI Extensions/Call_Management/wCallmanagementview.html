@@ -1,0 +1,67 @@
+<html dir="rtl" lang="he">
+	<head>
+		<title>Call management</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="x-ua-compatible" content="IE=edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap.rtl.min.css">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/call_management.css">
+		<script src="js/jquery-3.5.1.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="js/callmanagement.js"></script>
+		<script>
+		
+		function CallNumber(phoneNumber='', IdNumber, IncidentID=0, IncPhonesID=0){
+		console.log(IncPhonesID);
+			let nextId = 0;
+	const entity=[]
+						mytargetFrame=null;
+						paneFrame = window.parent.document.querySelectorAll(".sidePanelBrowserExtension");
+						console.log(paneFrame);
+						for(var win=0; win<paneFrame.length;win++){
+						if(paneFrame[win]){
+							if(paneFrame[win].contentWindow.click2dialName == 'Click2DialAvailabiliter'){
+								mytargetFrame = paneFrame[win].contentWindow;
+							}
+							}
+						}
+						
+		console.log(mytargetFrame);
+	
+      mytargetFrame.postMessage(
+        {
+		  ContactIDNumber:IdNumber, 
+		  incident_id:IncidentID,
+		  IncPhonesID:IncPhonesID,
+          id: nextId++,
+          type: 'clickToDialORACLE',
+          from: 'OracleCX-for-Davinci',
+          isReply: false,
+          message: {
+            phoneNumber,
+            entity
+          }
+        },
+        '*'
+      );
+	 
+	 }
+	
+	</script>
+	</head>
+	<body>
+		<!--<div id="mydata" style="display:none;" class="container">-->
+		<div id="mydata"  class="container">
+			<label for="incident" id="lblinc"></label><br>
+			
+			<div class="table-responsive">
+			<table id="myTableData"  class="table table-striped" style="font-size:12px;">
+			</table>
+			</div>
+			<input type="button" class="btn btn-primary" id="createrow" style="margin:10px 0;">
+		</div>
+	</body>	
+	
+</html>

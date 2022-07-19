@@ -1,0 +1,269 @@
+<!doctype html>
+<html dir="rtl">
+	<head>
+		<title>Indications Extension</title>
+		<meta name="description" content="Indications Extension">
+		<style>
+			body {
+			  margin: 0;
+			  padding: 0;
+			  box-sizing: border-box;	
+			  overflow: hidden; /* Hide scrollbars */
+			  font-family:Arial;
+			}
+			#main-menu {
+			  margin: 0;
+			  padding: 0;
+			  list-style-type: none; /* remove default list style */
+			}
+			#main-menu li {
+			  margin: 0;
+			  padding: 0;
+			  float: right;
+			}
+			#main-menu li a {
+			  /*float: right;*/
+			  padding: 0;
+			  margin: 0;
+			}
+			#indication-loading-icon-image  {
+			  float: right;
+			  height: 24px;
+			  width: 24px;
+			}
+		</style>
+		<!-- <script type="text/javascript" src="/AgentWeb/libs/jquery/jquery-3.1.1.min.js"></script> -->
+		<script src="jquery-3.6.0.js"></script> 
+ <script src="jquery-ui.js"></script>
+ <script type= "application/javascript"> </script>
+	</head>
+	<body id="body">
+
+	<script>
+	 // 1. Load extension
+	 // 2. Fetch type of workspace (Contact/Incident)
+	 // 3. If Contact WS - get contact id. If Incident workspace get id of primary contact
+	 // 4. Fetch properties at workspace level  - a. comma separated report ids (ReportIDs), b. No indications message (NoIndicationsMessage ) c. Max number of images to be shown (MaxIconsInRow) d. Folder url (FolderURL)
+	 // 5. If contact id is null - Display no indications message?? Else go to next step
+	 // 6. Call custom script asynchronously by sending report ids list and contact id
+	 // 7. Custom script to execute reports and create an associate array (key value pairs) and send it back as a reponse. Order of items in the array should follow the order of columns in reports
+	 // 8. Parse the response array in the extension and display images for those where value is 1. While displaying the images populate alt attribute(same as column name) and fire an event on click of image where event's name is same as the column name followed by "_clicked"
+	 // 9. If array is empty or if there a no elements in the array where value is not zero, display "No indications message"
+	 // 9. Define a maximum number of images/icons that can be displayed and write logic to discard excess images/icons if the total is more than max 
+	 // 10. Event based refresh of extension (Event name = "IndicationRefresh") 
+
+	var recordType = null;
+	var reportIDs = null;
+	var noIndicationsMessage = null;
+	var maxIconsInRow = null;
+	var folderURL = null;
+	var contactID = null;
+	var incidentID = null;
+	var interfaceurl = null;
+	var sessionID = null;
+	ORACLE_SERVICE_CLOUD.extension_loader.load("IndicationsExtension", "1")
+		.then(function(extensionProvider) {
+			extensionProvider.getGlobalContext().then(function(globalContext) {
+				interfaceurl = globalContext.getInterfaceUrl();
+				 globalContext.getExtensionContext('IndicationsExtension').then(function(extensionContext) {
+                extensionContext.getProperties(['NoIndicationsMessage', 'FolderURL']).then(function(collection) {
+				folderURL = collection.get('FolderURL');
+				console.log(folderURL);
+				noIndicationsMessage = collection.get('NoIndicationsMessage');
+				console.log(noIndicationsMessage);
+				});
+			});
+				globalContext.getContainerContext('IndicationsExtension').then(function(containerContext) {
+				containerContext.getProperties(['ReportIDs', 'MaxIconsInRow']).then(function(collection) {
+						reportIDs = collection.get('ReportIDs');
+						//noIndicationsMessage = collection.get('NoIndicationsMessage');
+						maxIconsInRow = collection.get('MaxIconsInRow');
+						//folderURL = collection.get('FolderURL');
+						console.log(`Extensionproperty ${reportIDs.getName()} with dataType ${reportIDs.getDataType()} has value ${reportIDs.getValue()}`);
+						globalContext.getSessionToken().then(function (sessionToken) {
+							sessionID = sessionToken;
+							extensionProvider.registerWorkspaceExtension(function(workspaceRecord)
+							{
+								recordType = workspaceRecord.getWorkspaceRecordType();
+								console.log(recordType);
+								workspaceRecord.addNamedEventListener('IndicationRefresh',getContactID);
+								var getContactIDPromise = null;
+								function getContactID () {
+									//Populate contactID using recordType
+									if(recordType == "Contact") {
+										workspaceRecord.getFieldValues(['Contact.CId']).then(function(IFieldDetails)
+										{
+											contactID = IFieldDetails.getField('Contact.CId').getLabel();
+											incidentID =0;
+											getIndications(contactID, incidentID);
+										});
+									}else if(recordType == "Incident") {
+										workspaceRecord.getFieldValues(['Incident.IId']).then(function(IFieldDetails)
+										{
+											incidentID = IFieldDetails.getField('Incident.IId').getLabel();
+											contactID =0;
+											//console.log(`Contact ID is: ${contactID}`);
+											getIndications(contactID, incidentID);
+										});
+									}
+									else {
+										console.log ("Record Type not supported.");
+									}
+								}
+								//Call above function for the first time when extension is loaded
+								getContactID();
+								//Function to add an indication/icon to the workspace (UI)
+								function addIndication (name,path,toolTip) {
+								var toolTipDesc;
+									console.log(toolTip);
+									//console.log(toolTip[name]);
+									if(toolTip[name])
+									{
+									toolTipDesc = toolTip[name];
+									}
+									else
+									{
+									toolTipDesc = "";
+									}
+									
+									var _li = $("<li>", {"id": name+"-li"});
+									var _a = $("<a>", {"id": name,"href":"#" });
+									_a.click(function(){ 
+										//alert("Indication with id: "+$(this).attr("id")+" is clicked.");
+										namedEvent = name+"Clicked";
+										workspaceRecord.triggerNamedEvent(namedEvent);
+									});
+									var _img = $("<img>", {"id": name+"-img","src":path+name+".png","alt":name,"title":toolTipDesc});
+									_a.append(_img);
+									_li.append(_a);
+									//Remove No indications message if any before displaying the indications
+									$('#no-indications-message').remove();
+									$("#main-menu").append(_li);	
+								}
+								//Function to display No Indications/Icons message on workspace (UI)
+								function addNoIndicationsMessage(msg) {
+									//Remove Indications/Icons (if any) before displaying no incications message
+									$('#main-menu').empty();
+									$('#no-indications-message').remove();
+									var _div = $("<div>", {"id": "no-indications-message","style":"font-family:Arial"}); 
+									_div.text(msg);
+									$("#body").append(_div);	
+								}
+								function resizeExtension() {
+									var maxHeight = 0;
+									var maxWidth = 0;
+									var minWidth = 500;
+									var minHeight = 50;
+									var heights = $("#main-content img").map(function ()
+									{
+										return $(this).height();
+									}).get();
+									maxHeight = Math.max.apply(null, heights);
+									maxWidth = $('body').width();
+									maxWidth = maxWidth > minWidth ? maxWidth : minWidth;
+									maxHeight = maxHeight > minHeight ? maxHeight : minHeight;
+									console.log("Width : "+ maxWidth);
+									console.log("Height : "+ maxHeight);
+									ORACLE_SERVICE_CLOUD.extensionResizeHandler.resize(maxWidth,maxHeight+15);
+								}
+								//Function to make an AJAX call to custom PHP script (in File Manager) to Fetch Indications/Icons
+								function getIndications(contactID, incidentID) {
+									if(reportIDs != null && (contactID > 0 || incidentID > 0)) {
+									
+									var formData = {psk:sessionID,reportIDs:reportIDs.getValue(),contactID:contactID,incidentID:incidentID};
+									console.log(formData);
+										// Make an Ajax call to custome script
+										console.log(`Report IDs: ${reportIDs.getValue()} and Contact ID: ${contactID}`);
+										var proxyscript = interfaceurl + "/php/custom/get_indications.php";
+										//Empty UL element's innerHTML before you get indications and update the UI
+										$('#main-menu').empty();
+										//Show loading icon before making an AJAX call
+										$('#indication-loading-icon').show();
+										$.ajax({
+											type: "POST",
+											url: proxyscript, 			
+											dataType: "json", 
+											data:formData,
+											success: function (data) {
+												console.log(data);
+												//var DataList = data;
+												var toolTip = data.tooltips;
+												console.log(toolTip);
+												delete data.tooltips;
+												//Hide loading icon on success / error of AJAX call
+												$('#indication-loading-icon').hide();
+												if(data)
+												{
+												console.log('data is present');
+												console.log(data);
+												}
+												if(!data)
+												{
+													console.log('data is null');
+												console.log(data);
+												}
+												//if(data != null) {
+												if(Object.keys(data).length > 0) {
+													var i = 0;
+													for (var key in data) {
+														i++;
+														if(i > maxIconsInRow.value) { // Do not display Incidents/Icons if they are more than maxIconsInRow
+															break;
+														}
+														addIndication(key,folderURL.value,toolTip);
+													}
+													resizeExtension();
+												}
+												else {
+													addNoIndicationsMessage(noIndicationsMessage.value);
+												}
+											},
+											error: function (jqXHR, exception) {
+												//Hide loading icon on success / error of AJAX call
+												$('#indication-loading-icon').hide();
+												var msg = '';
+												if (jqXHR.status === 0) {
+													msg = 'Not connect.\n Verify Network.';
+												} else if (jqXHR.status == 404) {
+													msg = 'Requested page not found. [404]';
+												} else if (jqXHR.status == 500) {
+													msg = 'Internal Server Error [500].';
+												} else if (exception === 'parsererror') {
+													msg = 'Can\'t fetch Indications.Please contact your Admin.';
+												} else if (exception === 'timeout') {
+													msg = 'Time out error.';
+												} else if (exception === 'abort') {
+													msg = 'Ajax request aborted.';
+												} else {
+													msg = 'Uncaught Error.\n' + jqXHR.responseText;
+												}
+												alert(msg);
+												console.log(msg);
+												//addNoIndicationsMessage(noIndicationsMessage.value);
+											}
+										});
+									} 
+									else if ((contactID == null || contactID < 0) && (incidentID == null || incidentID < 0)) { // contactID is assigned as a -ve integer for new unsaved contacts
+										$('#indication-loading-icon').hide();
+										addNoIndicationsMessage(noIndicationsMessage.value);
+									}
+								}
+							});
+						});
+					}).catch(function(err) {
+						console.log(err);
+					});
+				}).catch(function(err) {
+					console.log(err);
+				
+				});
+			});
+			
+		});
+	</script>
+		<div id="main-content">
+			<div id="indication-loading-icon" > <img id="indication-loading-icon-image" src="/euf/assets/images/extension/loading-circle.gif" alt="loading..." /> </div>
+			<ul id="main-menu"> </ul>
+		</div>
+	</body>
+</html>

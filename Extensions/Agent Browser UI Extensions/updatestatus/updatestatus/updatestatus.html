@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="jquery-3.6.0.js"></script> 
+ 
+  
+	<meta charset="utf-8">
+
+	
+
+</head>
+<body>
+
+ <script type= "application/javascript"> 
+
+	
+    var extensibilityApiVersion = '1.0'; // Extensibility API version
+    var globalContext = '';
+	var restUrl = '';
+	var sessionID = '';
+	var Incident_id = '';
+	var status_id = '';
+	var workspaceRecord = '';
+	var value;
+	var interfaceurl;
+	var AlertMessage = '';
+	
+	
+	
+	
+ORACLE_SERVICE_CLOUD.extension_loader.load("updatestatus" , extensibilityApiVersion)
+.then(function(extensionProvider)
+	{
+	//extensionProvider.getGlobalContext.then(function(extensionGlobalContext)
+		//{
+			
+		//});
+		
+			extensionProvider.getGlobalContext().then(function(globalContext) {
+		globalContext.getSessionToken().then(function(sessionToken)
+			{
+		interfaceurl = globalContext.getInterfaceUrl();
+				globalContext.getExtensionContext('updatestatus').then(function(extensionContext) {
+                extensionContext.getProperties(['alert_meassage']).then(function(collection) {
+					//reportID = collection.get('leadMD_agent_check_reportId').getValue();
+					AlertMessage = collection.get('alert_meassage').getValue();
+                    //console.log(property.getName());
+                       sessionID = sessionToken;
+					   
+					   
+					   extensionProvider.registerWorkspaceExtension(function(workspaceRecord)
+							{
+			   
+					workspaceRecord.getFieldValues(['Incident.Status.Id']).then(function(IFieldDetails1)
+					{
+				Incident_status = (IFieldDetails1.getField('Incident.Status.Id').getValue());
+	
+					
+					workspaceRecord.addNamedEventListener('update_statust', update_tsatuts).prefetchWorkspaceFields(["Incident.Status.Id","Incident.IID"]);
+				
+				});
+					   
+					   
+					   
+			
+			
+				 })
+				})
+			
+			
+			});
+		});
+	
+	
+	
+	
+	});
+	
+	});
+	
+	
+function update_tsatuts(workspaceRecordEventParameter)
+	{
+	
+	 status_id = workspaceRecordEventParameter.event.fields["Incident.Status.Id"];
+	Incident_id = workspaceRecordEventParameter.event.fields["Incident.IID"];
+	//alert(Incident_id);
+	//alert(status_id);
+	//return false;
+
+	if(Incident_id !='' && status_id !=''  ){
+	
+	
+				var formData = {psk:sessionID,requestfor:'updatestatus',incidentid:Incident_id,statusid:status_id};
+									console.log(formData);
+				       var ajaxUrl = interfaceurl + "/php/custom/validations.php";
+            	
+																
+										//Empty UL element's innerHTML before you get indications and update the UI
+										$.ajax({
+											type: "POST",
+											async: false,
+											url: ajaxUrl, 			
+											dataType: "json", 
+											data:formData,
+											success: function (data) {
+												console.log(data);
+												
+												
+												//alert(AlertMessage);
+												
+											},
+											
+											error: function (jqXHR, exception) {
+												//Hide loading icon on success / error of AJAX call
+												$('#indication-loading-icon').hide();
+												var msg = '';
+												if (jqXHR.status === 0) {
+													msg = 'Not connect.\n Verify Network.';
+												} else if (jqXHR.status == 404) {
+													msg = 'Requested page not found. [404]';
+												} else if (jqXHR.status == 500) {
+													msg = 'Internal Server Error [500].';
+												} else if (exception === 'parsererror') {
+													msg = 'Can\'t fetch data.Please contact your Admin.';
+												} else if (exception === 'timeout') {
+													msg = 'Time out error.';
+												} else if (exception === 'abort') {
+													msg = 'Ajax request aborted.';
+												} else {
+													msg = 'Uncaught Error.\n' + jqXHR.responseText;
+												}
+												alert(msg);
+												console.log(msg);
+												//addNoIndicationsMessage(noIndicationsMessage.value);
+											}
+											
+										});	
+	
+			}
+	//alert('after ajx');
+    
+	
+	
+	
+	 
+
+	// Custom implementation goes here.
+	}
+
+    	
+    
+		
+</script>	
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+[
+	
+	{
+		"name": "hostURL",
+		"defaultValue": "/php/custom/hafaka_middleware.php",
+		"dataType": "string"
+	},
+	{
+		"name": "oicURL",
+		"defaultValue": "/ic/api/integration/v1/flows/rest/DATA_REFLECTION_JOURNEY/1.0/",
+		"dataType": "string"
+	},
+	
+	
+	{
+		"name": "trigger_event",
+		"defaultValue": "POPUP_HAFAKA",
+		"dataType": "string"
+	},
+	{
+		"name": "loaded_event",
+		"defaultValue": "HAFAKA_LOAD_COMPLETED",
+		"dataType": "string"
+	}
+	
+]

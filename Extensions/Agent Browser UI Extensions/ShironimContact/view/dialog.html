@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Get Documents</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap.rtl.min.css" >
+		<link rel="stylesheet" href="../css/bootstrap-datepicker3.min.css" >
+		<link rel="stylesheet" href="../css/font-awesome.css" />
+		<link rel="stylesheet" href="../css/custom.css" />
+	</head>
+	<body onload="initialize('dialog');">
+		<a class="modal-close" id="close-popup"><i class="fa fa-times" aria-hidden="true"></i></a>
+		<div class="table-responsive" id="list-parent" >
+			<div class="bd-example" style="height:60px;" id="form-parent">
+				<form id="shironim-from">
+					<div class="form-check form-check-inline" style="font-size:12px;float:right;">
+						<label for="workspace-list" id="lblwsList">
+							Workspace List
+						</label>
+						<select class="form-control form-select" style="font-size:12px;" id="workspacelist" name="workspacelist">
+						</select>
+					</div>
+					<div class="form-check form-check-inline" style="font-size:12px;float:right;">
+						<label for="start-date" id="lblStartDate">
+							Start Date
+						</label>
+						<input class="form-control" style="font-size:12px;" type="text" name="startdate" id="startdate" required/>
+					</div>
+					<div class="form-check form-check-inline" style="font-size:12px;float:right;">
+						<label for="end-date" id="lblEndDate">
+							End Date
+						</label>
+						<input class="form-control" style="font-size:12px;" type="text" name="enddate" id="enddate" required/>
+					</div>
+				</form>
+				<div class="form-check form-check-inline" style="font-size:12px;float:right;margin-top:18px;" id="button-parent">
+					<button type="submit" style="font-size:12px;" id="get-document" class="btn btn-primary">Search</button>
+				</div>
+			</div>
+			<div class="alert alert-danger" style="display:none;" id="warning-msg" role="alert">
+			</div>
+			<div class="alert alert-light" style="display:none;" id="info-msg" role="alert">
+			</div>
+			<div id="document-list-parent" style="height:100%;overflow:auto;" class="container-fluid">
+			</div>
+		</div>
+		<div class="overlay show"></div>
+		<div class="spanner show" style="height:100%;">
+			<div class="loader"></div>
+			<p>Loading...</p>
+		</div>
+		<div class="modal fade bd-example-modal-lg" id="modalDocument" role="dialog" aria-labelledby="modalDocument" >
+		  <div class="modal-dialog modal-lg" >
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h4 class="modal-title" id="document-title"></h4>
+				<button type="button" class="close" data-mdb-dismiss="modal" id="closeModelDocument" aria-label="Close">
+				  <span aria-hidden="true">×</span>
+				</button>
+			  </div>
+			  <div class="modal-body ui-front" >
+				<div class="alert alert-danger" style="display:none;" id="warning-msg" role="alert">
+				</div>
+				<div class="alert alert-light" style="display:none;" id="info-msg" role="alert">
+				</div>
+				<div class="row" id="document-viewer">	
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+		<script src="../js/bootstrap.bundle.min.js" ></script>
+		<script src="../js/bootstrap-datepicker.min.js" ></script>
+		<script src="../js/jquery.validate.min.js"></script>
+		<script src="../js/additional-methods.min.js"></script>
+		<script src="../js/shironim.js"></script>
+		<!--<script src="http://localhost:8080/addin-js/shironim.js?v=0.1.1.1"></script>-->
+	</body>
+</html>

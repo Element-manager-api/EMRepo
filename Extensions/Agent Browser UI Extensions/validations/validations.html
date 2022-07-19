@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="/resources/demos/vanilla_theme.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="jquery-3.6.0.js"></script> 
+ 
+  
+	<meta charset="utf-8">
+
+	
+
+</head>
+<body>
+
+ <script type= "application/javascript"> 
+
+	
+    var extensibilityApiVersion = '1.0'; // Extensibility API version
+    var globalContext = '';
+	var restUrl = '';
+	var sessionID = '';
+	var recordId = '';
+	var workspaceRecord = '';
+	var value;
+	var interfaceurl;
+	var itemStr = null;
+	var LeadMD_Parent;
+	var reportID;
+	var extensionProvidern;
+	var related_leadMDHeader= '';
+	var can_entered_manually= '';
+	var related_product= '';
+	var agent_num= '';
+	var AlertMessage;
+	var Incident_id;
+	var workspaceRecord_ex;
+	var validations_apply;
+	
+	
+	
+ORACLE_SERVICE_CLOUD.extension_loader.load("validations" , extensibilityApiVersion)
+.then(function(extensionProvider)
+	{
+	//extensionProvider.getGlobalContext.then(function(extensionGlobalContext)
+		//{
+			
+		//});
+		
+			extensionProvider.getGlobalContext().then(function(globalContext) {
+		globalContext.getSessionToken().then(function(sessionToken)
+			{
+		interfaceurl = globalContext.getInterfaceUrl();
+				globalContext.getExtensionContext('validations').then(function(extensionContext) {
+                extensionContext.getProperties(['validationsapp']).then(function(collection) {
+					validations_apply = collection.get('validationsapp').getValue();
+					
+                    //console.log(property.getName());
+                       sessionID = sessionToken;
+					   
+					   
+					   extensionProvider.registerWorkspaceExtension(function(workspaceRecord)
+							{
+			   workspaceRecord_ex = workspaceRecord;
+					workspaceRecord.getFieldValues(['Incident.IID', 'Incident.Disposition']).then(function(IFieldDetails1)
+					{
+					Incident_id = (IFieldDetails1.getField('Incident.IID').getValue());
+				    Disposition = (IFieldDetails1.getField('Incident.Disposition').getValue());
+					
+					
+					//related_product = (IFieldDetails1.getField('LeadMD$LeadMDProductChannel.related_product').getValue());
+					//agent_num = (IFieldDetails1.getField('LeadMD$LeadMDProductChannel.agent_num').getValue());
+					//get_parent_collaborationList(reportIDs, sessionID);
+					
+					workspaceRecord.addRecordSavingListener(checkvalidations).prefetchWorkspaceFields(["Incident.IID" , "Incident.DispId"]);
+				
+				});
+					   
+					   
+					   
+			
+			
+				 })
+				})
+			
+			
+			}).catch(function (err) {
+                console.log(err)
+            });
+		});
+	
+	
+	
+	
+	});
+	
+	});
+	
+	
+function checkvalidations(workspaceRecordEventParameter)
+	{
+	//alert('Save command should cancel by flase as return');
+	Incident_id = workspaceRecordEventParameter.event.fields["Incident.IID"];
+	Disposition = workspaceRecordEventParameter.event.fields["Incident.DispId"];
+	//alert(Incident_id);
+	//alert(Disposition);
+	//alert(validations_apply);
+	
+	
+	//can_entered_manually = workspaceRecordEventParameter.event.fields["LeadMD$LeadMDProductChannel.can_entered_manually"];
+	//agent_num = workspaceRecordEventParameter.event.fields["LeadMD$LeadMDProductChannel.agent_num"];
+	//related_product = workspaceRecordEventParameter.event.fields["LeadMD$LeadMDProductChannel.related_product"];
+	//alert(agent_num);
+	if(Incident_id!='' && Disposition!='' && validations_apply!='' ){
+	
+	
+				var formData = {psk:sessionID,Incident_id:Incident_id ,Disposition:Disposition ,validations_apply:validations_apply };
+									console.log(formData);
+				       var ajaxUrl = interfaceurl + "/php/custom/validations.php";
+            	
+																
+										//Empty UL element's innerHTML before you get indications and update the UI
+										$.ajax({
+											type: "POST",
+											async: false,
+											url: ajaxUrl, 			
+											dataType: "json", 
+											data:formData,
+											success: function (data) {
+												console.log(data);
+												var validate;
+												var event_to_tigger;
+												validate = data['validate'];
+												event_to_tigger = data['event_name'];		
+												if(validate == 'fail'){
+												 	 workspaceRecordEventParameter.getCurrentEvent().cancel();
+													 //var alertmsg = 'Unable to save the object, agent num <agent_num> is marked as manual in header id <first_row_result-related_leadMDHeader>';
+													 workspaceRecord_ex.triggerNamedEvent(event_to_tigger);
+													
+												}
+												
+												//alert();
+												
+											},
+											
+											error: function (jqXHR, exception) {
+												//Hide loading icon on success / error of AJAX call
+												$('#indication-loading-icon').hide();
+												var msg = '';
+												if (jqXHR.status === 0) {
+													msg = 'Not connect.\n Verify Network.';
+												} else if (jqXHR.status == 404) {
+													msg = 'Requested page not found. [404]';
+												} else if (jqXHR.status == 500) {
+													msg = 'Internal Server Error [500].';
+												} else if (exception === 'parsererror') {
+													msg = 'Can\'t fetch data.Please contact your Admin.';
+												} else if (exception === 'timeout') {
+													msg = 'Time out error.';
+												} else if (exception === 'abort') {
+													msg = 'Ajax request aborted.';
+												} else {
+													msg = 'Uncaught Error.\n' + jqXHR.responseText;
+												}
+												alert(msg);
+												console.log(msg);
+												//addNoIndicationsMessage(noIndicationsMessage.value);
+											}
+											
+										});	
+	
+			}
+	//alert('after ajx');
+    
+	
+	
+	
+	 
+
+	// Custom implementation goes here.
+	}
+
+    	
+    
+		
+</script>	
+
+
+</body>
+</html>

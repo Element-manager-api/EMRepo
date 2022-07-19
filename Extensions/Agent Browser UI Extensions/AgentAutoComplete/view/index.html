@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" >
+<!--<html lang="he" >-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Agent Auto Complete</title>
+		<link rel="stylesheet" href="../css/bootstrap.rtl.min.css" >
+		<link rel="stylesheet" href="../css/font-awesome.css" />
+		<link rel="stylesheet" href="../css/jquery-ui.css" />
+		<link rel="stylesheet" href="../css/custom.css" />
+		<style>
+			body{
+				font-size:18px;
+				direction: rtl;
+			}
+			.table{
+				font-size:12px;
+			}
+			.nav-link.active{
+				color:rgb(13, 110, 253);
+			}
+			.nav-link{
+				color:rgb(183, 173, 173);
+			}
+			.ui-autocomplete {
+				max-height: 200px;
+				overflow-y: auto;
+				/* prevent horizontal scrollbar */
+				overflow-x: hidden;
+				/* add padding to account for vertical scrollbar */
+				padding-right: 20px;
+			}
+			.ui-menu-item{
+				font-size:12px;
+			}
+			.fa-sort-desc:hover{
+			cursor:pointer;
+			}
+		</style>
+	</head>
+	<body onload="initialize('main');">
+		<div class="form-group">
+			<label id="auto-complete-label" style="font-size:12px;"></label>
+			<input class="form-control" type="text" id="agent-list" style="font-size:12px;">
+			</input>
+			<i class="fa fa-sort-desc" aria-hidden="true" onclick = "click_auto_complete();" style="position: absolute;left: 12px;top: 22px;color:#9e9e9e;"></i>
+		</div>
+		<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+		<script src="../js/bootstrap.bundle.min.js" ></script>
+		<script src="../js/agentautocomplete.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+	</body>
+</html>

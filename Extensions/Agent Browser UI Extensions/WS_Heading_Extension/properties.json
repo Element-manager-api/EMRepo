@@ -1,0 +1,17 @@
+[
+	{
+		"name": "Translation_For_Incident",
+		"defaultValue": "פניה",
+		"dataType": "string"
+	},
+	{
+		"name": "Translation_For_Task",
+		"defaultValue": "משימה",
+		"dataType": "string"
+	},
+	{
+		"name": "Translation_For_Lead",
+		"defaultValue": "ליד",
+		"dataType": "string"
+	}
+]
