@@ -1,0 +1,1 @@
+jQuery('#applicationName').text('Service Cloud - JAJ');

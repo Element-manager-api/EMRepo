@@ -1,0 +1,873 @@
+.ws-workspace-table-cell .ws-workspace-table-cell {
+  padding: 2px;
+  direction: ltr;
+}
+
+/** Make text area content RTL **/
+
+.ws-workspace textarea.oj-text-field-input.oj-textarea-input {
+  direction: rtl;
+}
+
+/** Make radio button type choices RTL **/
+
+.script .scriptContent .input-controls .radio, .script .scriptContent .input-controls .oj-checkboxset .oj-choice-item.multiple {
+  direction: rtl;
+}
+
+/** Make forward incident pop-up text align to right **/
+
+.forward .forwardTextStyle, .forward .forwardInputStyle, .forward .forwardCommentsStyle, .forward .forwardLabelStyle, .forward .toLabel, .forward .ccLabel, .forward .bccLabel, .forward .forwardCommentsStyle::-webkit-input-placeholder {
+  text-align: right;
+}
+
+/** fixes for 21A upgrade **/
+
+.threads .zoomFactor {
+  transform: scale(var(--zoomFactorValue));
+  transform-origin: right top;
+}
+
+.ws-workspace .inside-label-value-null-or-empty .field-label {
+  left: unset;
+  right: 15px;
+}
+.ws-workspace .inside-label-container .field-label,
+.ws-workspace :not(.inside-label-read-only).inside-label-value-null-or-empty:focus-within .field-label {
+  left: unset;
+  right: 11px;
+}
+
+.ws-workspace-command-bar{float: right;}
+
+
+.ws-workspace .inside-label-value-null-or-empty .oj-text-field-container.oj-inputdatetime-input-container,
+.ws-workspace .inside-label-container .oj-text-field-container.oj-inputdatetime-input-container,
+.ws-workspace .inside-label-container .oj-inputnumber,
+.ws-workspace .inside-label-value-null-or-empty .oj-inputnumber,
+.ws-workspace .inside-label-read-only .oj-inputnumber {
+  direction: rtl;
+}
+
+/* .field-container{direction: rtl;} */
+.ws-workspace .inside-label-container .oj-inputdatetime-input-trigger,
+.ws-workspace .inside-label-value-null-or-empty:focus-within .oj-inputdatetime-input-trigger,
+.ws-workspace .inside-label-value-null-or-empty .oj-inputdatetime-input-trigger {
+  margin-left: 0px;
+}
+
+/** Make Action center (Landing panel) on login RTL **/
+
+.landingPanel-panel{
+  direction: rtl;
+}
+
+.landingPanel-panel .headers, .landingPanel-panel .headersUnderline{
+  margin-right:10px;
+}
+
+.landingPanel-panel .quickItemsIconColumn{
+  margin-left: 7px;
+}
+
+.landingPanel-panel .rwIcon{
+  padding-right:0;
+}
+
+/** Make attachments control RTL **/
+.fileAttachment {
+	direction: rtl;
+}
+
+html:not([dir="rtl"]) .fileAttachment .oj-table-data-cell, html:not([dir="rtl"]) .fileAttachment .oj-table-column-header-cell {
+    text-align: right;
+}
+
+/* To show the question text in one line for agent scripts */
+.scriptContent .question-control .question-container .label-container label{
+	width: max-content;
+	direction: rtl;
+}
+
+/* Align system error messages to RTL  */
+.oj-messaging-inline-container .oj-message.oj-message-error {
+    direction: rtl;
+}
+html:not([dir="rtl"]) .oj-message.oj-message-error .oj-message-content .oj-message-summary {
+    padding: 0 10px 0 0;
+}
+
+.oj-inputtext-input,
+.oj-inputpassword-input,
+.oj-inputtext-nocomp,
+.oj-inputpassword-nocomp {
+  height: 2.28571rem;
+  padding: 0 5px;
+  box-sizing: border-box;
+  /* direction: rtl; */
+  text-align: right;
+}
+
+.analyticsContainer {
+  padding: 3px;
+  position: absolute;
+  bottom: 0px;
+  top: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  direction: ltr;
+}
+
+.dialogBody {
+  width: auto;
+  height: auto;
+  direction: rtl;
+}
+
+.dialogBody .dialogFooter button > div {
+ direction: ltr;
+}
+
+.dialogBody .dialogFooterButton > button {
+  padding-left: revert;
+}
+
+.guidedAssistanceControl .guidedAssistanceContent {
+  display: block;
+  direction: rtl;
+}
+
+.ws-workspace *,
+.ws-workspace *:before,
+.ws-workspace *:after {
+  box-sizing: inherit;
+  text-align: right;
+}
+
+.oj-listview-element > .oj-listview-item:first-child,
+ul:not(.oj-listview-card-layout)
+  .oj-listview-group
+  > .oj-listview-item:first-child,
+.oj-listview-element
+  > .oj-listview-item-element:first-child
+  .oj-listview-group-item {
+  direction: rtl;
+  background-size: 0;
+}
+
+.dialogHeader {
+  color: black !important;
+  direction: rtl;
+
+}
+#ExtensibilityModalWindowViewModeldialog-title {
+  color: black !important;
+  direction: ltr!important;
+  width: 100% !important;
+  text-align: right!important;
+}
+
+#channelPanel {
+  padding-bottom: 10px;
+  border-radius: 4px;
+  direction: rtl;
+}
+
+.OracleChatPanelHeaderContainer {
+  max-width: 100%;
+  direction: ltr;
+}
+
+.OracleChatInputArea,
+.privateOracleChatInputArea {
+  height: auto;
+  min-height: 65px;
+  direction: rtl;
+  text-align: right;
+}
+
+.cke_editable {
+  font-size: 13px;
+  line-height: 1.6;
+  direction: rtl;
+}
+
+.oj-popup {
+  outline: none;
+  direction: rtl;
+}
+
+/* Time picker can still be LTR */
+.oj-popup .oj-timepicker-popup .oj-timepicker-wheel-group {
+    direction: ltr;
+}
+
+html:not([dir="rtl"]) .oj-datetimepicker-switcher .oj-inputdatetime-calendar-icon, html:not([dir="rtl"])
+.oj-datetimepicker-switcher .oj-inputdatetime-time-icon {
+  padding-left: 5px;
+}
+
+html:not([dir="rtl"]) .oj-datetimepicker-switcher-buttons a:first-child {
+  padding-left: 20px;
+}
+
+/* chakravarthy */
+
+.select-box-arrow {
+  left: 0;
+  right: unset!important;
+}
+
+.select-box-multi-display-content a .multi-select-item-remove,
+.select-box-multi-display-content a .multi-select-item-edit{
+	margin-right: 3px!important;
+}
+
+.oj-label {
+  direction: rtl;
+}
+
+.filterTop {
+  direction: rtl;
+}
+
+/* Notifications */
+
+.notifications .removeIcon {
+  right: 490px;
+  margin-top: 15px;
+}
+
+.notificationText {
+  padding-bottom: 0px;
+  margin-top: 12px;
+}
+
+.oj-navigationlist-vertical .oj-navigationlist-item-label {
+  padding: 0px;
+}
+
+.notifications .toolIcon {
+  margin-top: 30%;
+}
+
+.notifications #displayToastInput {
+  margin-top: 2px;
+  margin-left: 5px;
+}
+
+.header-dialog-word-wrap {
+  margin-left: 65px;
+}
+
+html:not([dir="rtl"]) .oj-inputnumber .oj-buttonset {
+  margin-left: 10px;
+}
+
+.notifications #messageAreaLabel {
+  float: right;
+  margin-right: 14px;
+  padding-left: 10px;
+}
+
+.notifications #enableSend {
+  margin-right: 55px;
+}
+
+html:not([dir="rtl"]) .oj-label-required-icon,
+html:not([dir="rtl"]) .oj-label-help-icon {
+  margin-left: 6px;
+  float: right;
+}
+
+.notifications .recipientField {
+  margin-left: -70px;
+  margin-right: 45px;
+}
+
+.notifications #buttonContainer {
+  float: left;
+  /* padding-right: 8px; */
+  padding-left: 20px;
+  margin-top: 2px;
+}
+
+.notifications #messageTextArea {
+  text-align: right;
+}
+
+.notifications #notificationHeader {
+  font-weight: 400;
+  float: right;
+  margin-right: 15px;
+  padding-left: 12px;
+  margin-top: 3px;
+}
+
+.leftAlign .notificationDurationLabel {
+  float: right;
+}
+
+.notifications #toastDurationId {
+  margin-left: 0px;
+}
+
+html:not([dir="rtl"]) .oj-inputnumber-input {
+  border-radius: 2px 0 0 2px;
+  border-right-width: 0;
+}
+
+.ws-toolbar-menu-button-menu .ws-toolbar-button {
+  padding: 7px 0px 6px 17px;
+}
+
+/** End notifications */
+
+/** Scroller */
+
+/** .oj-datagrid-scroller {
+    direction: rtl;
+} */
+
+/** End Scroller */
+
+/** .analyticsContainer {
+    direction: rtl;
+} */
+
+html:not([dir="rtl"]) .oj-inputnumber-input {
+  border-right-width: 1px;
+}
+
+html:not([dir="rtl"]) .oj-inputdatetime-input {
+  border-width: 1px 1px 1px 1px;
+}
+
+/** חיפוש במאגר ידע */
+
+.ws-toolbar-button {
+  padding-right: 0px;
+  padding-left: 5px;
+}
+
+html:not([dir="rtl"]) .oj-checkbox-label-nocomp {
+  margin-right: 5px;
+  text-align: right;
+  margin-bottom: 3px;
+}
+
+html:not([dir="rtl"]) .oj-label-inline {
+  padding-right: 0px;
+}
+
+.rowLimitFilterBox {
+  padding-right: 0px;
+}
+
+.select-box-multi-display .multi-select-item-remove {
+  margin-right: 4px;
+}
+
+html:not([dir="rtl"]) .oj-combobox-choices li {
+  float: right;
+}
+
+.ws-workspace li.oj-combobox-selected-choice {
+  margin-right: 0px;
+}
+
+.select-box-multi-display .oj-combobox-choices {
+  margin-right: 0px;
+}
+
+html:not([dir="rtl"]) .oj-collapsible-header a,
+html:not([dir="rtl"]) .oj-collapsible-header .oj-collapsible-header-icon {
+  margin-left: 0px;
+}
+
+/** סוף חיפוש במאגר ידע */
+
+/** Tab Hedears */
+.ws-workspace-tabset .ws-workspace-tabset-header {
+  direction: rtl;
+ /* background-color: rgb(37,159,237);*/
+   background-color: #ffffff;
+}
+
+.ws-workspace-tabset .ws-workspace-tabset-header .ws-workspace-tabset-header-tabs {
+	order: 2;
+	padding-right: 0;
+}
+
+.ws-workspace-tabset .ws-workspace-tabset-header .ws-workspace-tabset-scroll-left-button {
+	order: 3;
+	display: initial!important;
+}
+
+.ws-workspace-tabset .ws-workspace-tabset-header .ws-workspace-tabset-scroll-right-button {
+	order: 1;
+}
+
+.ws-workspace-tabset .ws-workspace-tabset .ws-workspace-tabset-header {
+    /* background-color: rgb(37,159,237);*/
+   background-color: #ffffff;
+}
+
+.ws-workspace-tabset .ws-workspace-tabset-header .ws-tab-item,
+.ws-workspace-tabset .ws-workspace-tabset-header .tab-count{
+  color:black;
+}
+
+.ws-workspace-tabset-header-tabs:hover .ws-tab-item:hover,
+.ws-workspace-tabset-header-tabs:not(:hover) .ws-tab-item-focused {
+  border-bottom: 3px solid #cbcccd;
+}
+
+.attachmentTabIcon:before, .accordion-attachmentTabIcon:before {
+  position: relative;
+  top: 0px;
+  right: -2px;
+  left: unset;
+  font-family: FontAwesome;
+  content: "\f0c6";
+  float: right;
+  font-size: 1.1em;
+  font-weight: normal;
+  transform: rotate(180deg) scaleX(-1);
+}
+
+.ws-tab-item.tabItem.attachmentTabIcon {
+    padding-top: 7px;
+}
+
+/** End Tab Hedears */
+
+/** Plus Sing List */
+html:not([dir="rtl"]) .oj-menu-item-icon {
+  margin-left: calc(95px - 16px - 0.57143rem);
+  margin-right: 0.57143rem;
+}
+
+/** End Plus Sing List */
+/* .select-box-input {
+    text-align: center;
+} */
+
+.filterRegionMargin {
+  direction: rtl;
+  margin-right: 1px;
+}
+
+.cm-label {
+  padding-right: 10px;
+}
+
+.menu-container .menu-context-menu-overlay {
+  right: unset;
+  left: 25px;
+}
+
+.menu-container .menu-filters-button-overlay {
+  left: 45px;
+  right: unset;
+}
+
+.select-box-root .select-box-input-container .select-box-busy{
+	right: unset!important;
+	left: 0!important;
+}
+
+.select-box-root .display-text {
+  left: unset!important;
+  right: 0!important;
+}
+
+#navigationSet .oj-collapsible-header-icon {
+  font-size: 23px;
+}
+#navigationSet #navigationSetSettings {
+  font-size: 18px;
+  margin-left: 0px;
+  float: left;
+  margin-right: 8px;
+}
+
+/* v1.3 Changes starts */
+
+.autoFilter .autoFilterHeader, .autoFilterItem{
+	direction: rtl;
+}
+.autoFilter .slider.analyticsInlineEdit{
+	direction: ltr;
+}
+.autoFilter .scroll-content{
+	overflow: hidden;
+}
+.autoFilter .scroll-scrollPane{
+	left: 0px;
+    right: unset;
+}
+.autoFilter .autoFilterItemOperator{
+	margin-left: 50%;
+}
+.autoFilter .autoFilterAllOption .oj-checkbox-label, .autoFilterMenuLabel.oj-checkbox-label{
+	text-align: right!important;
+	padding-right:5px;
+}
+
+.autoFilter .autoFilterAllOption, .autoFilter .autoFilterMenuOptions{
+  margin-right: 15px;
+}
+
+.oj-menu-item-icon.bui-icon{
+  right:0px;
+}
+.quick-create-default-link {
+    text-align: right;
+}
+
+#navigationSetSettings:not([style*="display: none"]) + #editNavigationSetItem {
+   display:none;
+}
+#navigationSetSettings[style*="display: none"] + #editNavigationSetItem {
+   display:contents!important;
+}
+#navigationSet #navigationSaveIcon {
+    float: none!important;
+}
+#navigationSet #navigationSave {
+    float: none!important;
+}
+
+html[dir="rtl"] .oj-tree-node.oj-collapsed > .oj-tree-disclosure-icon:before,
+html:not([dir="rtl"]) .oj-tree-node.oj-collapsed > .oj-tree-disclosure-icon:before{
+	content: "\25C0";
+}
+
+html[dir="rtl"] .oj-tree-node.oj-expanded > .oj-tree-disclosure-icon:before,
+html:not([dir="rtl"]) .oj-tree-node.oj-expanded > .oj-tree-disclosure-icon:before{
+	content: "\25E3";
+}
+
+.guided-assistance-question .input-controls {
+  margin-left:5px;
+  text-align:left;
+  
+}
+.guided-assistance-question .question-control .question-container .control-container .oj-listview-container {
+  float:left;
+  text-align:right;
+}
+.guided-assistance-question .question-control .question-container .control-container {
+  display:inline-block;
+}
+.guided-assistance-question .question-control .question-container .label-container {
+  float: right;
+}
+.guided-assistance-question .question-control .question-container .control-container .text-box-label{
+ text-align:left;
+}
+
+.OracleChatStatusSelector{
+	direction: rtl;
+}
+
+#quickSearch .select-box-root input.select-box-input {
+    text-align: right;
+    margin-right: 5px;
+}
+#quickSearch .quick-search-ellipsis {
+    left: 20px;
+	right: unset;
+}
+
+#quickSearch .quick-search-search-button {
+    left: 5px;
+	right: unset;
+}
+
+
+.inlineEditCell .select-box-container .select-box-input-container .select-box-input{
+  direction:rtl;
+}
+
+.inlineEditCell .select-box-root .display-text{
+  text-align: right;
+}
+.oj-datagrid-cell-edit{
+  overflow: visible;
+}
+
+html:not([dir="rtl"]) .guideSelectionPopup .oj-tree-node {
+    margin-right: 18px;
+}
+
+.ws-sub-dropdown-arrow-icon {
+  margin-right: 5px;
+  margin-right: auto;
+  margin-left: 1px;
+  padding-right: 6px;
+}
+.ws-sub-dropdown-arrow-icon:before {
+  content: "\2BC7";
+}
+
+.guideNavigatorSidePanel.oj-panel.guideNavigatorSlice{
+	direction: rtl;
+}
+
+html:not([dir="rtl"]) .guideNavigatorSidePanel .guideNavigatorContent .guidedAssistanceNavigatorTree .oj-tree-node{
+    margin-right: 18px;
+    direction: rtl;
+    text-align: right;
+}
+
+.guideNavigatorSidePanel.oj-panel.guideNavigatorSlice .guideAssistanceLabel{
+	float: right;
+}
+
+.select-box-list .menu-tree-node-toggle .fa-caret-right:before {
+    content: "\f0d9";
+}
+div[id*="BusinessRule"] .select-box-list .menu-tree-node-toggle .fa-caret-right:before {
+    content: "\f0da";
+}
+div[data-recordtype*='BusinessRule'] .oj-collapsible-close-icon:before,
+div[id*='BusinessRule'] .oj-collapsible-close-icon:before {
+    content: "\e600"!important;
+}
+div[data-recordtype*='BusinessRule'] .oj-collapsible-open-icon:before,
+div[id*='BusinessRule'] .oj-collapsible-open-icon:before {
+    content: "\e601"!important;
+}
+.select-box-root.select-box-display-text-inactive .select-box-input::placeholder {
+    direction:rtl;
+}
+
+.oj-panel.reportLeftPanelContent .oj-tabs-nav-root{
+  direction: rtl;
+}
+
+.report .reportContainer .reportLeftPanelContent .slice{
+	direction: rtl;
+}
+
+html:not([dir="rtl"]) .sliceFieldSetContainer .oj-tree-node{
+    margin-right: 18px;
+}
+
+.oj-label.oj-label-nowrap .oj-label-group {
+    display: inline-flex;
+}
+
+.OracleChatToastWindow{
+  direction:rtl;
+}
+.OracleChatToastTitle, .OracleChatToastContent{
+text-align: right;
+}
+.OracleChatToastActions {
+text-align: left;
+}
+
+.OracleChatTransferSelector{
+text-align: right;
+}
+
+div[data-recordtype*='BusinessRule'] .ws-workspace *, div[data-recordtype*='BusinessRule'] .ws-workspace *:before, div[data-recordtype*='BusinessRule'] .ws-workspace *:after,
+div[id*='BusinessRule'] .ws-workspace *, div[id*='BusinessRule'] .ws-workspace *:before, div[id*='BusinessRule'] .ws-workspace *:after {
+    text-align: left;
+    direction: ltr;
+}
+
+div[data-recordtype*='BusinessRule'] .oj-popup, div[id*='BusinessRule'] .oj-popup {
+    direction: ltr;
+}
+
+div[data-recordtype*='BusinessRule'] .menu-container .menu-context-menu-overlay, div[id*='BusinessRule']  .menu-container .menu-context-menu-overlay {
+    left: unset;
+    right: 25px;
+}
+
+div[data-recordtype*='BusinessRule'] .select-box-root .display-text, div[id*='BusinessRule'] .select-box-root .display-text {
+  left: 0;
+}
+
+div[data-recordtype*='BusinessRule'] .select-box-multi-display .oj-combobox-choices, div[id*='BusinessRule'] .select-box-multi-display .oj-combobox-choices {
+    margin-right: 25px;
+}
+div[data-recordtype*='BusinessRule'] .select-box-arrow, div[id*='BusinessRule'] .select-box-arrow {
+    left: unset;
+    right: 0;
+}
+
+.sidePanelEmbeddedView .analyticsContainer {
+    direction: rtl;
+}
+
+.ws-workspace .threads .recipients{
+	direction: rtl;
+}
+
+.ws-workspace .threads .threadsList .threadHeaderBar{
+  direction: rtl;
+}
+
+/* v1.3 Changes ends */
+
+.oj-fwk-icon-arrow-e:before,
+.oj-fwk-icon-arrow-w:before,
+html:not([dir="rtl"]) .oj-fwk-icon-arrow-start:before,
+html[dir="rtl"] .oj-fwk-icon-arrow-end:before,
+html[dir="rtl"] .oj-collapsible-close-icon:before,
+html[dir="rtl"] .oj-treeview-drop-marker-icon:before,
+html[dir="rtl"] .oj-listview-collapse-icon:before,
+.oj-fwk-icon-arrow-n:before,
+.oj-table-column-header-asc-icon:before,
+.oj-fwk-icon-arrow-s:before,
+.oj-table-column-header-dsc-icon:before,
+html[dir="rtl"] .oj-fwk-icon-arrow-start:before,
+html:not([dir="rtl"]) .oj-fwk-icon-arrow-end:before,
+html:not([dir="rtl"]) .oj-collapsible-close-icon:before,
+html:not([dir="rtl"]) .oj-treeview-drop-marker-icon:before,
+html:not([dir="rtl"]) .oj-listview-collapse-icon:before {
+  content: "\25C0";
+}
+
+.oj-fwk-icon-arrow-se:before,
+.oj-fwk-icon-arrow-sw:before,
+html:not([dir="rtl"]) .oj-fwk-icon-arrow-s-start:before,
+html[dir="rtl"] .oj-fwk-icon-arrow-s-end:before,
+html[dir="rtl"] .oj-collapsible-open-icon:before,
+html[dir="rtl"] .oj-listview-expand-icon:before,
+.oj-fwk-icon-arrow-nw:before,
+html:not([dir="rtl"]) .oj-fwk-icon-arrow-n-start:before,
+html[dir="rtl"] .oj-fwk-icon-arrow-n-end:before,
+.oj-fwk-icon-arrow-ne:before,
+html[dir="rtl"] .oj-fwk-icon-arrow-n-start:before,
+html:not([dir="rtl"]) .oj-fwk-icon-arrow-n-end:before,
+html[dir="rtl"] .oj-fwk-icon-arrow-s-start:before,
+html:not([dir="rtl"]) .oj-fwk-icon-arrow-s-end:before,
+html:not([dir="rtl"]) .oj-collapsible-open-icon:before,
+html:not([dir="rtl"]) .oj-listview-expand-icon:before {
+  content: "\25E3";
+}
+
+/* *Golan add this changes 17.2.2020 */
+
+/* Change the direction of the button on the Script --> beginning - previous - next - exit */
+
+.scriptFooterButtonSet {
+  direction: ltr;
+}
+
+/** פעולות מהירות, איניקציות לקוח,פרטי פניה */
+.ws-workspace-table {
+  direction: ltr;
+}
+
+/* .oj-menu-item-icon {
+    display: contents;
+} */
+
+/* .oj-menu,
+.oj-component,
+.oj-component-initnode,
+.oj-menu-icons, */
+/* .oj-menu-dropdown, */
+.oj-listbox-results,
+.oj-menu-text-only,
+.ws-toolbar-menu-button-menu {
+  direction: rtl;
+}
+
+/* Actions (Three Dots) */
+.ws-toolbar-button-image {
+  margin-left: 5px;
+}
+
+/** date and time in incedent details */
+
+/* .oj-component-initnode {
+    direction: ltr;
+} */
+
+#chatMediaBar_loggedOutStatusBtn {
+  direction: rtl;
+}
+
+.quick-search-header {
+  float: right;
+}
+
+/* .select-box-input {
+    direction: rtl;
+    margin-right: 35px;
+} */
+
+.localization-ext.fa-magic {
+  display: none!important;
+}
+
+/** Standart Text */
+.sidePanelEmbeddedView {
+  direction: rtl;
+}
+
+/*.oj-datagrid{
+	direction: rtl;
+}*/
+
+/* Align the grear icon on the hamburger in BUI */
+#navigationSet .navigation-title #navigationSetIcons,
+#navigationSet .navigation-title #editNavigationSetItem {
+	float: left!important;
+}
+#navigationSet .navigation-title {
+	margin-bottom: 8px;
+}
+#navigationSet #navigationSetClose {
+	margin-left: 0;
+}
+.select-box-popup-container .select-box-popup .menu-tree-node {
+	margin-left: -6px;
+	margin-right: 0;
+}
+
+.select-box-list-container .select-box-list .select-box-item .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content {
+	padding-right: 108px!important;
+	padding-left: unset!important;
+}
+
+.select-box-list-container .select-box-list .select-box-item .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content {
+	padding-right: 90px!important;
+	padding-left: unset!important;
+}
+
+.select-box-list-container .select-box-list .select-box-item .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content {
+	padding-right: 72px!important;
+	padding-left: unset!important;
+}
+
+.select-box-list-container .select-box-list .select-box-item .select-box-item-content + .oj-listbox-result-sub .select-box-item-content + .oj-listbox-result-sub .select-box-item-content {
+	padding-right: 36px!important;
+	padding-left: unset!important;
+}
+
+.select-box-list-container .select-box-list .select-box-item .select-box-item-content + .oj-listbox-result-sub .select-box-item-content {
+	padding-right: 18px!important;
+	padding-left: unset!important;
+}
+
+.select-box-list-container .select-box-list .select-box-item .select-box-item-content {
+	padding-right: 0px!important;
+	padding-left: unset!important;
+}
+/* Sumantha 18th jan*/
+.reportDataSet .oj-datagrid-cell .moreLink .loadMore {
+                left: 0;
+}
+
